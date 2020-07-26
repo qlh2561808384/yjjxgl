@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+       
+        <title>TreeGrid for Bootstrap 3.0.x</title>
+
+        <script src="../../bootstrap/js/jquery.js"></script>
+        <script src="../../bootstrap/js/bootstrap.datanew.js"></script>
+        <script type="text/javascript">
+        var treetable;
+        $(function() {
+            var data=
+                [
+                {id:'1',pid:'0',name:'item1',type:'t',money:'0.00',children:[
+                    {id:'4',pid:'1',name:'item1sub1',type:'t',money:'0.00',children:[
+                        {id:'6',pid:'4',name:'item1sub1sub1',type:'t',money:'0.00',children:[]},
+                        {id:'7',pid:'4',name:'item1sub1sub2',type:'t',money:'0.00',children:[]}
+                    ]},
+                    {id:'5',pid:'1',name:'item1sub2',type:'t',money:'0.00',children:[]}
+                ]},
+                {id:'2',pid:'0',name:'item2',type:'t',money:'0.00',children:[]},
+                {id:'3',pid:'0',name:'item3',type:'t',money:'0.00',children:[]}
+                ];
+            //初始化表格
+            treetable=$('#tree').dtreetable({
+               //父元素id字段
+                parentfield:'pid',
+                selfidfield:'id',
+               //子集字段
+                childrenfield:'children',
+               //本地加载数据
+                localdata:data,
+               //远程加载数据
+            //                url:'',
+               //列参数
+                columns: [{
+                    field: 'name',//字段名
+                    title: '名称',//列名
+                    width:200
+                },{
+                    field: 'id',
+                    title: 'id',
+                    hidden:true//隐藏列
+                }, {
+                    field: 'money',
+                    title: 'money',
+                    width:200
+                }]
+            });
+
+            //根据是否子节点 对金额编辑列 添加相应元素
+        $('#tree').find('tr').each(function(){
+            if($(this).children(":last").is("th")){
+                return;
+            }
+            var context =$(this).children(":last").children(".td_value").html();
+            $(this).children(":last").children().remove();
+            if (!$(this).treegrid('isLeaf')){
+                $(this).children(":last").html('<span class="total td_value">'+context+'</span>')
+            }else{
+                $(this).children(":last").html(' <span class="show_text td_value" >'+context+'</span><input type="text" class="show_input" style="display: none; margin: 0px;"/>');
+            }
+        });
+
+            //金额显示元素点击事件
+            $(".show_text").parent().off('click').on('click',function(){
+                var moneybox= $(this).children(".show_text");
+                var show_input= moneybox.next(".show_input");
+                show_input.val(moneybox.text());
+                moneybox.hide();
+                show_input.show().select();
+                show_input.focus();
+            });
+            //金额编辑栏失焦事件
+            $(".show_input").off('blur').on('blur',function(){
+                var show_input= $(this);
+                var moneybox= show_input.prev(".show_text");
+                moneybox.text(addzero(show_input.val()));
+
+                moneybox.show();
+                show_input.hide();
+                count(show_input.parent().parent())
+            });
+            //金额编辑 按键事件
+            $(".show_input").off('keypress').on('keypress',function(e){
+                if(e.keyCode==13 || e.keyCode==9) {
+                    //判断是否有下一行 有则显示input 并为焦点
+                    var nextrow = $(this).parent().parent().next();
+                    if (nextrow.is("tr")) {
+                        nextrow.find(".show_input").val(nextrow.find(".show_text").text());
+                        nextrow.find(".show_input").show().select();
+                        nextrow.find(".show_text").hide();
+                    } else {
+                        $(this).blur();
+                    }
+                }
+            });
+        });
+        /**
+         * 递归合计
+         */
+        function count(node){
+            //获取父节点
+            var parentnode=node.treegrid('getParentNode');
+            if(parentnode==null){
+                return;
+            }
+            //获取父节点下所有的子节点
+            var nodes=$(parentnode).treegrid('getChildNodes');
+            var t=0;
+            for(var i=0;i<nodes.length;i++){
+                if($(nodes[i]).find(".show_text").length!=0){
+                    t+=Number($(nodes[i]).find(".show_text").html())
+                }else{
+                    t+=Number($(nodes[i]).find(".total").html())
+                }
+            }
+            $(parentnode).find(".total").html(addzero(t));
+            count(parentnode)
+        }
+
+
+        /**
+         * 金额补零
+         */
+        function addzero(value){
+            var value=Math.round(parseFloat(value)*100)/100;
+            var xsd=value.toString().split(".");
+            if(xsd.length==1){
+                value=value.toString()+".00";
+                return value;
+            }
+            if(xsd.length>1){
+                if(xsd[1].length<2){
+                    value=value.toString()+"0";
+                }
+                return value;
+            }
+        }
+
+        /**
+         * 获取全表数据
+         */
+        function getAllData(){
+            alert(JSON.stringify(treetable.getdata()));
+        }
+
+            function agmsTest(){
+
+
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="container">
+            <button onclick="getAllData()">获取整表数据</button>
+            <button onclick="agmsTest('terst')">agmsTest</button>
+            <table class="table tree-2 table-bordered table-striped table-condensed" id="tree">
+            </table>
+        </div>
+    </body>
+</html>
+<style>
+   button{margin:10px 0;border-radius: 4px;background-color:#428BCA;border:1px solid #2E6DA4;font-family: "Microsoft YaHei";font-size:14px;height:34px;line-height:34px;padding:0 10px;color:#fff;}
+   button:hover{background-color: #3276b1;border:1px solid #125590;}
+</style>
+

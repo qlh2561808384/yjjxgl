@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<title>编辑树</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.datanew.js"></script>
+</head>
+
+<body>
+	
+	<ul id="editTree" class="ztree"></ul>
+	<button class="btn btn-primary btn_edit">保存</button>
+	
+	<!-- 编辑后输出新的树 -->
+	<p style="margin-top:30px;"><b>编辑拖拽后的树：</b></p>
+	<ul id="savedragTree" class="ztree"></ul>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//dedittree返回的是编辑后新的树据
+		var newtree = $("#editTree").dedittree({
+			localdata: zNodes,
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: false //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+		});
+		
+		$(".btn_edit").on('click', function(){
+			var settings = {check:{enable:true}, data:{simpleData:{enable:true}}};
+			$.fn.zTree.init($("#savedragTree"), settings, newtree);
+		})
+	});
+
+	var zNodes =[
+		{ id:1, pId:0, name:"父节点 1", open:true, ISLEAF:0},
+		{ id:11, pId:1, name:"叶子节点 1-1", ISLEAF:1},
+		{ id:12, pId:1, name:"叶子节点 1-2", ISLEAF:1},
+		{ id:13, pId:1, name:"叶子节点 1-3", ISLEAF:1},
+		{ id:2, pId:0, name:"父节点 2", open:true, ISLEAF:0},
+		{ id:21, pId:2, name:"叶子节点 2-1", ISLEAF:1},
+		{ id:22, pId:2, name:"叶子节点 2-2", ISLEAF:1},
+		{ id:23, pId:2, name:"叶子节点 2-3", ISLEAF:1},
+		{ id:3, pId:0, name:"父节点 3", open:true, ISLEAF:0},
+		{ id:31, pId:3, name:"叶子节点 3-1", ISLEAF:1},
+		{ id:32, pId:3, name:"叶子节点 3-2", ISLEAF:1},
+		{ id:33, pId:3, name:"叶子节点 3-3", ISLEAF:1}
+	];
+</script>

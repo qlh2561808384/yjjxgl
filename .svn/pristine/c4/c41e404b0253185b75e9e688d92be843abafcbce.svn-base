@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>bootstrapTable_demo</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script>
+
+        var zNodes =[
+            { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+            { id:11, pId:1, name:"关键字可以是名字", ISLEAF:1},
+            { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+            { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+            { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+            { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+            { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+            { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+            { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+            { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+            { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+            { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+            { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+        ];
+        $(function () {
+            var t=$("#datatable").dtable({
+                //列参数
+                height:$(window.parent.document).find("#myTabContent").height(),
+                columns: [
+                    //radio、checkbox 单选或多选框
+                    {checkbox: true},
+                    //field：对应数据键名 title：列名 width:单元格宽度px单位  align：单元格水平位置'left', 'right', 'center'
+                    //formatter：格式化方法参数为：value,row
+                    {field: 'status', title: '状态', width: 100, align: 'center', formatter: statusFormatter},
+                    {field: 'postaccount', title: '商户号', width: 150, align: 'center'},
+                    {field: 'isb2B', title: '商户类型', width: 100, align: 'center'},
+                    {field: 'accountname', title: '账户名称', width: 100, align: 'center'},
+                    {field: 'startdate', title: '启用日期', width: 100, align: 'center'},
+                    {field: 'enddate', title: '到期日期', width: 100, align: 'center',
+                    	editable:{
+                    		//type: 'tree',
+                    		title: 'treeenddate',
+                    		//localtreedata: zNodes
+                    		//url:
+                    		/* ,
+                    		source: [
+                	              {value: 1, text: 'Active'},
+                	              {value: 2, text: 'Blocked'},
+                	              {value: 3, text: 'Deleted'}
+                 	        ] */
+                    	}
+                    },
+                    {field: 'remark', title: '备注', width: 100, align: 'center'}
+                ],
+                data: localdata,
+                editable :true,
+                pageNumber: 1,//起始页
+                pageSize: 10,//页面大小
+                queryParams: queryParams,//查询参数 queryParams(params) params 包含分页参数
+                pagination: true,
+                paginationHAlign: 'left',//分页按钮位置  left/right
+                sidePagination: 'client',//分页方式 client/server 服务端分页 如为客户端分页 数据格式参考底部pagedata
+                //toolbar: '#bt',//工具栏 指定dom对象
+                showToggle: true,//是否使用列表显示开关
+                //singleSelect: true,//是否启用单选
+                clickToSelect: true,//点击选中
+                idField: 'guid',
+                detailView: true,//是否启用详细显示页面 当为true时 每行数据前会有展开按钮
+                //展开行事件    detailView 为true时生效   可根据该展开栏实现子表格显示
+                onExpandRow: function (index, row, $detail) {
+                    InitSubTable(index, row, $detail);//子表初始化方法
+                },
+                //双击行事件
+                onDblClickRow: function (row, $element) {
+                },
+                rigthClickRow:function(row, $element){
+                    //console.log(JSON.stringify(row))
+                }
+            });
+            
+            //table加载后编辑某个单元格
+           	$.editTableCell({
+            	tableobj: $("#datatable"), //table对象
+    			rowNum: 1, //行
+    			columnNum: 3, //列
+    			editVal: { //可编辑的参数
+    				type:"text",
+    				title:"selecttitle"
+    			}
+            });
+           	$.editTableCell({
+            	tableobj: $("#datatable"), //table对象
+    			rowNum: 2, //行
+    			columnNum: 4, //列
+    			editVal: { //可编辑的参数
+    				type:"text",
+    				title:"selecttitle"
+    			}
+            });
+           	$.editTableCell({
+            	tableobj: $("#datatable"), //table对象
+    			rowNum: 3, //行
+    			columnNum: 5, //列
+    			editVal: { //可编辑的参数
+    				type:"select",
+    				title:"selecttitle",
+    				source: [{value: "0", text: "个人"}, {value: "1", text: "企业"}, {value: "2", text: "不区分"}]
+    			}
+            });
+           	$.editTableCell({
+            	tableobj: $("#datatable"), //table对象
+    			rowNum: 4, //行
+    			columnNum: 6, //列
+    			editVal: { //可编辑的参数
+    				type:"textarea",
+    				title:"selecttitle",
+    			}
+            });
+
+           	$.editTableCell({
+            	tableobj: $("#datatable"), //table对象
+    			rowNum: 5, //行
+    			columnNum: 7, //列
+    			editVal: { //可编辑的参数
+    				type:"date",
+    				title:"selecttitle"
+    			}
+            });
+        });
+
+        
+        
+        
+        /**
+         * 子表初始化方法
+         */
+        InitSubTable = function (index, row, $detail) {
+            //在父表展开区域添加table元素
+            var cur_table = $detail.html('<table></table>').find('table');
+            $(cur_table).bootstrapTable({
+                method: 'post',
+                contentType: "application/x-www-form-urlencoded",
+                url: 'admin/pwayList/voucherList.do?',
+                queryParams: {paylistno: row.paylistno},
+                clickToSelect: true,
+                columns: [{
+                    field: 'certificateNo',
+                    title: '缴款凭证号'
+                }, {
+                    field: 'agencyName',
+                    title: '代收机构'
+                }, {
+                    field: 'paywayName',
+                    title: '支付方式'
+                }, {
+                    field: 'payDate',
+                    title: '缴款时间',
+                }]
+            });
+        };
+
+        function refresh() {
+            $("#datatable").bootstrapTable("refresh");
+        }
+
+        /**
+         * 设置查询参数  limit offset 为固定参数
+         * @param params
+         * @returns {{limit: (params.limit|*), offset: (params.offset|*), test: string}}
+         *          如return false 则终止请求
+         */
+        function queryParams(params) {
+            //            var paramSearch=DataDeal("#formSearch");
+            var param = {
+                limit: params.limit,
+                offset: params.offset
+            };
+            return param;
+            //            return $.extend({},param,paramSearch)
+        }
+
+        function subqueryParams(params) {
+            return {
+                limit: params.limit,
+                offset: params.offset
+            };
+        }
+
+
+        /**
+         * 格式化
+         */
+        function statusFormatter(value, row, index) {
+            switch (value) {
+                case 0:
+                    return '未缴款';
+                case 1:
+                    return '缴款';
+                case 2:
+                    return '退款';
+                case 3:
+                    return '重复缴款';
+            }
+        }
+
+    </script>
+</head>
+<body>
+<section class="parser container-fluid">
+	<div class="page-header"><h1>语法解析</h1></div>
+	
+	<h4>使用方法</h4>
+	<pre>
+        <ol style="display:table">
+            <li><span>$.editTableCell({</span></li>
+            <li><span>    tableobj: $("#datatable"), //table对象</span></li>
+            <li><span>    rowNum: 5, //行</span></li>
+            <li><span>    columnNum: 7, //列</span></li>
+            <li><span>    editVal: { //可编辑的参数</span></li>
+            <li><span>    	type:"date", //编辑类型，包括'text','textarea','select','date','datetime'</span></li>
+            <li><span>    	title:"selecttitle" //编辑框title</span></li>
+            <li><span>    	//source:source: [{value: "0", text: "val1"}, {value: "1", text: "val2"}, {value: "2", text: "val3"}] //select option选项数据源 需包含 value和text</span></li>
+            <li><span>    }</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+</section>
+
+<div style="width:98.5%;"><table id="datatable"></table></div>
+
+<br /><br />
+</body>
+
+<script>
+	//$("body").css("width", $(window).width());
+	
+    //本地数据
+    var localdata = [{
+        "guid": 5,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中银行",
+        "accountbank": "中银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": null,
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": null,
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, 
+    
+    {
+        "guid": 1,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": null,
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": null,
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 2,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 3,
+        "postaccount": "777290058135724",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "05",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 4,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "06",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }];
+</script>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>  
+<html>  
+  <head lang="zh-CN">
+    <meta charset="UTF-8">
+<!--     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript"  src="../js/jquery.js"></script>
+    <script type="text/javascript"  src="../js/bootstrap.min.js"></script>  
+    <script type="text/javascript"  src="../js/bootstrap.datanew.js"></script>  
+  </head>  
+  <body>  
+  <section class="parser">
+    <div class="page-header"><h1>语法解析</h1></div>
+
+    <h4>弹出框参数:</h4>
+    <pre>
+        <ol style="display:table;">
+            <li><span>$("#modal").dmodal({</span></li>
+            <li><span>    title:'标题',</span></li>
+            <li><span>    content: '&lt;p&gt;内容&lt;/p&gt;',</span></li>
+            <li><span>    …,</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>title</td><td>String</td><td>定义弹出框的标题。</td><td>undefined</td></tr>
+        <tr><td>content</td><td>String</td><td>定义弹出框主题内容。当url有值时，该值无效。 </td><td>[]</td></tr>
+        <tr><td>url</td><td>String</td><td>定义弹出框主体内容加载的页面。路径以/开头，为根目录下的全路径。</td><td>undefined</td></tr>
+        <tr><td>width</td><td>Number</td><td>定义弹出框的宽度。</td><td>'-'</td></tr>
+        <tr><td>height</td><td>Number</td><td>定义弹出框主体内容的高度。最大不可超过350px，超出无效。</td><td>350</td></tr>
+        <tr><td>showCloseButton</td><td>Boolean</td><td>定义弹出框按钮栏处是否需要关闭按钮。</td><td>false</td></tr>
+        <tr><td>father</td><td>Boolean</td><td>定义弹出框是弹出在当前页面还是父层。</td><td>false</td></tr>
+        <tr><td>otherButtons</td><td>Array</td><td>定义弹出框按钮栏处的按钮文字。</td><td>undefined</td></tr>
+        <tr><td>otherButtonStyles</td><td>Array</td><td>定义弹出框按钮栏处按钮的CSS样式。</td><td>undefined</td></tr>
+        <tr><td>bootstrapModalOption</td><td>Boolean</td><td>定义模态框默认参数<a href="#bootstrapModalOption">模态框参数 表格</a></td><td>true</td></tr>
+        </tbody>
+    </table>
+
+    <h4><a id="bootstrapModalOption">模态框参数:</a></h4>bootstrapModalOption:{}
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>backdrop</td><td>Boolean</td><td>指定一个静态的背景，当用户点击模态框外部时不会关闭模态框。</td><td>true</td></tr>
+        <tr><td>keyboard</td><td>Boolean</td><td>当按下 escape 键时关闭模态框，设置为 false 时则按键无效。</td><td>true</td></tr>
+        <tr><td>show</td><td>Boolean</td><td>当初始化时显示模态框。</td><td>true</td></tr>
+        <tr><td>remote</td><td>Boolean</td><td>使用 jQuery.load方法，为模态框的主体注入内容。如果添加了一个带有有效 URL的 href，则会加载其中的内容。如下面的实例所示：<br />&lt;a data-toggle="modal" href="remote.html" data-target="#modal"&gt;请点击我&lt;/a&gt;</td><td>false</td></tr>
+        </tbody>
+    </table>
+    
+    <h4>事件:</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>dialogShow</td><td>none</td><td>在调用show方法后触发</td></tr>
+        <tr><td>dialogShown</td><td>none</td><td>当模态框对用户可见时触发（将等待 CSS 过渡效果完成）</td></tr>
+        <tr><td>dialogHide</td><td>none</td><td>当调用 hide 实例方法时触发</td></tr>
+        <tr><td>dialogHidden</td><td>none</td><td>当模态框完全对用户隐藏时触发</td></tr>
+        </tbody>
+    </table>
+    <h4>方法:</h4><h5>调用语法：modalObject.method(param)</h5>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>toggleDialog</td><td>none</td><td>手动切换模态框。若模态框为关闭状态则打开模态框，反之若模态框为显示状态，则关闭模态框。</td></tr>
+        <tr><td>showDialog</td><td>none</td><td>手动显示模态框</td></tr>
+        <tr><td>closeDialog</td><td>none</td><td>手动关闭模态框</td></tr>
+        </tbody>
+    </table>
+    <h4>案例:</h4>
+    <a onclick="modal();">点我弹出框</a>
+</section>
+<!--     <a data-toggle="modal" data-url="table_demo.html" href="#infoModal">请点击我</a> -->
+<!-- 	<div class="modal" id="infoModal"></div> -->
+	
+	<div id="modal"></div>
+	<script>
+// 	$("a[href=#infoModal]").click(function(){
+// 	    $("#infoModal").load($(this).attr("data-url"));
+// 	});
+	function modal(){
+// 		var fatherBody = $(window.document.body);
+// 		var dialog = $('<div id="modal"></div>');
+// 		dialog.appendTo(fatherBody);
+// 		dialog.dmodal({
+		var modalObj = $("#modal").dmodal({
+		    title:'弹出框测试',  //模态框标题
+		    content:'<form id="formdemo"></form>',  //模态框内容
+		    showCloseButton:true,	//关闭按钮
+   		    //url:'/bootstrap/example/table_demo.html', //模态框展示页面（有url时，content无效）
+			width:"900",	//模态框宽度
+			height:"350",//最大不可超过350px，超出无效。
+ 			father:false,	//弹出层是否要遮住父层
+		    otherButtons:["确定","取消"], //模态框右下角按钮
+		    otherButtonStyles:['btn-primary','btn-primary'], //按钮样式
+		    bootstrapModalOption:{
+		    	keyboard:true,//当按下 escape 键时关闭模态框
+		    	backdrop:true//指定一个静态的背景，当用户点击模态框外部时不会关闭模态框
+// 				show:false,//当初始化时显示模态框
+// 				remote:false
+		    },
+		    dialogShow:function(){
+		        alert('即将显示对话框');
+		    },
+		    dialogShown:function(){
+		        alert('显示对话框');
+		    },
+		    dialogHide:function(){
+		        alert('即将关闭对话框');
+		    },
+		    dialogHidden:function(){
+		        alert('关闭对话框');
+		    },
+		    clickButton:function(sender,index){//按钮触发方法
+		        alert('选中第'+index+'个按钮：'+sender.html());
+		    	if (index == 1){
+		    		modalObj.closeDialog();
+		    	}else if (index == 0){
+		    		var str = $("#formdemo").serialize();
+		    		alert(str);
+		    	}
+		    }
+		});
+		
+		$("#formdemo").dform({
+    		 rownum:3,   //每行控件数目。只有layout为form-inline才生效
+    		 labelwidth:"70px",
+    		 inputs:[
+    		         {
+    		        	 title:"姓名",
+    		        	 name:"name",
+    		        	 type:"text",
+    		        	 defaultvalue:"张三",
+    		        	 colspan:"2"
+    		         },{
+    		        	 
+    		         },
+    		         {
+    		        	 title:"密码",
+    		        	 name:"password",
+    		        	 type:"password",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"日期",
+    		        	 name:"createdate",
+    		        	 type:"datetime",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"datetime",
+    		        	 name:"datetime-local",
+    		        	 type:"datetime-local",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"日期date",
+    		        	 name:"date",
+    		        	 type:"date",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"日期month",
+    		        	 name:"month",
+    		        	 type:"month",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"日期time",
+    		        	 name:"time",
+    		        	 type:"time",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"日期week",
+    		        	 name:"week",
+    		        	 type:"week",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"number",
+    		        	 name:"number",
+    		        	 type:"number",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"email",
+    		        	 name:"email",
+    		        	 type:"email",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"url",
+    		        	 name:"url",
+    		        	 type:"url",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"search",
+    		        	 name:"search",
+    		        	 type:"search",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"tel",
+    		        	 name:"tel",
+    		        	 type:"tel",
+    		        	 defaultvalue:"111" 
+    		         },
+    		         {
+    		        	 title:"color",
+    		        	 name:"color",
+    		        	 type:"color",
+    		        	 defaultvalue:"111" 
+    		         }
+    		 ]
+    	  });
+		
+		
+	}
+	</script>  
+  </body>  
+<html> 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE>dopen</TITLE>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+        <h3>扩展自layer弹层组件，<a href="http://www.layui.com/doc/modules/layer.html" target="_blank">参考链接</a></h3>
+    	<h4>使用方法:</h4>
+        <pre id="content1">
+            <ol style="display:table;">
+                <li><span>$.dopen({</span></li>
+                <li><span>    title: "页面层-自定义内容",</span></li>
+                <li><span>    content: '这是一个自定义html的例子',</span></li>
+                <li><span>    area: ['310px','130px'],</span></li>
+                <li><span>    btn: ['确定', '取消'],</span></li>
+                <li><span>    btn1:function(index){</span></li>
+                <li><span>        alert("点击了确定按钮");</span></li>
+                <li><span>        layer.close(index);</span></li>
+                <li><span>    },</span></li>
+                <li><span>    btn2:function(index){</span></li>
+                <li><span>        alert("点击了取消按钮");</span></li>
+                <li><span>        layer.close(index);</span></li>
+                <li><span>    },</span></li>
+                <li><span>    close:function(index){//层右上角关闭按钮的点击事件触发回调函数。</span></li>
+                <li><span>        alert("点击了右上角关闭按钮");</span></li>
+                <li><span>    },</span></li>
+                <li><span>    end: function(){//层被彻底关闭后执行的回调函数。</span></li>
+                <li><span>        alert("层已销毁");</span></li>
+                <li><span>    }</span></li>
+                <li><span>});</span></li>
+            </ol>
+            </pre>
+        <h4>属性:</h4>
+        <table class=" table-border">
+            <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+            <tbody>
+            <!--<tr><td>text</td><td>string（字符串型）</td><td>提示框中内容</td><td>无</td></tr>-->
+            <tr><td>type</td><td>Number</td><td>基本层类型 <br/>可传入的值有：0（信息框）1（页面层）2（iframe层）3（加载层）4（tips层）5（tab层）</td><td>1</td></tr>
+            <tr><td>data</td><td>object</td><td>参数对象 <br/></td>该参数 仅在type为2时有效（iframe模式） 利用动态插入表单方式 实现post请求 请求参数格式：{param:value,param1:value}<td>1</td></tr>
+            <tr><td>title</td><td>String/Array/Boolean</td><td>提示框标题 <br/>1、title:"我是标题" <br/>2、title: ['文本', 'font-size:18px;']（数组第二项可以写任意css样式）<br/>3、title: false（无标题栏）</td><td>'信息'</td></tr>
+            <tr><td>content</td><td>String/DOM/Array</td><td>提示框内容 <br/>1、content:'传入任意的文本或html'<br/>2、content:$('#id')<br/>3、content:'http://sentsin.com'（iframe层，同时type:2）<br/>4、content: ['内容', '#id']（同时type:4）</td><td>无</td></tr>
+            <tr><td>area</td><td>String/Array</td><td>定义提示框的宽高 <br/>1、只定义宽度，高度自适应：area:'500px'<br/>2、定义宽高：area:['500px', '300px']</td><td>auto</td></tr>
+            <tr><td>offset</td><td>String/Array</td><td>坐标 <br>offset: 'auto'	默认坐标，即垂直水平居中<br>offset: '100px'	只定义top坐标，水平保持居中<br>offset: ['100px', '50px']	同时定义top、left坐标<br>offset: 't'	快捷设置顶部坐标<br>offset: 'r'	快捷设置右边缘坐标<br>offset: 'b'	快捷设置底部坐标<br>offset: 'l'	快捷设置左边缘坐标<br>offset: 'lt'	快捷设置左上角<br>offset: 'lb'	快捷设置左下角<br>offset: 'rt'	快捷设置右上角<br>offset: 'rb'	快捷设置右下角</td><td>垂直水平居中</td></tr>
+            <tr><td>icon</td><td>Number（数字）</td><td>提示框图标 <br/>1打勾，2打叉，3问号，4加锁，5不开心，6笑脸，7感叹号</td><td>1</td></tr>
+            <tr><td>btn</td><td>String/Array</td><td>提示框按钮 <br/>1、只定义一个按钮时，btn:'我知道了' <br/>2、定义两个按钮时，btn:['yes', 'no']<br/>3、定义多个按钮时，btn:['按钮1', '按钮2', '按钮3', …]
+                <br/>按钮1和按钮2的回调分别是yes和cancel <span style="color:#f00;">（也可以直接用btn1和btn2）</span>，而从按钮3开始，则回调为btn3: function(){}，以此类推。<br/>默认点击按钮后关闭窗口，如不想关闭窗口，则在回调函数中return false</td><td>"确认"</td></tr>
+            <tr><td>closeBtn</td><td>String/Boolean</td><td>关闭按钮</td><td>1</td></tr>
+            <tr><td>shadeClose</td><td>Boolean</td><td>是否点击遮罩关闭</td><td>false</td></tr>
+            <tr><td>time</td><td>Number</td><td>自动关闭所需毫秒。默认不会自动关闭</td><td>0</td></tr>
+            <tr><td>maxmin</td><td>Boolean</td><td>最大化最小化</td><td>false</td></tr>
+            <tr><td>fixed</td><td>Boolean</td><td>固定。即鼠标滚动时，层是否固定在可视区域。</td><td>true</td></tr>
+            <tr><td>resize</td><td>Boolean</td><td>是否允许拉伸</td><td>true</td></tr>
+            <tr><td>zIndex</td> <td></td><td>层叠顺序。一般用于解决和其它组件的层叠冲突。</td><td>19891014</td></tr>
+            </tbody>
+        </table>
+        <h4>方法:</h4>
+        <table class=" table-border">
+            <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+            <tbody>
+            <tr><td>success</td><td>Function</td><td>层弹出后的成功回调方法。该回调携带两个参数，分别是当前层DOM当前层索引</td><td>null</td></tr>
+            <tr><td>yes</td><td>Function</td><td>确定按钮回调方法。该回调携带两个参数，分别为当前层索引、当前层DOM对象</td><td>null</td></tr>
+            <tr><td>cancel</td><td>Function</td><td>右上角关闭按钮触发的回调。该回调携带两个参数，分别为：当前层索引参数（index）、当前层的DOM对象（layero），默认会自动触发关闭。如果不想关闭，return false即可</td><td>null</td></tr>
+            <tr><td>btn1/btn2/btn3...</td><td>Function</td><td>提示框按钮的回调。该回调携带两个参数，分别为：当前层索引参数（index）、当前层的DOM对象（layero），默认会自动触发关闭。如果不想关闭，return false即可</td><td>null</td></tr>
+            <tr><td>end</td><td>Function</td><td>层销毁后触发的回调。无论是确认还是取消，只要层被销毁了，end都会执行，不携带任何参数。</td><td>null</td></tr>
+            <tr><td>full/min/restore</td><td>Function</td><td>分别代表最大化、最小化、还原 后触发的回调。携带一个参数，即当前层DOM</td><td>null</td></tr>
+            </tbody>
+        </table>
+	    <h4>案例:</h4>
+	    <button onclick="btnclick1()">页面层-自定义内容</button>
+	    <button onclick="btnclick2()">iframe层-父子操作</button>
+	    <button onclick="btnclick3()">tab层</button>
+        <br/><br/>
+        <button onclick="btnclick8()">多个按钮</button>
+
+        <br/><br/><br/><br/><br/><br/>
+	</section>
+	<script>
+	    function btnclick1(){
+	    	$.dopen({
+                title :"页面层-自定义内容",
+                content: '<table id="table"></table>',
+                area: ['800px','500px'],
+                btn: ['确定', '取消'],
+                btn1:function(index){
+                    alert("点击了确定按钮");
+                    layer.close(index);
+                },
+                btn2:function(index){
+                    alert("点击了取消按钮");
+                    layer.close(index);
+                },
+                close:function(index){//层右上角关闭按钮的点击事件触发回调函数。
+                    alert("点击了右上角关闭按钮");
+                },
+                end: function(){//层被彻底关闭后执行的回调函数。
+                    alert("层已销毁");
+                },
+                full: function(){
+                    var options = $("#table").bootstrapTable("getOptions");
+                    $("#table").bootstrapTable("load", options.data); //本地数据
+                    //$("#table").bootstrapTable("refresh"); //远程url
+                }
+	    	});
+            $("#table").dtable({
+                height:300,
+                data:[
+                    {status:"未缴款",agencyName1:"a1",agencyName2:"a2",agencyName3:"a3",paywayName1:"p1",paywayName2:"p2"}
+                ],
+                columns:[
+                    [
+                        {field: 'status', title: '状态', width: 100, align: 'center', rowspan:2},
+                        {field: 'agencyName', title: '代收机构', width: 200, align: 'center', colspan:3},
+                        {field: 'paywayName', title: '支付方式', width: 150, align: 'center', colspan:2}
+                    ],
+                    [
+                        {field: 'agencyName1', title: '代收机构1', width: 100, align: 'center'},
+                        {field: 'agencyName2', title: '代收机构2', width: 100, align: 'center'},
+                        {field: 'agencyName3', title: '代收机构3', width: 100, align: 'center'},
+                        {field: 'paywayName1', title: '支付方式1', width: 100, align: 'center'},
+                        {field: 'paywayName2', title: '支付方式2', width: 100, align: 'center'}
+                    ]
+                ]
+            })
+	    }
+
+        //iframe层-父子操作
+	    function btnclick2(){
+	    	$.dopen({
+                parent:true,
+                type: 2,
+                title :"iframe层-父子操作",
+                area: ['700px', 'auto'],
+                data:{abc:'测试',eFg:'123'},
+                content: 'http://www.baidu.com'
+	    	});
+	    }
+        //tab
+	    function btnclick3(){
+	    	$.dopen({
+	    		type: 5,
+	    		area: ['600px', '300px'],
+                tab: [{
+                    title: 'TAB1',
+                    content: '这是自定义的html内容'
+                }, {
+                    title: 'TAB2',
+                    content: "TAB2TAB2TAB2TAB2"
+                }, {
+                    title: 'TAB3',
+                    content: 'TAB3TAB3TAB3TAB3TAB3'
+                }]
+	    	});
+	    }
+
+        function btnclick8(){
+            $.dopen({
+                btn: ['审核通过', '退回重填', '取消'],
+                area: ['800px', '400px'],
+                btn1: function (index) {
+                    alert('点击了 审核通过 按钮');
+                    layer.close(index);
+                },btn2: function(index){
+                    alert('点击了 退回重填 按钮');
+                    layer.close(index);
+                },btn3: function(index){
+                    alert('点击了 取消 按钮');
+                    layer.close(index);
+                },
+                title: '审核财政计划申报',
+                content: '<div>这是一个自定义html的例子</div>'
+            })
+        }
+	
+	</script>
+</BODY>
+</HTML>

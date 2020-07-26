@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../plugins/echarts/echarts.js"></script>
+    <script src="../../js/jquery.js"></script>
+    <style>
+        .op1{background-color:#E6FFE6;}
+        .op2{background-color:#FFE6E6;}
+        .op3{background-color:#D2E6FF;}
+    </style>
+</head>
+<body>
+<section class="parser container-fluid">
+    <div class="page-header"><h1>语法解析</h1></div>
+    <h3>扩展自ECharts，<a href="http://echarts.baidu.com/echarts2/doc/doc.html" target="_blank">文档</a>，<a href="http://echarts.baidu.com/echarts2/doc/example.html" target="_blank">实例</a></h3>
+    <h4>使用方法</h4>
+	<pre>
+		<ol style="margin-bottom:10px;display:table">
+            <li>//html部分</li>
+            <li><span>&lt;div id="main"&gt;&lt;/div&gt;</span></li>
+        </ol>
+        <ol style="display:table">
+            <li>//js部分</li>
+            <li><span>var myChart = echarts.init(document.getElementById('main'));</span></li>
+            <li><span>var option = {</span></li>
+            <li><span>    title: {</span></li>
+            <li><span>        text: '柱状图'</span></li>
+            <li><span>    },</span></li>
+            <li><span>    tooltip: {},</span></li>
+            <li><span>    legend: {</span></li>
+            <li><span>        data:['1月销量','2月销量']</span></li>
+            <li><span>    },</span></li>
+            <li><span>    xAxis: {</span></li>
+            <li><span>        data: ["商品1","商品2","商品3","商品4","商品5","商品6"]</span></li>
+            <li><span>    },</span></li>
+            <li><span>    yAxis: {},</span></li>
+            <li><span>    series: [{</span></li>
+            <li><span>        name: '1月销量',</span></li>
+            <li><span>        type: 'line',</span></li>
+            <li><span>        data: [5, 20, 36, 10, 10, 20]</span></li>
+            <li><span>    },{</span></li>
+            <li><span>        name: '2月销量',</span></li>
+            <li><span>        type: 'bar',</span></li>
+            <li><span>        data: [10, 13, 44, 11, 12, 40]</span></li>
+            <li><span>    }]</span></li>
+            <li><span>};</span></li>
+            <li><span>myChart.setOption(option);</span></li>
+        </ol>
+    </pre><h4>属性：</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>选项名称</th><th>类型&描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td rowspan="21">option</td><td></td><td colspan="2">图表选项，包含图表实例任何可配置选项：<a href="#op1" class="op1">公共选项</a>，<a href="#op2" class="op2">组件选项</a>，<a href="#op3" class="op3">数据选项</a></td></tr>
+        <tr><td id="op1" name="op1" class="op1" colspan="3">公共选项：</td></tr>
+        <tr><td>backgroundColor</td><td>{color}，全图默认背景，支持rgba</td><td>默认为无，透明</td></tr>
+        <tr><td>color</td><td>{Array}，数值系列的颜色列表，可配数组，<br/>eg：['#87cefa', 'rgba(123,123,123,0.5)','...']，<br/>当系列数量个数比颜色列表长度大时将循环选取</td><td>默认颜色序列，循环使用</td></tr>
+        <tr><td>renderAsImage</td><td>{Boolean|String}，非IE8-支持渲染为图片，可设为true或指定图片格式（png | jpeg）</td><td>false</td></tr>
+        <tr><td>calculable</td><td>{Boolean}，是否启用拖拽重计算特性，默认关闭</td><td>false</td></tr>
+        <tr><td>animation</td><td>{boolean}，是否启用图表初始化动画，默认开启，建议IE8-关闭</td><td>true</td></tr>
+        <tr><td id="op2" name="op2" class="op2" colspan="3">公共选项：</td></tr>
+        <tr><td>timeline</td><td colspan="2">{Object}，时间轴，每个图表最多仅有一个时间轴控件，详见 <a href="http://echarts.baidu.com/echarts2/doc/doc.html#Timeline" target="_blank">timeline</a></td></tr>
+        <tr><td>title</td><td colspan="2">{Object}，标题，每个图表最多仅有一个标题控件，详见 <a href="http://echarts.baidu.com/echarts2/doc/doc.html#Title" target="_blank">title</a></td></tr>
+        <tr><td>toolbox</td><td colspan="2">{Object}，工具箱，每个图表最多仅有一个工具箱，详见 <a href="http://echarts.baidu.com/echarts2/doc/doc.html#Toolbox" target="_blank">toolbox</a></td></tr>
+        <tr><td>tooltip</td><td colspan="2">{Object}，提示框，鼠标悬浮交互时的信息交互，详见 <a href="http://echarts.baidu.com/echarts2/doc/doc.html#Tooltip" target="_blank">tooltip</a></td></tr>
+        <tr><td>legend</td><td colspan="2">{Object}，时间轴，每个图表最多仅有一个图例，混搭图表共享，详见 <a href="http://echarts.baidu.com/echarts2/doc/doc.html#Legend" target="_blank">legend</a></td></tr>
+        <tr><td>dataRange</td><td colspan="2">{Object}，值域选择，值域范围，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#DataRange" target="_blank">dataRange</a></td></tr>
+        <tr><td>dataZoom</td><td colspan="2">{Object}，数据区域缩放，数据展现范围选择，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#DataZoom" target="_blank">dataZoom</a></td></tr>
+        <tr><td>roamController</td><td colspan="2">{Object}，漫游缩放组件，搭配地图使用，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#RoamController" target="_blank">roamController</a></td></tr>
+        <tr><td>grid</td><td colspan="2">{Object}，直角坐标系内绘图网格，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#Grid" target="_blank">grid</a></td></tr>
+        <tr><td>xAxis</td><td colspan="2">{Array|Object}，直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，标准（1.0）中规定最多同时存在2条横轴，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#Xaxis" target="_blank">xAxis</a></td></tr>
+        <tr><td>yAxis</td><td colspan="2">{Array|Object}，直角坐标系中纵轴数组，数组中每一项代表一条纵轴坐标轴，标准（1.0）中规定最多同时存在2条纵轴，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#Yaxis" target="_blank">yAxis</a></td></tr>
+        <tr><td id="op3" name="op3" class="op3" colspan="3">公共选项：</td></tr>
+        <tr><td>series</td><td colspan="2">{Array}，驱动图表生成的数据内容，数组中每一项代表一个系列的特殊选项及数据，详见<a href="http://echarts.baidu.com/echarts2/doc/doc.html#Series" target="_blank">series</a></td></tr>
+        </tbody>
+    </table>
+    <h4>案例：</h4>
+</section>
+
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        title: {
+            text: '柱状图'
+        },
+        tooltip: {},
+        legend: {
+            data:['1月销量','2月销量']
+        },
+        xAxis: {
+            data: ["商品1","商品2","商品3","商品4","商品5","商品6"]
+        },
+        yAxis: {},
+        series: [{
+            name: '1月销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        },{
+            name: '2月销量',
+            type: 'bar',
+            data: [10, 13, 44, 11, 12, 40]
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <title>searchTree</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <!--<script src="../plugins/input/input.js"></script>-->
+</head>
+<script>
+    var zNodes =[
+        { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+        { id:11, pId:1, name:"关键字可以是名字", test:123,ISLEAF:1},
+        { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+        { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+        { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+        { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+        { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+        { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+        { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+        { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+        { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+        { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+        { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:40, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:41, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:42, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:43, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:44, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:45, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:46, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:47, pId:32, name:"我的 id 是: 33", ISLEAF:1},
+        { id:34, pId:33, name:"我的 id 是: 34", ISLEAF:1},
+        { id:35, pId:34, name:"我的 id 是: 34", ISLEAF:1},
+        { id:36, pId:35, name:"我的 id 是: 34", ISLEAF:1},
+        { id:37, pId:36, name:"我的 id 是: 34", ISLEAF:1},
+    ];
+    var zNodes1 = [
+        {id:1, pId:0, name:"北京", ISLEAF:1},
+        {id:2, pId:0, name:"天津", ISLEAF:1},
+        {id:3, pId:0, name:"上海", ISLEAF:1},
+        {id:4, pId:0, name:"河北省", ISLEAF:0},
+        {id:41, pId:4, name:"石家庄", ISLEAF:0},
+        {id:411, pId:41, name:"dd", ISLEAF:1},
+        {id:42, pId:4, name:"保定", ISLEAF:1},
+        {id:43, pId:4, name:"邯郸", ISLEAF:1},
+        {id:44, pId:4, name:"承德", ISLEAF:1},
+        {id:5, pId:0, name:"广东省", ISLEAF:0},
+        {id:51, pId:5, name:"广州", ISLEAF:1},
+        {id:52, pId:5, name:"深圳", ISLEAF:1},
+        {id:53, pId:5, name:"东莞", ISLEAF:1},
+        {id:54, pId:5, name:"佛山", ISLEAF:1},
+        {id:6, pId:0, name:"福建省", ISLEAF:0},
+        {id:61, pId:6, name:"福州", ISLEAF:1},
+        {id:62, pId:6, name:"厦门", ISLEAF:1},
+        {id:63, pId:6, name:"泉州", ISLEAF:1},
+        {id:64, pId:6, name:"三明", ISLEAF:1}
+    ];
+
+    $(function(){
+        $("#searchTree").searchTree({
+            width:200,
+            checkType:'radio',
+            required:true,
+            validText:'测试',
+            // localdata: zNodes,
+            url:'./json/treeData.json',
+            rootElement:false,
+            onlyLeaf:true,
+            onChange:function(newValue,oldValue){
+                //console.log(newValue+",,,,"+oldValue);
+            },
+            onAckCallback:function(nodes){
+                alert(nodes.length)
+            },
+            onLoaded:function(tree){
+                //console.log(tree.getNodes())
+            }
+        });
+
+        $("#tt").textBox({
+            defaultValue:'test',
+            width:200
+        });
+    });
+
+
+    function disable(){
+        $("#searchTree").searchTree("disable");
+    }
+    function enable(){
+        $("#searchTree").searchTree("enable");
+    }
+    function getValue(){
+        alert($("#searchTree").searchTree("getValue"));
+    }
+    function setValue(){
+        $('#searchTree').searchTree("setValue",'12')
+    }
+    function testVile(){
+        $("#searchTree").searchTree("validate")
+    }
+    function destroy(){
+        $("#searchTree").searchTree("destroy")
+    }
+    function clear1(){
+        $("#searchTree").searchTree("clear");
+    }
+    function reload(){
+        //初始化时用的是远程数据，所以要把url清空
+        $("#searchTree").searchTree("reload",{localdata:zNodes1, url:""});
+    }
+
+
+
+
+</script>
+</head>
+<body>
+
+<section class="parser container-fluid">
+    <div class="page-header" id="a1"><h1>searchTree —— 查询树输入框</h1></div>
+    <h3>扩展自zTree，<a href="http://www.treejs.cn/v3/api.php" target="_blank">参考链接</a></h3>
+
+    searchTree 继承自 textBox
+    默认参数 继承自 textBox.default tree.default
+    <h4 id="a2">语法：</h4>
+    <pre>
+        <ol style="display:table">
+          <li><span>初始化：</span></li>
+          <li><span>fn.searchTree(初始化参数对象)</span></li>
+          <li><span>方法调用：</span></li>
+          <li><span>fn.searchTree('方法名',参数)</span></li>
+        </ol>
+    </pre>
+
+    <h4 id="a3">初始化参数</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr id="a3_tr_1"><td>localdata</td><td>Array</td><td>本地数据，zNodes =[{id:1, pId:0, name:"节点搜索演示 1"}]</td><td></td></tr>
+        <tr><td>url</td><td>String</td><td>远程数据请求路径</td><td></td></tr>
+        <tr><td>queryParam</td><td>obj</td><td>远程请求所携带的参数  格式：{param1:xxx,param2:xx}</td><td></td></tr>
+        <tr><td>checkType</td><td>String</td><td>定义选择框类型，checkbox为多选框，radio为单选框</td><td>"radio"</td></tr>
+        <tr><td>ISLEAF</td><td>Boolean</td><td>当checkType为checkbox或radio时，父节点是否有选择框，设置为false表示父不可选</td><td>false</td></tr>
+        <tr><td>rootElement</td><td>Boolean</td><td>是否添加“全部”节点</td><td>false</td></tr>
+        <tr><td>onLoaded</td><td>function</td><td>树加载完毕后 所执行方法 包含一个参数 返回ztree对象 可使用原生api实现 展开所有节点 等操作</td><td>false</td></tr>
+        <tr><td>data</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+                    <li><span>data:{</span></li>
+                    <li><span>    key : {</span></li>
+                    <li><span>        name: "name", //保存节点<span style="color:#F00;">名称</span>的属性名</span></li>
+                    <li><span>        url: "url", //保存节点<span style="color:#F00;">链接url</span>的属性名</span></li>
+                    <li><span>        icon: "icon", //保存节点<span style="color:#F00;">小图标</span>的属性名</span></li>
+                    <li><span>    },</span></li>
+                    <li><span>    simpleData : {</span></li>
+                    <li><span>        enable: true, //数据是否采用简单数据模式(Array)，true为是</span></li>
+                    <li><span>        idKey: "id", //保存节点<span style="color:#F00;">唯一标识</span>的属性名</span></li>
+                    <li><span>        pIdKey: "pId",  //保存节点<span style="color:#F00;">其父节点的唯一标识</span>的属性名</span></li>
+                    <li><span>        rootPId: null //指定<span style="color:#F00;">根节点</span>数据</span></li>
+                    <li><span>    }</span></li>
+                    <li><span>}</span></li>
+                </ol>
+			</pre>
+        </td></tr>
+        <tr><td>callback</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+                    <li><span>callback:{</span></li>
+                    <li><span>    clickNode : function(e,treeId,treeNode,clickFlag){</span></li>
+                    <li><span>     点击节点回调方法（由于封装时 使用了onclick事件 所以由该回调来代替onClick）  </span></li>
+                    <li><span>    }</span></li>
+                    <li><span>}</span></li>
+                </ol>
+			</pre>
+        </td></tr>
+        <tr><td colspan="4">其余为ztree组件属性，如要修改可查询ztree文档，地址<a href="http://www.treejs.cn/v3/api.php" target="_blank">http://www.treejs.cn/v3/api.php</a></td></tr>
+        </tbody>
+    </table>
+    <h4 id="a4">属性</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr id="a4_tr_1"><td>width</td><td>int</td><td>input宽度</td><td>100%</td></tr>
+        <tr><td>modalWidth</td><td>int</td><td>模态框宽度</td><td>auto</td></tr>
+        <tr><td>modalHeight</td><td>int</td><td>模态框高度</td><td>auto</td></tr>
+        <tr><td>modalTitle</td><td>string</td><td>模态框title</td><td>''</td></tr>
+        <tr><td>placeholder</td><td>String</td><td>提示文字</td><td>""</td></tr>
+        <tr><td>required</td><td>Boolean</td><td>是否必选</td><td>false</td></tr>
+        <tr><td>validate</td><td>Function OR String</td>
+            <td>定义表单验证规则。可使用globalValid中定义的正则名称 支持多种正则验证 多个正则名间用'|'进行分割。如正则无法满足 可定义function(value){return boolean} 参数为表单value 返回值必须为boolean</td><td>false</td></tr>
+        <tr><td>queryParam</td><td>{}</td><td>远程请求的额外参数</td><td>{}</td></tr>
+        <tr><td>onChange</td><td>Function</td><td>change触发回调方法 参数1：newValue参数2：oldValue</td><td>return false</td></tr>
+        <tr><td>onAckCallback</td><td>Function</td><td>点击模态框确认按钮后回调</td><td>return false</td></tr>
+        <tr><td>onLoaded</td><td>Function</td><td>树加载完毕后回调 参数为  ztree：ztree对象 可使用该对象 调用ztreeAPI </td><td>return false</td></tr>
+
+        </tbody>
+    </table>
+    <h4 id="a5">方法:</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr id="a5_tr_1"><td>validate</td><td>none</td><td>对input进行表单验证 返回boolean</td></tr>
+        <tr><td>clear</td><td>none</td><td>清除组件内容</td></tr>
+        <tr><td>getValue</td><td>none</td><td>获取value</td></tr>
+        <tr><td>setValue</td><td>String</td><td>设值回写 多选下 多个值逗号分隔</td></tr>
+        <tr><td>disable</td><td>none</td><td>禁用组件</td></tr>
+        <tr><td>enable</td><td>none</td><td>启用</td></tr>
+        <tr><td>reload</td><td>obj</td><td>重新加载树 参见tree reload 方法</td></tr>
+        <tr><td>getText</td><td>none</td><td>获取显示文本内容</td></tr>
+        <tr><td>setText</td><td>String</td><td>设置显示文本内容</td></tr>
+        <tr><td>getTree</td><td>none</td><td>返回树对象  该对象可以使用ztree API</td></tr>
+        <tr><td>searchNodes</td><td>string</td><td>根据树节点name 模糊过滤节点</td></tr>
+
+        </tbody>
+    </table>
+    <h4 id="a6">案例1:</h4>
+    <div class="outbackframe">
+        <button style="margin-left: 5px;margin-bottom: 10px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn1">查看代码</button>
+        <div class="innerback">
+            <div id="bt">
+                <button class="btn btn-primary bootstrap-table-add" type="button" onclick="disable()">禁用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn2">查看代码</button> |
+                <button class="btn btn-primary bootstrap-table-edit" type="button" onclick="enable()">启用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn3">查看代码</button> |
+                <button class="btn btn-primary bootstrap-table-delete" type="button" onclick="getValue()">取值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn4">查看代码</button> |
+                <button class="btn btn-primary" type="button" onclick="setValue()">设值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn5">查看代码</button> |
+                <button class="btn btn-primary" type="button" onclick="testVile()">表单验证</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn6">查看代码</button><br/><br/>
+                <button class="btn btn-primary" type="button" onclick="destroy()">销毁</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn7">查看代码</button> |
+                <button class="btn btn-primary" type="button" onclick="clear1()">clear</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn8">查看代码</button> |
+                <button class="btn btn-primary" type="button" onclick="reload()">reload</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn9">查看代码</button>
+            </div>
+            <input id="searchTree"/>
+        </div>
+    </div>
+
+    <div style="width:1px;height:1px;overflow:hidden;">
+        <textarea id="copyTarget1">
+        $("#searchTree").searchTree({
+          width:200,
+          checkType:'checkbox',
+          required:true,
+          validText:'测试',
+          localdata: zNodes,
+          rootElement:false,
+          onlyLeaf:true,
+          onChange:function(newValue,oldValue){
+            console.log(newValue+",,,,"+oldValue);
+          },
+          onAckCallback:function(nodes){
+            alert(nodes.length)
+          },
+          onLoaded:function(tree){
+            console.log(tree.getNodes())
+          }
+        });
+        </textarea>
+        <textarea id="copyTarget2">
+        function disable(){
+            $("#searchTree").searchTree("disable");
+        }
+        </textarea>
+        <textarea id="copyTarget3">
+        function enable(){
+            $("#searchTree").searchTree("enable");
+        }
+        </textarea>
+        <textarea id="copyTarget4">
+        function getValue(){
+            alert($("#searchTree").searchTree("getValue"));
+        }
+        </textarea>
+        <textarea id="copyTarget5">
+        function setValue(){
+            $('#searchTree').searchTree("setValue",'12')
+        }
+        </textarea>
+        <textarea id="copyTarget6">
+        function destroy(){
+            $("#searchTree").searchTree("destroy")
+        }
+        </textarea>
+        <textarea id="copyTarget7">
+        function destroy(){
+            $("#combotree").comboTree("destroy")
+        }
+        </textarea>
+        <textarea id="copyTarget8">
+        function clear1(){
+            $("#searchTree").searchTree("clear");
+        }
+        </textarea>
+        <textarea id="copyTarget9">
+        function reload(){
+            //初始化时用的是远程数据，所以要把url清空
+            $("#searchTree").searchTree("reload",{localdata:zNodes1, url:""});
+        }
+        </textarea>
+    </div>
+    <script>
+        $(function(){
+            $(".copyBtn").on("click", function(){
+                var num = $(this).attr("id").replace(/[^0-9]/ig, "");
+                var target = $("#copyTarget"+ num);
+                $.dopen({
+                    title: "查看代码",
+                    content: "<pre>"+ target.html() +"</pre>",
+                    area: ["600px", "auto"],
+                    btn: ["复制", "取消"],
+                    btn1: function(index){
+                        var res = $.copyToClipboard(target.get(0));
+                        if(res){
+                            layer.msg('复制成功', {time: 2000});
+                            layer.close(index);
+                        }else{
+                            layer.msg('复制失败，请手动复制', {time: 2000});
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
+    <h4>案例2: 具有默认值的输入框</h4>
+    <!--工具栏-->
+    <div class="outbackframe">
+        <button style="margin-left: 5px;margin-bottom: 10px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn18">查看代码</button>
+        <div class="innerback">
+            <div id="bt1">
+                <button class="btn btn-primary btn-sm" type="button" onclick="disable1()">禁用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn10">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="enable1()">启用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn11">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="getValue1()">取值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn12">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="setValue1()">赋值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn13">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="testVile1()">表单验证</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn14">查看代码</button> <br><br>
+                <button class="btn btn-primary btn-sm" type="button" onclick="destroy1()">销毁组件</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn15">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="clear11()">清除组件值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn16">查看代码</button> |
+                <button class="btn btn-primary btn-sm" type="button" onclick="addvalidate1()">修改验证规则(覆盖初始化参数对象 开启必填验证)</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn17">查看代码</button>
+            </div>
+            <div id="tt"></div>
+        </div>
+    </div>
+    <script>
+        function disable1() {
+            $("#tt").textBox("disable");
+        }
+        function enable1() {
+            $("#tt").textBox("enable")
+        }
+        function getValue1() {
+            $("#tt").textBox("getValue");
+        }
+        function setValue1() {
+            $("#tt").textBox("setValue",1)
+        }
+        function testVile1() {
+            $("#tt").textBox("validate")
+        }
+        function destroy1() {
+            $("#tt").textBox("destroy")
+        }
+        function clear11() {
+            $("#tt").textBox("clear")
+        }
+        function addvalidate1() {
+            $("#tt").textBox({required:true})
+        }
+    </script>
+    <div style="width:1px;height:1px;overflow:hidden;">
+        <textarea id="copyTarget10">
+        $("#tt").textBox("disable")
+        </textarea>
+        <textarea id="copyTarget11">
+        $("#tt").textBox("enable")
+        </textarea>
+        <textarea id="copyTarget12">
+        $("#tt").textBox("getValue")
+        </textarea>
+        <textarea id="copyTarget13">
+        $("#tt").textBox("setValue",1)
+        </textarea>
+        <textarea id="copyTarget14">
+        $("#tt").textBox("validate")
+        </textarea>
+        <textarea id="copyTarget15">
+        $("#tt").textBox("destroy")
+        </textarea>
+        <textarea id="copyTarget16">
+        $("#tt").textBox("clear")
+        </textarea>
+        <textarea id="copyTarget17">
+        $("#tt").textBox({required:true})
+        </textarea>
+        <textarea id="copyTarget18">
+        $("#tt").textBox({
+          defaultValue:'test',
+          width:200
+        });
+        </textarea>
+    </div>
+
+</section>
+
+<div class="siteDir">
+    <div class="dir-title">目录 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+    <div class="dir-list">
+        <ul id="dir_tree"></ul>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(".siteDir .close").on("click", function(){
+            $(this).parents(".siteDir").hide();
+        });
+        function addEleId(ele) {
+            var i = 0;
+            $('#'+ele+'_tr_1').parent().find('tr').map(function (index,value) { //a3_tr_1
+                $(this).attr('id',ele+"_tr_"+(++i));
+            })
+        }
+        addEleId('a3');//传入参数a3
+        addEleId('a4');
+        addEleId('a5');
+        function createObject(ele) { //创建一个对象，{id:3, pId:0, name:"方法", url:"#a4", target:"_self"}
+            var gdatastring = [];
+            var gdata = {
+                arg:{},
+                i:1,
+                sumarg:[],
+                glength:$('#a'+ele+'_tr_1').parent().find('tr').length,
+                gseriesinfo:function () {
+                    let sumarg = [];
+                    for(;gdata.i<=gdata.glength;gdata.i++){
+                        gdata.arg.id=ele.toString()+gdata.i;
+                        gdata.arg.pId = ele;
+                        gdata.arg.name = $('#a'+ele+'_tr_'+gdata.i).find('td:first').html();
+                        gdata.arg.url = '#a'+ele+'_tr_'+gdata.i;
+                        gdata.arg.target = '_self';
+                        sumarg.push(JSON.stringify(gdata.arg));
+                    }
+                    return sumarg;
+                }
+            }
+
+            gdata.gseriesinfo().map(function (i,v) {
+                gdatastring.push(JSON.parse(i));
+            });
+            return gdatastring;
+        }
+        $("#dir_tree").tree({
+            localdata: [
+                {id:1, pId:0, name:"用法 & 数据格式", url:"#a1", target:"_self"},
+                {id:2, pId:0, name:"语法", url:"#a2", target:"_self"},
+
+                {id:3, pId:0, name:"初始化参数", url:"#a3", target:"_self"},
+                {id:4, pId:0, name:"属性", url:"#a4", target:"_self"},
+
+                {id:5, pId:0, name:"方法", url:"#a5", target:"_self"},
+                {id:6, pId:0, name:"案例", url:"#a6", target:"_self"}
+            ].concat(createObject(3),createObject(4),createObject(5)),
+            checkType:'nocheck',
+            view: {
+                showIcon: false
+            },
+            data : { // 必须使用data
+                simpleData : {
+                    enable : true,
+                    idKey : "id", // id编号命名 默认
+                    pIdKey : "pId", // 父id编号命名 默认
+                    rootPId : 0
+                },
+                key: {
+                    url: "url"
+                }
+            },
+            callback:{
+                clickNode : function(e,treeId,treeNode,clickFlag){
+                    var ztree = $("#"+treeId).tree("getTree");
+                    ztree.expandNode(treeNode);
+                }
+            }
+        });
+    })
+</script>
+<br><br><br><br>
+</body>
+</html>
+<style>
+    .ztreeBox_down{margin:10px 0;}
+    .btn-primary { background-color: #428BCA;border:1px solid #2E6DA4;}
+    .btn-primary:hover{background-color: #3276b1;border:1px solid #125590;}
+</style>

@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.conBox .subhead{margin-bottom:20px;}
+
+/* 四个按钮 */
+.sub_catagory{position: absolute; top:0; bottom:0; left:0; right:0; margin:auto;}
+.sub_catagory li{float:left; width:100%; height:100%; text-align: center;}
+.sub_catagory li a{position:relative; display:block; width:100%; height:95%; margin:0 auto;}
+.sub_catagory li span{position: absolute; bottom:-10px; left:0; display:block; width:100%; font-size:30px; text-shadow:0 0 15px #000; color:#FFF;}
+.sub_catagory li a:active{padding:5px 0 0 5px;}
+
+.subcatagoryNum1{width:28%;}
+.subcatagoryNum1 li{width:100%;}
+
+.subcatagoryNum3{width:80%;}
+.subcatagoryNum3 li{width:33.3%;}
+
+.subcatagoryNum2, .subcatagoryNum4{width:60%;}
+.subcatagoryNum2 li, .subcatagoryNum4 li{width:50%;}
+.subcatagoryNum4 li{height:50%; margin-bottom:1%;}
+
+.subcatagoryNum1, .subcatagoryNum2, .subcatagoryNum3{height:33%;}
+.subcatagoryNum4{height:70%;}
+
+
+/* 左右两列 */
+.sdcon_lt{width:62%; padding-right:5%; background:url('../images/secondline.png') no-repeat center right; background-size:2px 100%;}
+.sdcon_rt{width:28%;}
+.sdcon_rt .icon_tips{display:inline-block; width:16px; height:16px; margin-right:5px; background:url('../images/icon_tips.png') no-repeat 0 3px; background-size:100%; background-image:url('../images/icon_tips_small.png') \9;}
+.sdcon_rt p{font-size:15px; color:#FCFCBA; line-height:1.8;}
+
+.secondcon .inputBox{width:100%; margin-bottom:15px; background-color:#FFF; border:1px solid #42505B;}
+.secondcon .inputBox input[type='text']{padding:12px; padding-right:21%;}
+.secondcon .inputBox .icon_keyboard{right:0; background-size:60%;}
+.secondcon .nextBtn a{width:100%; margin-top:5px;}
+
+/* 一列 */
+.secondcon_onerow{width:80%; margin:0 auto;}
+.secondcon_onerow .inputBox .icon_select{background-size:40%;}
+.secondcon_onerow .inputBox .icon_keyboard{background-size:45%;}
+
+/* 二列 */
+.secondcon_tworow_inputs .sdcon_tips{width:100%;}
+.secondcon_tworow_inputs .sdcon_inputs{width:105%; padding-top:20px;}
+.secondcon_tworow_inputs .sdcon_inputs .inputBox{float:left; width:45%; margin-right:4%;}
+
+/* 选择单位 */
+.secondcon_unit .unitSelect li,
+.secondcon_unit .tempSelect li{float:left; width:35%; padding:30px 2%; margin:8px 5%; text-align: center; color:#FFF; font-size:30px; border-radius:8px; border:1px solid #2D80AD; background: url("../images/btnbg_line.png") repeat-x; background-size:auto 100%;}
+.secondcon_unit .unitSelect li:active,
+.secondcon_unit .tempSelect li:active{opacity: .8; filter: alpha(opacity=80);}
+
+/* 输入框disabled状态 */
+.inputBox_keybd{overflow:hidden;}
+.inputBox_keybd .inp_keyboard[disabled='disabled']{width:79%;}
+
+/* 模板名称 */
+.tempname dt{padding:6px 0; margin-top:5px; background:url('../images/subtitbg.png') repeat-x; background-size:1px 100%; text-shadow:0 0 3px #c5c5c5; text-align:center; font-size:16px;}
+.tempname dd{max-height:120px; overflow-y:auto;}
+.tempname dd p{padding:5px 0 5px 10%; font-size:16px; background-color:#FFF; color:#999;}
+.tempname dd p:nth-child(even){background-color:#EFF0F2;}
+
+/* 刷身份证&选择取票类型  */
+.selectBtn{text-align: center; margin-top:20%;}
+.selectBtn a{display:inline-block; width:41%; padding:5% 0 8%; margin:0 20px; color:#FFF; font-size:34px; background: url("../images/btnbg.png") no-repeat; background-size:100% 100%;}
+.selectBtn a:active{opacity: .8; filter: alpha(opacity=80);}
+
+.showIDCard, .showQRCode{text-align: center; color:#FFF;}
+.showIDCard p, .showQRCode p{margin-bottom:10px; font-size:40px;}
+
+/* 系统维护 & 支付完成 */
+.systemMain{width: 100%; height: 64%; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; padding: 0;}
+.systemMain .conBox{background:rgba(255,255,255,.6); width:65%; height:87%; margin:0 auto;}
+.systemMain .system{position: absolute; left:0; right:0; top:0; bottom:0; width:230px; height:190px; padding-left:270px; margin:auto; background:url("../images/systemMaintenance.png") no-repeat left top;}
+.systemMain .sys1{font-size:45px; color:#ca102a;}
+.systemMain .sys2{font-size:28px; color:#555454;}
+
+.systemMain .payDone{position: absolute; left:0; right:0; top:0; bottom:0; width:210px; height:230px; padding-left:130px; margin:auto; background:url("../images/paydone.png") no-repeat left top;}
+.systemMain .payDone .pay1{font-size:40px; color:#4ab233; line-height:100px;}
+.systemMain .payDone .pay2{margin-left: -60px;}
+.systemMain .payDone .pay2 a{display: inline-block; padding: 15px 40px; color:#FFF; margin-top: 50px; font-size:28px; background:url("../images/btnbg_line.png") repeat-x; background-size: 1px 100%; border-radius: 5px;}
+
+/* 刷银行卡 */
+.systemMain .bankcard{text-align: center; padding-top:3%;}
+.systemMain .bankcard .bcard1{margin-bottom:30px; font-size:30px; color:#000;}
+
+/* 分页 */
+.pageNum2{width:30%; margin:15px auto 0;}
+.pageNum2 a{float:left; text-indent: -999em; width:90px; height:90px; background:url('../images/pagebtn.png') no-repeat; background-size:200% 100%;}
+.pageNum2 a.prevPage{background-position: 0 0;}
+.pageNum2 a.nextPage{float:right; background-position: -90px 0;}
+.pageNum2 a.btn_disabled{opacity:.5; filter:alpha(opacity=50);}
+.pageNum2 a:active{opacity: .8; filter: alpha(opacity=80);}

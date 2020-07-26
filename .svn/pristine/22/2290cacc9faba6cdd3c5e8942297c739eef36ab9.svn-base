@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE></TITLE>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+    	<h4>使用方法:</h4>
+	    <pre>
+	        <ol style="display:table;">
+	        	<li><span>$.dajax({</span></li>
+	        	<li><span> url:"xxxxxxx",</span></li>
+	        	<li><span> data:{},</span></li>
+	        	<li><span> success:function(){},</span></li>
+	        	<li><span>});</span></li>
+	        </ol>
+	    </pre>
+	    <h4>属性:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+	        <tbody>
+	        	<tr><td>option:url</td><td>string（字符串型）</td><td>ajax请求地址</td><td>无</td></tr>
+	        	<tr><td>option:data</td><td>json</td><td>ajax请求参数</td><td>无</td></tr>
+	        	<tr><td>option:success</td><td>function</td><td>ajax请求后成功方法</td><td>无</td></tr>
+	        </tbody>
+	    </table>
+	</section>
+</BODY>
+</HTML>

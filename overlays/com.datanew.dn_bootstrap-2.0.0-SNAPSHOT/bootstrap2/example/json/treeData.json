@@ -1,0 +1,15 @@
+[
+  { "id":1, "pId":0, "name":"节点搜索演示 1", "open":true, "ISLEAF":0},
+  { "id":11, "pId":1, "name":"关键字可以是名字", "test":123,"ISLEAF":1},
+  { "id":12, "pId":1, "name":"关键字可以是level", "ISLEAF":1},
+  { "id":13, "pId":1, "name":"关键字可以是id", "ISLEAF":1},
+  { "id":14, "pId":1, "name":"关键字可以是各种属性", "ISLEAF":1},
+  { "id":2, "pId":0, "name":"节点搜索演示 2", "open":true, "ISLEAF":0},
+  { "id":21, "pId":2, "name":"可以只搜索一个节点", "ISLEAF":1},
+  { "id":22, "pId":2, "name":"可以搜索节点集合", "ISLEAF":1},
+  { "id":23, "pId":2, "name":"搜我吧", "ISLEAF":1},
+  { "id":3, "pId":0, "name":"节点搜索演示 3", "open":true, "ISLEAF":0},
+  { "id":31, "pId":3, "name":"我的 id 是: 31", "ISLEAF":0},
+  { "id":32, "pId":31, "name":"我的 id 是: 32", "ISLEAF":0},
+  { "id":33, "pId":32, "name":"我的 id 是: 33", "ISLEAF":1}
+]

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>type=ddate</title>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+		$(function(){
+            $("a[id^='copybtn']").click(function(){
+                var copyObj = $(this).siblings("textarea")[0];
+                copyObj.select();
+                document.execCommand("Copy");
+                alert("复制成功");
+            })
+
+
+			$("#yearInput").ddate({
+				title:"年份",
+				name:"dyear",
+				type:"ddate",
+				format: 'yyyy',
+				autoclose: 1,
+				startView: 4, //日期时间选择器打开之后首先显示的视图，4显示为年
+				minView: 4,
+				did:"yearid",
+				dname:"yearname",
+				defaultValue:"2016",
+				removeIcon: false/*,
+                disabled: true*/
+			})
+			$("#dateInput").ddate({
+				title:"日期",
+				name:"ddate",
+				type:"ddate",
+				format : 'yyyy-mm-dd hh:ii',
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				showMeridian: 1,
+				did:"updatedateid",
+				dname:"updatedate",
+				defaultValue:"2016-09-02 02:05"
+			})
+			
+		})
+					
+	</script>
+</head>
+<body>
+
+<section class="parser">
+    <div class="page-header"><h1>语法解析</h1></div>
+
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$(function(){</span></li>
+            <li><span> $("#yearInput").ddate({</span></li>
+			<li><span>	title:"年份",</span></li>
+			<li><span>	name:"dyear",</span></li>
+			<li><span>	format: 'yyyy',</span></li>
+			<li><span>	todayBtn: 1,</span></li>
+			<li><span>	autoclose: 1,</span></li>
+			<li><span>	startView: 4,//日期时间选择器打开之后首先显示的视图，4显示为年</span></li> 
+			<li><span>	minView: 4,</span></li>
+			<li><span>	defaultValue:"2016",</span></li>
+			<li><span>	removeIcon: false</span></li>
+			<li><span> })		</span></li>
+			<li><span>})</span></li>
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+			<tr><td colspan="4">form组件的其他参数请参考<a href="form_demo.html" target="_blank">form_demo.html</a>页面</td></tr>
+        	<tr><td>title</td><td>String</td><td>组件标签文字</td><td></td></tr>
+        	<tr><td>name</td><td>String</td><td>组件name值</td><td></td></tr>
+        	<tr><td>type</td><td>String</td><td>标签类型，默认为空的单元格，日期年份输入框为ddate</td><td></td></tr>
+        	<tr><td>did</td><td>String</td><td>3</td><td>4</td></tr>
+        	<tr><td>dname</td><td>String</td><td>input对应的隐藏域的name值</td><td></td></tr>
+        	<tr><td>defaultValue</td><td>String</td><td>设定默认值</td><td></td></tr>
+        	<tr><td>removeIcon</td><td>Boolean</td><td>默认true则显示重置按钮，false为无</td><td>true</td></tr>
+        	<tr><td>disabled</td><td>Boolean</td><td>时间控件是否禁用，默认为false不禁用</td><td>false</td></tr>
+            <tr><td>format</td><td>String</td><td>日期格式， p, P, h, hh, i, ii, s, ss, d, dd, m, mm, M, MM, yy, yyyy 的任意组合</td><td>"mm/dd/yyyy"</td></tr>
+        	<tr><td>weekStart</td><td>Integer</td><td>一周从哪一天开始。0（星期日）到6（星期六）</td><td>0</td></tr>
+        	<tr><td>todayBtn</td><td>Boolean, "linked"</td><td>如果此值为true 或 "linked"，则在日期时间选择器组件的底部显示一个 "Today" 按钮用以选择当前日期。如果是true的话，"Today" 按钮仅仅将视图转到当天的日期，如果是"linked"，当天日期将会被选中。</td><td>false</td></tr>
+        	<tr><td>autoclose</td><td>Boolean</td><td>当选择一个日期之后是否立即关闭此日期时间选择器</td><td>false</td></tr>
+        	<tr><td>todayHighlight</td><td>Boolean</td><td>如果为true, 高亮当前日期。</td><td>false</td></tr>
+        	<tr><td>startView</td><td>Number, String</td><td>日期时间选择器打开之后首先显示的视图。 可接受的值：<br />0 or 'hour' for the hour view<br />1 or 'day' for the day view<br />2 or 'month' for month view (the default)<br />3 or 'year' for the 12-month overview<br />4 or 'decade' for the 10-year overview. Useful for date-of-birth datetimepickers.</td><td>2, 'month'</td></tr>
+        	<tr><td>minView</td><td>Number, String</td><td>日期时间选择器所能够提供的最精确的时间选择视图</td><td>0, 'hour'</td></tr>
+        	<tr><td>forceParse</td><td>Boolean</td><td>当选择器关闭的时候，是否强制解析输入框中的值。也就是说，当用户在输入框中输入了不正确的日期，选择器将会尽量解析输入的值，并将解析后的正确值按照给定的格式format设置到输入框中。</td><td>true</td></tr>
+        	<tr><td>showMeridian</td><td>Boolean</td><td>This option will enable meridian views for day and hour views.</td><td>false</td></tr>
+        	<tr><td colspan="4">datetimepicker的用法具体可参考<a href="http://www.bootcss.com/p/bootstrap-datetimepicker/" target="_blank">http://www.bootcss.com/p/bootstrap-datetimepicker/</a></td></tr>
+        </tbody>
+    </table>
+    
+    <h4>案例:</h4>
+</section>
+
+<input type="text" name="" id="yearInput" />
+<section class="parser container-fluid row">
+    <br/><a href="javascript:;" id="copybtn1">复制代码</a>
+    <textarea id="copytext1" style="width:1px; height:1px; padding:0; border:none;">
+        <input type="text" name="" id="yearInput_1" />
+        <script>
+            $("#yearInput_1").ddate({
+                title:"年份",
+                name:"dyear",
+                type:"ddate",
+                format: 'yyyy',
+                autoclose: 1,
+                startView: 4, //日期时间选择器打开之后首先显示的视图，4显示为年
+                minView: 4,
+                did:"yearid",
+                dname:"yearname",
+                defaultValue:"2016",
+                removeIcon: false
+            })
+        </script>
+    </textarea>
+    <pre>
+        <ol style="display:table">
+            <li><span>&lt;script type="text/javascript"&gt;</span></li>
+            <li><span>    $("#yearInput").ddate({</span></li>
+            <li><span>        title:"年份",</span></li>
+            <li><span>        name:"dyear",</span></li>
+            <li><span>        type:"ddate",</span></li>
+            <li><span>        format: 'yyyy',</span></li>
+            <li><span>        autoclose: 1,</span></li>
+            <li><span>        startView: 4,</span></li>
+            <li><span>        minView: 4,</span></li>
+            <li><span>        did:"yearid",</span></li>
+            <li><span>        dname:"yearname",</span></li>
+            <li><span>        defaultValue:"2016",</span></li>
+            <li><span>        removeIcon: false,</span></li>
+            <li><span>    });</span></li>
+            <li><span>&lt;/script&gt;</span></li>
+        </ol>
+    </pre>
+</section>
+<br />
+<input type="text" name="" id="dateInput" />
+<section class="parser container-fluid row">
+    <br/><a href="javascript:;" id="copybtn2">复制代码</a>
+    <textarea id="copytext2" style="width:1px; height:1px; padding:0; border:none;">
+        <input type="text" name="" id="dateInput_1" />
+        <script>
+            $("#dateInput_1").ddate({
+                title:"日期",
+                name:"ddate",
+                type:"ddate",
+                format : 'yyyy-mm-dd hh:ii',
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                showMeridian: 1,
+                did:"updatedateid",
+                dname:"updatedate",
+                defaultValue:"2016-09-02 02:05"
+            })
+        </script>
+    </textarea>
+    <pre>
+        <ol style="display:table">
+            <li><span>&lt;script type="text/javascript"&gt;</span></li>
+            <li><span>    $("#dateInput").ddate({</span></li>
+            <li><span>        title:"日期",</span></li>
+            <li><span>        name:"ddate",</span></li>
+            <li><span>        type:"ddate",</span></li>
+            <li><span>        format : 'yyyy-mm-dd hh:ii',</span></li>
+            <li><span>        todayBtn: 1,</span></li>
+            <li><span>        autoclose: 1,</span></li>
+            <li><span>        todayHighlight: 1,</span></li>
+            <li><span>        startView: 2,</span></li>
+            <li><span>        showMeridian: 1,</span></li>
+            <li><span>        did:"updatedateid",</span></li>
+            <li><span>        dname:"updatedate",</span></li>
+            <li><span>        defaultValue:"2016-09-02 02:05"</span></li>
+            <li><span>    });</span></li>
+            <li><span>&lt;/script&gt;</span></li>
+        </ol>
+    </pre>
+</section>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</body>
+</html>

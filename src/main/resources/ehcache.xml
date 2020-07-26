@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+	
+	<!--磁盘存储配置：用来指定缓存在磁盘上的存储位置。
+	  	可以使用JavaVM环境变量 
+	  	user.home – 用户主目录
+        user.dir  – 用户当前工作目录
+        java.io.tmpdir – 默认临时文件路径   -->
+	<diskStore path="java.io.tmpdir" />
+	
+	<!--  
+        name:cache唯一标识   
+        eternal：缓存是否永久有效   
+        maxElementsInMemory：内存中最大缓存对象数  
+        overflowToDisk(true,false)：缓存对象达到最大数后，将缓存写到硬盘中  
+        diskPersistent：硬盘持久化  
+        timeToIdleSeconds：缓存清除时间 (缓存自创建日期起至失效时的间隔时间,单位秒)  
+        timeToLiveSeconds：缓存存活时间 (缓存创建以后，最后一次访问缓存的日期至失效之时的时间间隔,单位秒)
+        diskSpoolBufferSizeMB:这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。
+        memoryStoreEvictionPolicy：缓存清空策略  
+        1.FIFO：first in first out 先讲先出  
+        2.LFU： Less Frequently Used 一直以来最少被使用的  
+        3.LRU：Least Recently Used  最近最少使用的   
+    --> 
+	
+	<!-- 默认cache：如果没有对应的特定区域的缓存，就使用默认缓存 -->
+	<defaultCache maxElementsInMemory="1000" 
+				eternal="false"
+				timeToIdleSeconds="200" 
+				timeToLiveSeconds="300" 
+				overflowToDisk="false" 
+				memoryStoreEvictionPolicy="LRU">
+
+	</defaultCache>
+    <!--配置自定义缓存             (业务的数据缓存)-->
+	<!-- <cache name="businessCache" 
+			maxElementsInMemory="10000"
+			eternal="false" 
+			timeToIdleSeconds="50"  
+            timeToLiveSeconds="60" 
+            overflowToDisk="false" 
+			memoryStoreEvictionPolicy="LRU"/> -->
+	<!--配置自定义缓存             (页面缓存)-->		
+	<!-- <cache name = "SimplePageCachingFilter"
+	       maxElementsInMemory = "10"
+           maxElementsOnDisk = "10"
+           eternal = "false"
+           overflowToDisk = "true"
+           diskSpoolBufferSizeMB = "20"
+           timeToIdleSeconds = "10"
+           timeToLiveSeconds = "10"
+           memoryStoreEvictionPolicy = "LFU"
+            />	 -->	
+			
+
+</ehcache>

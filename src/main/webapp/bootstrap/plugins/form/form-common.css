@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.form-fieldset {padding: .35em .625em .75em; margin: 0 2px; border: 1px solid #c0c0c0;  }
+.form-legend {width:auto; padding: 0; border: 0;}
+
+.form-inline .dis_flex, .form-horizontal .dis_flex{display: -webkit-flex; display: -moz-flex; display: -o-flex; display: flex;}
+.form-inline .dis_flex .flex_val_1, .form-horizontal .dis_flex .flex_val_1{-webkit-flex:1; -moz-flex:1; -o-flex:1; flex:1; width:60% \9 !important;}

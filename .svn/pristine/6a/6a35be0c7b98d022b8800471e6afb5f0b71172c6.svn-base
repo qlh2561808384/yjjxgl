@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<title>radio</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link href="./css/bootstrap-combined.min.css" rel="stylesheet">
+	<link href="./css/ztree.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="./js/jquery-2.0.0.min.js"></script>
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.htmlClean.js"></script>
+
+	<link rel="stylesheet" href="css/metroStyle/metroStyle.css" type="text/css">
+	<script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.excheck.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.exedit.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.select.radio.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.select.checkbox.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h3 class="text-center">
+				h3. 这是一套可视化布局系统.
+			</h3>
+			<div class="btn-group ztreeBox">
+				 <button data-toggle="dropdown" class="dropdown-toggle"><span>checkboxTest:</span><input class="sel_checkbox" type="text" readonly="readonly" /></button>
+				<ul class="dropdown-menu ztree treeDemo_checkbox" id="treeDemo_checkbox_1">
+					<li id="treeDemo_checkbox_1_1" class="level0">
+						<span id="treeDemo_checkbox_1_1_switch" class="button level0 switch root_open"></span><span id="treeDemo_checkbox_1_1_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_1_a" class="level0" title="全部"><span id="treeDemo_checkbox_1_1_ico" class="button ico_open"></span><span id="treeDemo_checkbox_1_1_span" class="node_name">全部</span></a>
+						<ul id="treeDemo_checkbox_1_1_ul" class="level0 ">
+							<li id="treeDemo_checkbox_1_2" class="level1">
+								<span id="treeDemo_checkbox_1_2_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_2_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_2_a" class="level1" title="移动客户端"><span id="treeDemo_checkbox_1_2_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_2_span" class="node_name">移动客户端</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_3" class="level1">
+								<span id="treeDemo_checkbox_1_3_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_3_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_3_a" class="level1" title="自助终端支付"><span id="treeDemo_checkbox_1_3_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_3_span" class="node_name">自助终端支付</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_4" class="level1">
+								<span id="treeDemo_checkbox_1_4_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_4_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_4_a" class="level1" title="刷卡支付"><span id="treeDemo_checkbox_1_4_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_4_span" class="node_name">刷卡支付</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_5" class="level1">
+								<span id="treeDemo_checkbox_1_5_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_5_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_5_a" class="level1" title="其他渠道支付"><span id="treeDemo_checkbox_1_5_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_5_span" class="node_name">其他渠道支付</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_6" class="level1">
+								<span id="treeDemo_checkbox_1_6_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_6_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_6_a" class="level1" title="扫码支付"><span id="treeDemo_checkbox_1_6_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_6_span" class="node_name">扫码支付</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_7" class="level1">
+								<span id="treeDemo_checkbox_1_7_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_7_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_7_a" class="level1" title="柜面支付"><span id="treeDemo_checkbox_1_7_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_7_span" class="node_name">柜面支付</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_8" class="level1">
+								<span id="treeDemo_checkbox_1_8_switch" class="button level1 switch center_docu"></span><span id="treeDemo_checkbox_1_8_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_8_a" class="level1" title="委托扣款"><span id="treeDemo_checkbox_1_8_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_8_span" class="node_name">委托扣款</span></a>
+							</li>
+							<li id="treeDemo_checkbox_1_9" class="level1">
+								<span id="treeDemo_checkbox_1_9_switch" class="button level1 switch center_open"></span><span id="treeDemo_checkbox_1_9_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_9_a" class="level1" title="移动支付"><span id="treeDemo_checkbox_1_9_ico" class="button ico_open"></span><span id="treeDemo_checkbox_1_9_span" class="node_name">移动支付</span></a>
+								<ul id="treeDemo_checkbox_1_9_ul" class="level1 line">
+									<li id="treeDemo_checkbox_1_10" class="level2">
+										<span id="treeDemo_checkbox_1_10_switch" class="button level2 switch center_docu"></span><span id="treeDemo_checkbox_1_10_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_10_a" class="level2" title="移动支付（商业银行）"><span id="treeDemo_checkbox_1_10_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_10_span" class="node_name">移动支付（商业银行）</span></a>
+									</li>
+									<li id="treeDemo_checkbox_1_11" class="level2">
+										<span id="treeDemo_checkbox_1_11_switch" class="button level2 switch bottom_docu"></span><span id="treeDemo_checkbox_1_11_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_11_a" class="level2" title="移动支付（支付机构）"><span id="treeDemo_checkbox_1_11_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_11_span" class="node_name">移动支付（支付机构）</span></a>
+									</li>
+								</ul>
+							</li>
+							<li id="treeDemo_checkbox_1_12" class="level1">
+								<span id="treeDemo_checkbox_1_12_switch" class="button level1 switch bottom_open"></span><span id="treeDemo_checkbox_1_12_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_12_a" class="level1" title="网页支付"><span id="treeDemo_checkbox_1_12_ico" class="button ico_open"></span><span id="treeDemo_checkbox_1_12_span" class="node_name">网页支付</span></a>
+								<ul id="treeDemo_checkbox_1_12_ul" class="level1 ">
+									<li id="treeDemo_checkbox_1_13" class="level2">
+										<span id="treeDemo_checkbox_1_13_switch" class="button level2 switch center_docu"></span><span id="treeDemo_checkbox_1_13_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_13_a" class="level2" title="商业银行互联网支付"><span id="treeDemo_checkbox_1_13_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_13_span" class="node_name">商业银行互联网支付</span></a>
+									</li>
+									<li id="treeDemo_checkbox_1_14" class="level2">
+										<span id="treeDemo_checkbox_1_14_switch" class="button level2 switch bottom_docu"></span><span id="treeDemo_checkbox_1_14_check" class="button chk checkbox_false_full"></span><a id="treeDemo_checkbox_1_14_a" class="level2" title="网页支付（支付机构）"><span id="treeDemo_checkbox_1_14_ico" class="button ico_docu"></span><span id="treeDemo_checkbox_1_14_span" class="node_name">网页支付（支付机构）</span></a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="btn-group ztreeBox no">
+				<button class="dropdown-toggle" data-toggle="dropdown"><span>radio父元素不可选:</span><input class="sel_radio" readonly="readonly" type="text" value="" /></button>
+				<ul class="dropdown-menu ztree treeDemo_radio" id="treeDemo_radio_3">
+					<li id="treeDemo_radio_3_1" class="level0">
+						<span id="treeDemo_radio_3_1_switch" class="button level0 switch roots_docu"></span><span id="treeDemo_radio_3_1_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_1_a" class="level0" title="移动客户端"><span id="treeDemo_radio_3_1_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_1_span" class="node_name">移动客户端</span></a>
+					</li>
+					<li id="treeDemo_radio_3_2" class="level0">
+						<span id="treeDemo_radio_3_2_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_2_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_2_a" class="level0" title="自助终端支付"><span id="treeDemo_radio_3_2_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_2_span" class="node_name">自助终端支付</span></a>
+					</li>
+					<li id="treeDemo_radio_3_3" class="level0">
+						<span id="treeDemo_radio_3_3_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_3_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_3_a" class="level0" title="刷卡支付"><span id="treeDemo_radio_3_3_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_3_span" class="node_name">刷卡支付</span></a>
+					</li>
+					<li id="treeDemo_radio_3_4" class="level0">
+						<span id="treeDemo_radio_3_4_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_4_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_4_a" class="level0" title="其他渠道支付"><span id="treeDemo_radio_3_4_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_4_span" class="node_name">其他渠道支付</span></a>
+					</li>
+					<li id="treeDemo_radio_3_5" class="level0">
+						<span id="treeDemo_radio_3_5_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_5_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_5_a" class="level0" title="扫码支付"><span id="treeDemo_radio_3_5_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_5_span" class="node_name">扫码支付</span></a>
+					</li>
+					<li id="treeDemo_radio_3_6" class="level0">
+						<span id="treeDemo_radio_3_6_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_6_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_6_a" class="level0" title="柜面支付"><span id="treeDemo_radio_3_6_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_6_span" class="node_name">柜面支付</span></a>
+					</li>
+					<li id="treeDemo_radio_3_7" class="level0">
+						<span id="treeDemo_radio_3_7_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_3_7_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_7_a" class="level0" title="委托扣款"><span id="treeDemo_radio_3_7_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_7_span" class="node_name">委托扣款</span></a>
+					</li>
+					<li id="treeDemo_radio_3_8" class="level0">
+						<span id="treeDemo_radio_3_8_switch" class="button level0 switch bottom_open"></span><span id="treeDemo_radio_3_8_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_8_a" class="level0" title="移动支付"><span id="treeDemo_radio_3_8_ico" class="button ico_open"></span><span id="treeDemo_radio_3_8_span" class="node_name">移动支付</span></a>
+						<ul id="treeDemo_radio_3_8_ul" class="level0 ">
+							<li id="treeDemo_radio_3_9" class="level1">
+								<span id="treeDemo_radio_3_9_switch" class="button level1 switch center_docu"></span><span id="treeDemo_radio_3_9_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_9_a" class="level1" title="移动支付（商业银行）"><span id="treeDemo_radio_3_9_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_9_span" class="node_name">移动支付（商业银行）</span></a>
+							</li>
+							<li id="treeDemo_radio_3_10" class="level1">
+								<span id="treeDemo_radio_3_10_switch" class="button level1 switch bottom_docu"></span><span id="treeDemo_radio_3_10_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_3_10_a" class="level1" title="移动支付（支付机构）"><span id="treeDemo_radio_3_10_ico" class="button ico_docu"></span><span id="treeDemo_radio_3_10_span" class="node_name">移动支付（支付机构）</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="btn-group ztreeBox yes">
+				<button class="dropdown-toggle" data-toggle="dropdown"><span>radio父元素可选:</span><input class="sel_radio" readonly="readonly" type="text" /></button>
+				<ul class="dropdown-menu ztree treeDemo_radio" id="treeDemo_radio_4">
+					<li id="treeDemo_radio_4_1" class="level0">
+						<span id="treeDemo_radio_4_1_switch" class="button level0 switch roots_docu"></span><span id="treeDemo_radio_4_1_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_1_a" class="level0" title="移动客户端"><span id="treeDemo_radio_4_1_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_1_span" class="node_name">移动客户端</span></a>
+					</li>
+					<li id="treeDemo_radio_4_2" class="level0">
+						<span id="treeDemo_radio_4_2_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_2_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_2_a" class="level0" title="自助终端支付"><span id="treeDemo_radio_4_2_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_2_span" class="node_name">自助终端支付</span></a>
+					</li>
+					<li id="treeDemo_radio_4_3" class="level0">
+						<span id="treeDemo_radio_4_3_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_3_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_3_a" class="level0" title="刷卡支付"><span id="treeDemo_radio_4_3_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_3_span" class="node_name">刷卡支付</span></a>
+					</li>
+					<li id="treeDemo_radio_4_4" class="level0">
+						<span id="treeDemo_radio_4_4_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_4_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_4_a" class="level0" title="其他渠道支付"><span id="treeDemo_radio_4_4_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_4_span" class="node_name">其他渠道支付</span></a>
+					</li>
+					<li id="treeDemo_radio_4_5" class="level0">
+						<span id="treeDemo_radio_4_5_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_5_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_5_a" class="level0" title="扫码支付"><span id="treeDemo_radio_4_5_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_5_span" class="node_name">扫码支付</span></a>
+					</li>
+					<li id="treeDemo_radio_4_6" class="level0">
+						<span id="treeDemo_radio_4_6_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_6_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_6_a" class="level0" title="柜面支付"><span id="treeDemo_radio_4_6_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_6_span" class="node_name">柜面支付</span></a>
+					</li>
+					<li id="treeDemo_radio_4_7" class="level0">
+						<span id="treeDemo_radio_4_7_switch" class="button level0 switch center_docu"></span><span id="treeDemo_radio_4_7_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_7_a" class="level0" title="委托扣款"><span id="treeDemo_radio_4_7_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_7_span" class="node_name">委托扣款</span></a>
+					</li>
+					<li id="treeDemo_radio_4_8" class="level0">
+						<span id="treeDemo_radio_4_8_switch" class="button level0 switch bottom_open"></span><span id="treeDemo_radio_4_8_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_8_a" class="level0" title="移动支付"><span id="treeDemo_radio_4_8_ico" class="button ico_open"></span><span id="treeDemo_radio_4_8_span" class="node_name">移动支付</span></a>
+						<ul id="treeDemo_radio_4_8_ul" class="level0 ">
+							<li id="treeDemo_radio_4_9" class="level1">
+								<span id="treeDemo_radio_4_9_switch" class="button level1 switch center_docu"></span><span id="treeDemo_radio_4_9_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_9_a" class="level1" title="移动支付（商业银行）"><span id="treeDemo_radio_4_9_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_9_span" class="node_name">移动支付（商业银行）</span></a>
+							</li>
+							<li id="treeDemo_radio_4_10" class="level1">
+								<span id="treeDemo_radio_4_10_switch" class="button level1 switch bottom_docu"></span><span id="treeDemo_radio_4_10_check" class="button chk radio_false_full"></span><a id="treeDemo_radio_4_10_a" class="level1" title="移动支付（支付机构）"><span id="treeDemo_radio_4_10_ico" class="button ico_docu"></span><span id="treeDemo_radio_4_10_span" class="node_name">移动支付（支付机构）</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

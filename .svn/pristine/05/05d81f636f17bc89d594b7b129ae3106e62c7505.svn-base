@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>tab切换</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.datanew.js"></script>
+    <link rel="stylesheet" href="css/layout.css"/>
+    <script>
+        $(function () {
+            //右侧表单
+            $("#pList1").dtable({
+                height:$(window).height() - $("#toolbar").outerHeight(true) - 110,
+                columns : [{
+                    field : 'guid',
+                    title : 'guid',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                },{
+                    field : 'buymode',
+                    title : 'buymode',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                },{
+                    field : 'code',
+                    title : '工作内容编码',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                }, {
+                    field : 'name',
+                    title : '工作内容名称',
+                    width : 180,
+                    align : 'left'
+                }, {
+                    field : 'reportdiv',
+                    title : '上报单位',
+                    width : 80,
+                    align : 'center'
+                },{
+                    field : 'programsource',
+                    title : '项目来源',
+                    width : 80,
+                    align : 'center'
+                },{
+                    field : 'money',
+                    title : '项目预算(万元)',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'cmoney',
+                    title : '本年预算(万元) ',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'lmoney',
+                    title : '历年预算 (万元)',
+                    width : 100,
+                    align : 'right'
+                }, {
+                    field : 'nmoney',
+                    title : '下年预算 (万元)',
+                    width : 100,
+                    align : 'right'
+                }, {
+                    field : 'programleader',
+                    title : '课题组长',
+                    width : 60,
+                    align : 'center'
+                },{
+                    field : 'businesscontact',
+                    title : '业务联系人',
+                    width : 60,
+                    align : 'center'
+                },{
+                    field : 'remark',
+                    title : '备注 ',
+                    width : 80,
+                    align : 'center'
+                }],
+                uniqueId:'guid',
+                url: './json/tableData.json',
+                showRefresh: false,
+                pageNumber:1,//起始页
+                pageSize:10,//页面大小
+                paginationHAlign:'left',//分页按钮位置  left right
+                sidePagination:'client',//分页方式
+                singleSelect:true,//单选
+                clickToSelect:true//点击选中
+            });
+            $("#pList2").dtable({
+                height:$(window).height() - $("#toolbar").outerHeight(true) - 110,
+                columns : [{
+                    field : 'guid',
+                    title : 'guid',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                },{
+                    field : 'buymode',
+                    title : 'buymode',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                },{
+                    field : 'code',
+                    title : '工作内容编码',
+                    width : 10,
+                    align : 'center',
+                    visible:false
+                }, {
+                    field : 'name',
+                    title : '工作内容名称',
+                    width : 180,
+                    align : 'left'
+                },{
+                    field : 'programsource',
+                    title : '项目来源',
+                    width : 80,
+                    align : 'center'
+                },{
+                    field : 'money',
+                    title : '项目预算(万元)',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'cmoney',
+                    title : '本年预算(万元) ',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'lmoney',
+                    title : '历年预算 (万元)',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'nmoney',
+                    title : '下年预算 (万元)',
+                    width : 115,
+                    align : 'right'
+                }, {
+                    field : 'programleader',
+                    title : '课题组长',
+                    width : 80,
+                    align : 'center'
+                },{
+                    field : 'businesscontact',
+                    title : '业务联系人',
+                    width : 90,
+                    align : 'center'
+                },{
+                    field : 'remark',
+                    title : '备注 ',
+                    width : 80,
+                    align : 'center'
+                }],
+                uniqueId:'guid',
+                url: './json/tableData.json',
+                showRefresh: false,
+                pageNumber:1,//起始页
+                pageSize:10,//页面大小
+                paginationHAlign:'left',//分页按钮位置  left right
+                sidePagination:'client',//分页方式
+                singleSelect:true,//单选
+                clickToSelect:true//点击选中
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="toolbar" id="toolbar">
+    <button class="bootstrap-table-add" type="button">新增</button>
+    <button class="bootstrap-table-edit" type="button">修改</button>
+    <button class="bootstrap-table-delete" type="button">删除</button>
+    <button class="bootstrap-table-download" type="button">导入</button>
+    <button class="bootstrap-table-upload" type="button">导出</button>
+    <button class="bootstrap-table-submit" type="button">保存</button>
+    <button class="bootstrap-table-disable" type="button">取消</button>
+</div>
+<div class="container-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#div_pList1" role="tab" data-toggle="tab">待审合同列表</a></li>
+        <li role="presentation"><a href="#div_pList2" role="tab" data-toggle="tab">已阅合同列表</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="div_pList1">
+            <table id="pList1"></table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="div_pList2">
+            <table id="pList2"></table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

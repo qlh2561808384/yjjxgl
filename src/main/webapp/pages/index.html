@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<TITLE>首页</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap.datanew.js"></script>
+	<script src="../bootstrap/plugins/tree/js/jquery.ztree.sidebar.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="../bootstrap/css/sideTree.css"/>
+	<link rel="stylesheet" href="../bootstrap/css/index.css"/>
+	<script type="text/javascript" src="../bootstrap/js/index.js"></script>
+	<script type="text/javascript" src="../js/ajaxM.js"></script>
+	<script type="text/javascript">
+	var currkey;
+    var sessId;
+    var str = window.location.search.substring(1);
+    function getUrlString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    if(null != str && "" != str && str.indexOf("&") > 0) {
+	        currkey = str.substring(0, str.indexOf("&"));
+	        sessId=getUrlString("sessionId");
+	 }
+	</script>
+	<style>
+		.sidebar.menu-min {
+			-webkit-transition: all 0s ease;
+			-moz-transition: all 0s ease;
+			transition: all 0s ease;
+		}
+
+		.sidebar.menu-min + .main-content-inner {
+			-webkit-transition: all 0s ease;
+			-moz-transition: all 0s ease;
+			transition: all 0s ease;
+		}
+
+
+	</style>
+</HEAD>
+
+<BODY>
+<div class="main-content">
+<!-- 导航 -->
+	
+		<div class="navbar">
+			<div class="navbar-inner container-fluid">
+				<!-- <button data-target=".sidebar" data-toggle="collapse" class="btn btn-navbar collapsed pull-left" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> -->
+				<a href="#" class="brand"><images src="images/tubiao.png" alt=""/>非税综合管理平台</a>
+				
+			</div>
+		</div>
+	
+<div class="main-content">
+	<!-- Sidebar -->
+	<div class="sidebar" id="sidebar">
+		<div class="userInfo">
+			<div class="user_name">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<div><images src="images/gly2.png" alt=""/>
+						<span style="color: black;font-size: 16px;" class="uname" id="uname"><b class="caret"></b></span>
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a style="color: black" href="javascript:void(0)" onclick="updatePassword()">修改密码</a></li>
+					<li class="divider"></li>
+					<li><a style="color: black" href="javascript:logOut()">退出</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tree_side ztreeBox">
+			<ul class="ztree" id="treeSide" contenteditable="true">
+			</ul>
+		</div>
+		<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+			<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+			   data-icon2="ace-icon fa fa-angle-double-right"></i>
+		</div>
+	</div>
+
+	<!-- main -->
+	<div class="main-content-inner">
+		<!-- tab标签 -->
+		<div class="tabBox">
+			<div class="tab_wrap clearfix">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active" id="tabli-11"><a href="#tab-11" id="tabclose-11" data-toggle="tab">首页 <i
+							class="fa fa-times-circle"></i></a></li>
+				</ul>
+			</div>
+			<div class="tab_btn">
+				<a href="javascript:;" class="closeAll pull-right hide">关闭所有</a>
+				<a href="javascript:;" class="showtab showRightTabs pull-right hide"><i
+						class="fa fa-angle-double-right"></i></a>
+				<a href="javascript:;" class="showtab showLeftTabs pull-right hide"><i
+						class="fa fa-angle-double-left"></i></a>
+			</div>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="tab-11">
+					<iframe src="indexcontent.jsp" frameborder="0" class="iframeCon" id="iframe-11"
+							width="100%"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+</BODY>
+</HTML>
+<script>
+	var usermenus; //用户对应的菜单权限
+	var loginuser; //用户信息
+	var userbuttons;//用户对应的按钮权限
+	var userwork;
+	$(function () {
+		$.dajax({
+			url: "../login/getUserInfo.do?"+currkey, // Ajax 获取数据的 URL 地址
+			success: function (data) {
+				if (data.success) {
+					usermenus = data.usermenus;
+					userwork = data.userwork;
+					if(usermenus.length<=1){
+						$.dalert({text:"当前用户没有菜单权限,请联系管理员进行授权"});
+					}
+					loginuser = data.loginuser;
+					userbuttons = data.userbuttons;
+					$("#uname").prepend(loginuser.username);
+					//侧边栏
+					var treeSide = $("#treeSide").dtree({
+						localdata: usermenus,
+						view: {
+							dblClickExpand: false,
+							showLine: false,
+							showBadge: true //显示消息数字
+						},
+						//oralce使用 
+ 						data: { // 必须使用data
+							simpleData: {
+								enable: true,
+								idKey: "MENUID", // id编号命名 默认
+								pIdKey: "PARENTID", // 父id编号命名 默认
+								rootPId: 0
+								// 用于修正根节点父节点数据，即 pIdKey 指定的属性值
+							},
+							key: {
+								name: "MENUNAME",
+								url: "MENUURL",
+								icon: "MENUICON"
+							}
+						},
+						callback: {
+							beforeExpand: beforeExpand,
+							onExpand: onExpand,
+							onClick: onClick
+						}
+					});
+				}
+			}
+		});
+	});
+	function logOut() {
+        AM.ajax({
+            url:"../login/logOut.do",
+            beforeSend:function (request) {
+                request.setRequestHeader("current_user_logon_key",currkey);
+            },
+            success:function (data) {
+                if(data.length>0){
+                    window.location.href="../login.jsp";
+                }
+            }
+        });
+
+    }
+	function updatePassword(){
+		$.dopen({
+               btns: 2, 
+               btn: ['保存', '取消'],
+               area: ['310px','250px'],
+               title :"修改密码",
+               content: '<form id="updateform" />',
+               yes:function(index){
+            	   
+            	   if(!$("#updateform").dform("validate")){
+            		   
+            	   }else if($("#updateform input[name=newpassword]").val()!=$("#updateform input[name=rnewpassword]").val()){
+            		   $.dalert({text:"您两次输入的新密码不一致,请确认"})
+            	   }else{
+            		   $("#updateform").dform("submit",{
+	       					url:"../user/updatePassword.do",
+	       					success:function(data){
+	       						if(data.success){
+	       							$.dalert({text:data.content});
+	       							layer.close(index);
+	       						}else{
+	       							$.dalert({text:data.content});
+	       						}
+	       						
+	       					}
+       				   })
+            		   
+            	   }
+               },
+               no:function(index){
+                  alert("点击了取消按钮");
+                  layer.close(index);		
+			   }
+				    	    
+		});
+		$("#updateform").dform({
+			 labelwidth:"100px",
+			 rownum:1,   //每行控件数目
+	 		 inputs:[
+	 		         {
+	 		             proving:"notEmpty",
+	 		        	 title:"原密码",
+	 		        	 name:"oldpassword",
+	 		        	 type:"password"
+	 		         },{
+	 		             proving:"notEmpty",
+	 		        	 title:"新密码",
+	 		        	 name:"newpassword",
+	 		        	 type:"password"
+	 		         },{
+	 		             proving:"notEmpty",
+	 		        	 title:"重复新密码",
+	 		        	 name:"rnewpassword",
+	 		        	 type:"password"
+	 		         }
+	 		 ]
+		})
+	}
+	
+</script>

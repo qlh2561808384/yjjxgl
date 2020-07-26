@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>bootstrapTable_demo</title>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script>
+
+        var zNodes =[
+            { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+            { id:11, pId:1, name:"关键字可以是名字", ISLEAF:1},
+            { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+            { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+            { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+            { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+            { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+            { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+            { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+            { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+            { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+            { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+            { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+        ];
+        $(function () {
+            var t=$("#datatable").dtable({
+                //列参数
+                height:$(window.parent.document).find("#myTabContent").height(),
+                columns: [
+                    //radio、checkbox 单选或多选框
+                    {checkbox: true},
+                    //field：对应数据键名 title：列名 width:单元格宽度px单位  align：单元格水平位置'left', 'right', 'center'
+                    //formatter：格式化方法参数为：value,row
+                    {field: 'status', title: '状态', width: 100, align: 'center', formatter: statusFormatter},
+                    {field: 'agencyName', title: '代收机构', width: 100, align: 'center'},
+                    {field: 'appName', title: '接入应用', width: 100, align: 'center'},
+                    {field: 'paywayName', title: '支付方式', width: 150, align: 'center'},
+                    {field: 'postaccount', title: '商户号', width: 150, align: 'center'},
+                    {
+                        field: 'isb2B', title: '商户类型', width: 100, align: 'center',
+                        editable: {
+                            type: 'select',
+                            title: '商户类型',
+                            //本地数据加载
+                            source: [{value: "0", text: "个人"}, {value: "1", text: "企业"}, {value: "2", text: "不区分"}]
+                            //远程数据加载  参照getSelectOption 方法
+//                        source:getSelectOption
+                        }
+                    },
+                    {field: 'sortnum', title: '排序', width: 50, align: 'center', sortable: true},
+                    {field: 'bankName', title: '收款银行', width: 100, align: 'center'},
+                    {field: 'accountbank', title: '开户银行', width: 100, align: 'center'},
+                    {
+                        field: 'accountname', title: '账户名称', width: 100, align: 'center', editable: {
+                        type: 'text',
+                        title: '账户名称',
+                        validate: function (v) {
+                            if (!v) return '账户名称不能为空';
+                        }
+                    }
+                    },
+                    {field: 'account', title: '账号', width: 100, align: 'center'},
+                    {field: 'startdate', title: '启用日期', width: 100, align: 'center'},
+                    {field: 'enddate', title: '到期日期', width: 100, align: 'center'},
+                    {field: 'remark', title: '备注', width: 100, align: 'center'}
+                ],
+                //远程数据请求地址
+//            url: 'admin/pwayList/pawayListPage.do?',
+                //本地数据加载
+                data: localdata,
+                //搜索栏初始化
+                searchbar: {
+                    rownum: 3,//搜索栏表单列数  最大支持3
+                    inputs: [//搜索栏表单参数
+                        {
+                            title: '姓名',//表单lable显示名
+                            name: 'name',//表单name属性
+                            type: 'text',//表单类型：目前支持 select/text
+                            placeholder: '输入姓名'//text提示文字
+                        }, {
+                            title: 'test',
+                            name: 'test',
+                            type: 'select',
+                            localdata: [{guid: 1, postaccount: 'test'}],//select 本地数据加载
+//                        url:'',//远程加载请求地址
+                            valueField: 'guid',//指定option value的属性
+                            textField: 'postaccount',//指定option text的属性
+                            searchOption: true//是否作为查询选项 默认false 当为true时 额外添加 “全部”选项
+                        }, {
+                            type:'dsearchtree',
+                            title:'ceshi',
+                            name:'searchtree',
+                            localdata: zNodes,
+                            ISLEAF:false,
+                            modalTitle: '查找名称', //模态框标题
+                            checkType: 'checkbox' //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+//                            isLeafCheck: false //checkType为checkbox或radio时，非叶子节点是否有选择框，false为不可选
+                        }
+                    ]
+                },
+                resizable:true, //单元格手动拉伸
+                editable :true,
+                pageNumber: 1,//起始页
+                pageSize: 2,//页面大小
+                queryParams: queryParams,//查询参数 queryParams(params) params 包含分页参数
+                pagination:true,
+                paginationHAlign: 'left',//分页按钮位置  left/right
+                sidePagination: 'client',//分页方式 client/server 服务端分页 如为客户端分页 数据格式参考底部pagedata
+                toolbar: '#bt',//工具栏 指定dom对象
+                showToggle: true,//是否使用列表显示开关
+//                singleSelect: true,//是否启用单选
+                clickToSelect: true,//点击选中
+                idField: 'guid',
+                detailView: true,//是否启用详细显示页面 当为true时 每行数据前会有展开按钮
+                //展开行事件    detailView 为true时生效   可根据该展开栏实现子表格显示
+                onExpandRow: function (index, row, $detail) {
+                    InitSubTable(index, row, $detail);//子表初始化方法
+                },
+                //双击行事件
+                onDblClickRow: function (row, $element) {
+                },
+                rigthClickRow:function(row, $element){
+                    console.log(JSON.stringify(row))
+                },
+                //行内编辑提交保存事件
+                //提交行数据 如success 返回false 被编辑单元格数据修改回原数据
+                onEditableSave: function (field, row, oldValue, $el) {
+                    $.dajax({
+                        url: "/Editable/Edit",
+                        data: row,
+                        success: function (data) {
+                            if (data.success) {
+                                alert('提交数据成功');
+                            } else {
+                                alert('编辑失败');
+//                            $.el.text(oldValue)
+                            }
+                            $("#datatable").bootstrapTable("refresh")
+                        }
+                    });
+                },
+                onCheck:function(row,$element){
+                   // alert(JSON.stringify(row))
+                }
+            });
+        });
+
+
+        function getSelectOption() {
+            var result = [];
+            $.dajax({
+                url: '/Editable/GetDepartments',
+                async: false,
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        result.push({value: value.ID, text: value.name});
+                    });
+                }
+            });
+            return result;
+        }
+        /**
+         * 子表初始化方法
+         */
+        InitSubTable = function (index, row, $detail) {
+            //在父表展开区域添加table元素
+            var cur_table = $detail.html('<table></table>').find('table');
+            $(cur_table).bootstrapTable({
+                method: 'post',
+                contentType: "application/x-www-form-urlencoded",
+                url: 'admin/pwayList/voucherList.do?',
+                queryParams: {paylistno: row.paylistno},
+                clickToSelect: true,
+                columns: [{
+                    field: 'certificateNo',
+                    title: '缴款凭证号'
+                }, {
+                    field: 'agencyName',
+                    title: '代收机构'
+                }, {
+                    field: 'paywayName',
+                    title: '支付方式'
+                }, {
+                    field: 'payDate',
+                    title: '缴款时间',
+                }]
+            });
+        };
+
+        function refresh() {
+            $("#datatable").bootstrapTable("refresh");
+        }
+
+        /**
+         * 设置查询参数  limit offset 为固定参数
+         * @param params
+         * @returns {{limit: (params.limit|*), offset: (params.offset|*), test: string}}
+         *          如return false 则终止请求
+         */
+        function queryParams(params) {
+            //            var paramSearch=DataDeal("#formSearch");
+            var param = {
+                limit: params.limit,
+                offset: params.offset
+            };
+            return param;
+            //            return $.extend({},param,paramSearch)
+        }
+
+        function subqueryParams(params) {
+            return {
+                limit: params.limit,
+                offset: params.offset
+            };
+        }
+
+
+        /**
+         * 格式化
+         */
+        function statusFormatter(value, row, index) {
+            switch (value) {
+                case 0:
+                    return '未缴款';
+                case 1:
+                    return '缴款';
+                case 2:
+                    return '退款';
+                case 3:
+                    return '重复缴款';
+            }
+        }
+
+
+        function add() {
+            $("#myModal").modal({backdrop: 'static', keyboard: false});
+            clearForm('#fm');
+        }
+
+        function edit() {
+            clearForm('#fm');
+            var data = getselectdata();
+            $.dloadformdata($("#fm"), data);
+            $("#myModal").modal({backdrop: 'static', keyboard: false});
+        }
+
+        function remov() {
+            var data = getselectdata();
+            $.dloadformdata($("#fm"), data);
+            $("#myModal").modal({backdrop: 'static', keyboard: false});
+        }
+
+        function getselectdata() {
+            var dataArr = $("#datatable").bootstrapTable("getSelections");
+            if (dataArr.length == 0) {
+                alert("请选择数据");
+                return;
+            }
+            return dataArr[0]
+        }
+
+    </script>
+</head>
+<body>
+<!--工具栏-->
+<div id="bt">
+    <button class="btn btn-primary bootstrap-table-add" type="button" onclick="add()">新增</button>
+    <button class="btn btn-primary bootstrap-table-edit" type="button" onclick="edit()">修改</button>
+    <button class="btn btn-primary bootstrap-table-delete" type="button" onclick="remov()">删除</button>
+</div>
+<section class="parser">
+    <div class="page-header"><h1>语法解析</h1><a href="http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/"><h2>参考连接</h2></a></div>
+
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$("#table").dtable({</span></li>
+            <li><span>    height:500,</span></li>
+            <li><span>    undefinedText:'null',</span></li>
+            <li><span>    …,</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>height</td><td>Number</td><td>定义表格的高度。</td><td>undefined</td></tr>
+        <tr><td>columns</td><td>Array</td><td>列配置项,详情请查看 <a href="#columns">列参数 表格</a></td><td>[]</td></tr>
+        <tr><td>searchbar</td><td>obj</td><td>搜索栏配置 无该属性则不展示查询伸缩栏<a href="#searchbar">列参数 表格</a></td><td>undefined</td></tr>
+        <tr><td>undefinedText</td><td>String</td><td>当数据为 undefined 时显示的字符</td><td>'-'</td></tr>
+        <tr><td>striped</td><td>Boolean</td><td>设置为 true 会有隔行变色效果</td><td>false</td></tr>
+        <tr><td>data</td><td>Array</td><td>加载json格式的数据</td><td>[]</td></tr>
+        <tr><td>ajax</td><td>Function</td><td>自定义 AJAX 方法,须实现 jQuery AJAX API</td><td>undefined</td></tr>
+        <tr><td>method</td><td>String</td><td>服务器数据的请求方式 'get' or 'post'</td><td>'get'</td></tr>
+        <tr><td>url</td><td>String</td><td>服务器数据的加载地址</td><td>undefined</td></tr>
+        <tr><td>cache</td><td>Boolean</td><td>设置为 true 禁用 AJAX 数据缓存</td><td>true</td></tr>
+        <tr><td>contentType</td><td>String</td><td>发送到服务器的数据编码类型</td><td>'application/json'</td></tr>
+        <tr><td>dataType</td><td>String</td><td>服务器返回的数据类型</td><td>'json'</td></tr>
+        <tr><td>uniqueId </td><td>String</td><td>配置唯一字段</td><td>''</td></tr>
+        <tr><td>queryParams</td><td>Function</td><td>function(params) {
+            return params;
+            }
+        </td><td>请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果 queryParamsType = 'limit' ,返回参数必须包含
+            limit, offset, search, sort, order 否则, 需要包含:
+            pageSize, pageNumber, searchText, sortName, sortOrder.
+            返回false将会终止请求
+        </td></tr>
+        <tr><td>queryParamsType</td><td>String</td><td>设置为 'limit' 则会发送符合 RESTFul 格式的参数.</td><td>'limit'</td></tr>
+        <tr><td>pagination</td><td>Boolean</td><td>设置为 true 会在表格底部显示分页条</td><td>false</td></tr>
+        <tr><td>paginationLoop</td><td>Boolean</td><td>设置为 true 启用分页条无限循环的功能。</td><td>true</td></tr>
+        <tr><td>onlyInfoPagination</td><td>Boolean</td><td>设置为 true 只显示总数据数，而不显示分页按钮。需要 pagination='True'</td><td>false</td></tr>
+        <tr><td>sidePagination</td><td>String</td><td>设置在哪里进行分页，可选值为 'client' 或者 'server'。设置 'server'时，必须设置 服务器数据地址（url）或者重写ajax方法</td><td>'client'</td></tr>
+        <tr><td>pageNumber</td><td>Number</td><td>如果设置了分页，首页页码</td><td>1</td></tr>
+        <tr><td>pageSize</td><td>Number</td><td>如果设置了分页，页面数据条数</td><td>10</td></tr>
+        <tr><td>pageList</td><td>Array</td><td>如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。</td><td>[10, 25, 50, 100, All]</td></tr>
+        <tr><td>responseHandler</td><td>Function</td><td>加载服务器数据之前的处理程序，可以用来格式化数据。
+            参数：res为从服务器请求到的数据。
+        </td><td>function(res) {
+            return res;
+            }
+        </td></tr>
+        <tr><td>selectItemName</td><td>String</td><td>radio \ checkbox 的字段名</td><td>'btSelectItem'</td></tr>
+        <tr><td>smartDisplay</td><td>Boolean</td><td>智能显示分页或卡片视图</td><td>true</td></tr>
+        <tr><td>escape</td><td>Boolean</td><td>转义HTML字符串</td><td>false</td></tr>
+        <tr><td>showHeader</td><td>Boolean</td><td>是否显示列头</td><td>true</td></tr>
+        <tr><td>showFooter</td><td>Boolean</td><td>是否显示页脚</td><td>false</td></tr>
+        <tr><td>showColumns</td><td>Boolean</td><td>是否显示 内容列下拉框</td><td>false</td></tr>
+        <tr><td>showRefresh</td><td>Boolean</td><td>是否显示 刷新按钮</td><td>false</td></tr>
+        <tr><td>showToggle</td><td>Boolean</td><td>是否显示 切换试图（table/card）按钮</td><td>false</td></tr>
+        <tr><td>showPaginationSwitch</td><td>Boolean</td><td>是否显示 数据条数选择框</td><td>false</td></tr>
+        <tr><td>minimumCountColumns</td><td>Number</td><td>当列数小于此值时，将隐藏内容列下拉框。</td><td>1</td></tr>
+        <tr><td>detailView</td><td>Boolean</td><td>设置为 true 可以显示详细页面模式。</td><td>false</td></tr>
+        <tr><td>cardView</td><td>Boolean</td><td>设置为 true将显示card视图，适用于移动设备。否则为table试图，适用于pc</td><td>false</td></tr>
+        <tr><td>detailFormatter</td><td>Function</td><td>格式化详细页面模式的视图。</td><td>function(index, row) {
+            return '';
+            }
+        </td></tr>
+        <tr><td>searchAlign</td><td>String</td><td>指定 搜索框 水平方向的位置。'left' or 'right'</td><td>'right'</td></tr>
+        <tr><td>clickToSelect</td><td>Boolean</td><td>设置true 将在点击行时，自动选择rediobox 和 checkbox</td><td>false</td></tr>
+        <tr><td>singleSelect</td><td>Boolean</td><td>设置True 将禁止多选</td><td>false</td></tr>
+        <tr><td>toolbar</td><td>String</td><td>jQuery 选择器，指明自定义的toolbar 例如:
+            #toolbar, .toolbar.
+        </td><td>undefined</td></tr>
+        <tr><td>checkboxHeader</td><td>Boolean</td><td>设置false 将在列头隐藏check-all checkbox .</td><td>true</td></tr>
+        <tr><td>resizable</td><td>boolean</td><td>单元格手动拉伸</td><td>true</td></tr>
+
+        </tbody>
+    </table>
+    <h4><a id="columns">列参数:</a></h4>columns:[]
+     <pre >
+        <ol style="display: table">
+            <li><span>columns: [</span></li>
+            <li><span>{checkbox: true},//radio、checkbox 单选或多选框</span></li>
+            <li><span>{field: 'status', title: '状态', width: 100, align: 'center', formatter: function(value, row, index) {}},</span></li>
+            <li><span>{field: 'agencyName', title: '代收机构', width: 100, align: 'center'},</span></li>
+            <li><span>{field: 'appName', title: '接入应用', width: 100, align: 'center'},</span></li>
+            <li><span>{field: 'paywayName', title: '支付方式', width: 150, align: 'center'},</span></li>
+            <li><span>{field: 'postaccount', title: '商户号', width: 150, align: 'center'},</span></li>
+            <li><span>{field: 'isb2B', title: '商户类型', width: 100, align: 'center',</span></li>
+            <li><span>    editable: {</span></li>
+            <li><span>    type: 'select',</span></li>
+            <li><span>    title: '商户类型',</span></li>
+            <li><span>//本地数据加载</span></li>
+            <li><span>    source: [{value: "0", text: "个人"}, {value: "1", text: "企业"}, {value: "2", text: "不区分"}]</span></li>
+            <li><span>//远程数据加载  参照getSelectOption 方法</span></li>
+            <li><span>//  source:getSelectOption</span></li>
+            <li><span>     }</span></li>
+            <li><span>},…</span></li>
+            <li><span>onEditableSave: function (field, row, oldValue, $el) {</span></li>
+            <li><span>    $.dajax({</span></li>
+            <li><span>    url: "/Editable/Edit",</span></li>
+            <li><span>    data: row,</span></li>
+            <li><span>    success: function (data) {</span></li>
+            <li><span>        if (data.success) {</span></li>
+            <li><span>            alert('提交数据成功');</span></li>
+            <li><span>        } else {</span></li>
+            <li><span>            alert('编辑失败');</span></li>
+            <li><span>            //  $.el.text(oldValue)</span></li>
+            <li><span>        }</span></li>
+            <li><span>        $("#datatable").bootstrapTable("refresh")</span></li>
+            <li><span>     }</span></li>
+            <li><span>});</span></li>
+            <li><span>}</span></li>
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>radio</td><td>Boolean</td><td>设置为true时显示单选栏</td><td>false</td></tr>
+        <tr><td>checkbox</td><td>Boolean</td><td>设置为true时显示多选栏</td><td>false</td></tr>
+        <tr><td>field</td><td>String</td><td>列字段名</td><td>undefined</td></tr>
+        <tr><td>title</td><td>String</td><td>列标题</td><td>undefined</td></tr>
+        <tr><td>class</td><td>String</td><td>自定义列class</td><td>undefined</td></tr>
+        <tr><td>rowspan</td><td>Number</td><td>定义合并多行</td><td>undefined</td></tr>
+        <tr><td>colspan</td><td>Number</td><td>定义合并多列</td><td>undefined</td></tr>
+        <tr><td>align</td><td>String</td><td>数据水平对齐  'left', 'right', 'center'</td><td>undefined</td></tr>
+        <tr><td>halign</td><td>String</td><td>表头水平对齐  'left', 'right', 'center'</td><td>undefined</td></tr>
+        <tr><td>valign</td><td>String</td><td>数据垂直对齐  'top', 'middle', 'bottom' </td><td>undefined</td></tr>
+        <tr><td>width</td><td>Number </td><td>列宽 未指定 则自适应</td><td>undefined</td></tr>
+        <tr><td>sortable</td><td>Boolean </td><td>是否允该字段排序</td><td>false</td></tr>
+        <tr><td>order</td><td>String </td><td>排序方式'asc' or 'desc'</td><td>'asc'</td></tr>
+        <tr><td>visible</td><td>Boolean </td><td>当为false时隐藏列</td><td>true</td></tr>
+        <tr><td>formatter</td><td>Function </td><td>格式化方法  该方法有三个参数 value、row、index 分别为该字段value 该行数据对象 和该行的索引</td><td>undefined</td></tr>
+        <tr><td>footerFormatter</td><td>Function </td><td>汇总的方法，该方法的参数有 data </td><td>undefined</td></tr>
+        <tr><td>editable</td><td>Boolean</td><td>配置是否可编辑，和columns中的editable配合使用才可编辑</td><td>false</td></tr>
+        <tr><td colspan="4"><h5>editable</h5></td></tr>
+        <tr><td>type</td><td>string</td> <td>行内编辑表单类型'text','textarea','select','date','datetime','checklist' </td><td>'text'</td></tr>
+        <tr><td>title</td><td>string</td> <td>表单标题 </td><td>''</td></tr>
+        <tr><td>validate</td><td>function</td> <td>表单验证方法重写 返回的字符串为表单验证提示</td><td>function(v){}</td></tr>
+        <tr><td colspan="4"><h5>select</h5></td></tr>
+        <tr><td>source</td><td>array</td><td>select option选项数据源 需包含 value和text</td><td>[]</td></tr>
+        </tbody>
+    </table>
+
+    <h4><a id="searchbar">查询栏参数:</a></h4>searchbar:{}
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>colNum</td><td>Number</td><td>搜索栏表单列数 根据bootstrap进行布局</td><td>0</td></tr>
+        <tr><td>inputs</td><td>array</td><td>搜索栏表单参数 </td><td>[]</td></tr>
+        <tr><td>title</td><td>string</td><td>表单lable显示名 </td><td></td></tr>
+        <tr><td>name</td><td>string</td><td>表单元素name属性 </td><td></td></tr>
+        <tr><td>type</td><td>string</td><td>表单类型 目前支持 'select' 'text' 'data'  </td><td>'text'</td></tr>
+        <tr ><td colspan="4"><h5>input:text</h5></td></tr>
+        <tr><td>placeholder</td><td>String</td><td>text表单的提示文字 仅对text有效</td><td>undefined</td></tr>
+        <tr ><td colspan="4"><h5>input:select</h5></td></tr>
+        <tr><td>localdata</td><td>array</td><td>本地select选项 仅对select有效</td><td></td></tr>
+        <tr><td>url</td><td>string</td><td>远程加载数据的url 仅对select有效</td><td>undefined</td></tr>
+        <tr><td>valueField</td><td>string</td><td>指定option value属性 的对象键</td><td>undefined</td></tr>
+        <tr><td>textField</td><td>string</td><td>指定option text 的对象键</td><td>undefined</td></tr>
+        <tr><td>searchOption</td><td>boolean</td><td>是否作为查询选项 当为true时 额外添加 “全部”选项</td><td>false</td></tr>
+
+        </tbody>
+    </table>
+    <h4>事件:</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>onAll</td><td>name, args</td><td>所有的事件都会触发该事件，参数包括：
+            name：事件名，
+            args：事件的参数。
+        </td></tr>
+        <tr><td>onClickRow</td><td>row, $element,field</td><td>当用户点击某一行的时候触发，参数包括：
+            row：点击行的数据，
+            $element：tr 元素，
+            field：点击列的 field 名称。
+        </td></tr>
+        <tr><td>onDblClickRow</td><td>row, $element,field</td><td>当用户双击某一行的时候触发，参数包括：
+            row：点击行的数据，
+            $element：tr 元素，
+            field：点击列的 field 名称。
+        </td></tr>
+        <tr><td>rigthClickRow</td><td>row, $element,field</td><td>右键点击行触发，参数包括：
+            row：点击行的数据，
+            $element：tr 元素，
+            field：点击列的 field 名称。
+        </td></tr>
+        <tr><td>onClickCell</td><td>field, value, row, $element</td><td>当用户点击某一列的时候触发，参数包括：
+            field：点击列的 field 名称，
+            value：点击列的 value 值，
+            row：点击列的整行数据，
+            $element：td 元素。
+        </td></tr>
+        <tr><td>onDblClickCell</td><td>field, value, row, $element</td><td>当用户双击某一列的时候触发，参数包括：
+            field：点击列的 field 名称，
+            value：点击列的 value 值，
+            row：点击列的整行数据，
+            $element：td 元素。
+        </td></tr>
+        <tr><td>onRefresh</td><td>params</td><td>点击刷新按钮后触发 params 为请求参数
+        </td></tr>
+        <tr><td>onSort</td><td>name, order</td><td>使用列排序时触发 name：排序列的field名称 order：排序方式
+        </td></tr>
+        <tr><td>onCheck</td><td>row,$element</td><td>选中行时触发 row：选中行数据 $element：checkbox元素对象
+        </td></tr>
+        <tr><td>onUncheck</td><td>row,$element</td><td>选中行时触发 row：选中行数据 $element：checkbox元素对象
+        </td></tr>
+        <tr><td>onCheckAll</td><td>rows</td><td>全选时触发 rows：选中行数据
+        </td></tr>
+        <tr><td>onUncheckAll</td><td>rows</td><td>反选时触发 rows：反选行数据
+        </td></tr>
+        <tr><td>onLoadSuccess</td><td>data</td><td>远程数据加载成功时触发 data:返回的数据
+        </td></tr>
+        <tr><td>onLoadError</td><td>status</td><td>远程数据加载失败时触发 status:响应状态码
+        </td></tr>
+        <tr><td>onExpandRow</td><td>index, row, $detail</td><td>当点击详细图标展开详细页面的时候触发
+            index：当前行的索引
+            row:当前行数据
+            $detail：展开区域元素对象
+        </td></tr>
+        <tr><td>onCollapseRow</td><td>index, row</td><td>当点击详细图片收起详细页面的时候触发
+            index：当前行的索引
+            row:当前行数据
+        </td></tr>
+        <tr><td>onPageChange</td><td>number, size</td><td>翻页触发
+            number：
+            size:
+        </td></tr>
+        </tbody>
+    </table>
+    <h4>方法:</h4><h5>调用语法：fn.bootstrapTable('method',param)</h5>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>getOptions</td><td>none</td><td>返回表格当前配置选项</td></tr>
+        <tr><td>getSelections</td><td>none</td><td>返回所选的行，当没有选择任何行的时候返回一个空数组</td></tr>
+        <tr><td>getAllSelections</td><td>none</td><td>返回所有选择的行，包括搜索过滤前的，当没有选择任何行的时候返回一个空数组</td></tr>
+        <tr><td>getData</td><td>useCurrentPage</td><td>返回表格加载的所有数据 当参数为true时只返回当前页 注：远程分页只能返回当前页数据</td></tr>
+        <tr><td>getRowByUniqueId</td><td>id</td><td>根据 配置的uniqueId字段 获取行数据</td></tr>
+        <tr><td>load</td><td>data</td><td>加载数据到表格中，旧数据会被替换</td></tr>
+        <tr><td>showAllColumns</td><td>none</td><td>显示所有行</td></tr>
+        <tr><td>hideAllColumns</td><td>none</td><td>隐藏所有行</td></tr>
+        <tr><td>append</td><td>data</td><td>添加数据到表格在现有数据之后</td></tr>
+        <tr><td>prepend</td><td>data</td><td>添加数据到表格在现有数据之前</td></tr>
+        <tr><td>remove</td><td>params</td><td>从表格中删除数据，包括两个参数： field: 需要删除的行的 field 名称。
+            values: 需要删除的行的值，类型为数组
+        </td></tr>
+        <tr><td>removeAll</td><td>none</td><td>删除表格所有数据
+        <tr><td>removeByUniqueId</td><td>id</td><td>根据 uniqueId 删除指定的行。</td></tr>
+        <tr><td>insertRow</td><td>params</td><td>插入新行，参数包括：
+            index: 要插入的行的 index。
+            row: 行的数据，Object 对象
+        </td></tr>
+        <tr><td>updateRow</td><td>params</td><td>更新指定的行，参数包括：
+            index: 要更新的行的 index。
+            row: 行的数据，Object 对象。
+        </td></tr>
+        <tr><td>mergeCells</td><td>none</td><td>数据行合并，参数有：index是重第几行开始，field: '数据绑定字段Name'，colspan跨几列， rowspan跨几行</td></tr>
+        
+        </tbody>
+    </table>
+    <h4>案例:</h4>
+</section>
+<div style="width:98.5%;"><table id="datatable"></table></div>
+
+
+</body>
+
+<script>
+	$("body").css("width", $(window).width());
+	
+    //本地数据
+    var localdata = [{
+        "guid": 1,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": null,
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": null,
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 2,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 3,
+        "postaccount": "777290058135724",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "05",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 4,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "06",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }];
+
+
+    var pagedata = {
+        "limit": 2,
+        "offset": 0,
+        "pageSize": null,
+        "pageNumber": null,
+        "total": 11,
+        "currentPage": null,
+        "searchText": null,
+        "sortName": null,
+        "sortOrder": null,
+        "rows": [{
+            "guid": 1,
+            "notice": "11",
+            "paylistno": "11114",
+            "paymoney": 1111.0,
+            "createtime": 1473503869000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473504015000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": null,
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": null,
+            "appid": 1,
+            "paylistinfo": null,
+            "remark": null
+        }, {
+            "guid": 2,
+            "notice": "11",
+            "paylistno": "11115",
+            "paymoney": 1111.0,
+            "createtime": 1473503145000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473506775000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": "",
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": "",
+            "appid": 1,
+            "paylistinfo": "",
+            "remark": ""
+        }]
+    }
+</script>
+</html>

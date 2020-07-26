@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	<title>拖拽树</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.datanew.js"></script>
+</head>
+
+<body>
+
+<section class="parser container-fluid">
+	<div class="page-header"><h1>语法解析</h1></div>
+    <h3>扩展自zTree，<a href="http://www.treejs.cn/v3/api.php" target="_blank">参考链接</a></h3>
+
+    <h4>表格参数:</h4>
+	<pre>
+        <ol style="display:table">
+            <li><span>$("#dragTree").ddragtree({</span></li>
+            <li><span>    localdata: zNodes,</span></li>
+            <li><span>    checkType: 'radio',</span></li>
+            <li><span>    …,</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+	<table class=" table-border">
+		<thead>
+		<tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>localdata</td><td>Array</td><td>本地数据，zNodes =[{id:1, pId:0, name:"节点搜索演示 1"}]</td><td></td></tr>
+		<tr><td>url</td><td>String</td><td>获取数据库数据</td><td></td></tr>
+		<tr><td>checkType</td><td>String</td><td>定义选择框类型，设置为nocheck为无选择框，checkbox为多选框，radio为单选框</td><td>"nocheck"</td></tr>
+		<tr><td>ISLEAF</td><td>Boolean</td><td>当checkType为checkbox或radio时，父节点是否有选择框，设置为false表示父不可选</td><td>false</td></tr>
+		</tbody>
+	</table>
+	<h4>案例:</h4>
+</section>
+
+	<ul id="dragTree"></ul>
+	
+	<ul id="dragTree2"></ul>
+	
+	
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</body>
+</html>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#dragTree").ddragtree({
+			localdata: zNodes,
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: true //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+		});
+		
+		$("#dragTree2").ddragtree({
+			localdata: zNodes,
+			checkType: "radio", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: false //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+		});
+	})
+	
+	var zNodes =[
+		{ id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+		{ id:11, pId:1, name:"关键字可以是名字", ISLEAF:1},
+		{ id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+		{ id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+		{ id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+		{ id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+		{ id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+		{ id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+		{ id:23, pId:2, name:"搜我吧", ISLEAF:1},
+		{ id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+		{ id:31, pId:3, name:"我的 id 是: 31", open:true, ISLEAF:0},
+		{ id:32, pId:31, name:"我的 id 是: 32", open:true, ISLEAF:0},
+		{ id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+	];
+
+</script>
+<style>
+	.container-fluid{padding-left:15px; padding-right:15px;}
+	.ztree {margin-left:10px;}
+</style>

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+.bs-bars.pull-left #bt .btn.btn-primary{}
+
+.bootstrap-table-add,
+.bootstrap-table-edit,
+.bootstrap-table-delete,
+.bootstrap-table-download,
+.bootstrap-table-upload,
+.bootstrap-table-submit,
+.bootstrap-table-query,
+.bootstrap-table-review,
+.bootstrap-table-clear,
+.bootstrap-table-disable,
+.bootstrap-table-enable,
+.bootstrap-table-verify,
+.bootstrap-table-save,
+.bootstrap-table-cancel{height:30px;line-height:normal;border-radius: 4px;padding: 4px 6px;text-shadow: none; border-width: 0; color: #fff; text-indent: 18px; background-image:url(img/btn-img.png);background-repeat: no-repeat;}
+
+.bootstrap-table-add{background-color:#4BB3CC;background-position: 0 8px;}
+.bootstrap-table-edit{background-color:#88C871;background-position: 0 -21px;}
+.bootstrap-table-delete{background-color:#FF982F;background-position: 0 -49px;}
+.bootstrap-table-download{background-color:#F56B9E;background-position:0 -76px;}
+.bootstrap-table-upload{background-color:#819BD4;background-position:0 -104px;}
+.bootstrap-table-submit{background-color:#A37AC9;background-position:0 -132px;}
+.bootstrap-table-query{background-color:#DA7CBE;background-position:0 -162px;}
+.bootstrap-table-review{background-color:#D2A669;background-position:0 -188px;}
+.bootstrap-table-clear{background-color:#A5CB21;background-position: 0 -256px;}
+.bootstrap-table-disable{background-color:#F45762;background-position: 0 -283px;}
+.bootstrap-table-enable{background-color:#57C590;background-position: 0 -310px;}
+.bootstrap-table-verify{background-color:#DD8175;background-position:0 -339px;}
+.bootstrap-table-save{background-color:#38c4b6;background-position:-57px -106px;}
+.bootstrap-table-cancel{background-color:#d0bb31;background-position:-57px -134px;}
+
+.bootstrap-table-add:hover{background-color: #2995AF;}
+.bootstrap-table-edit:hover{background-color: #67B24D;}
+.bootstrap-table-delete:hover{background-color: #F08315;}
+.bootstrap-table-download:hover{background-color: #DE4D81;}
+.bootstrap-table-upload:hover{background-color: #6281C1;}
+.bootstrap-table-submit:hover{background-color: #895DB4;}
+.bootstrap-table-query:hover{background-color: #CE62AF;}
+.bootstrap-table-review:hover{background-color: #B9894B;}
+.bootstrap-table-clear:hover{background-color: #8EB212;}
+.bootstrap-table-disable:hover{background-color: #E03943;}
+.bootstrap-table-enable:hover{background-color: #34AA71;}
+.bootstrap-table-verify:hover{background-color: #CE5D4D;}
+.bootstrap-table-save:hover{background-color: #1CA79B;}
+.bootstrap-table-cancel:hover{background-color: #B4A00D;}
+
+/* 公共样式 */
+.textover-ell{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* 带有下拉面板的input内的向下图标 */
+.ztreeBox_down i.fa-angle-down{position:absolute; right:1px; top:2px; padding:8px 6px; background-color: #fff; color:#999; font-weight:600; font-size:14px; border-radius:0 4px 4px 0;}
+.ztreeBox_down .input-sm ~ i.fa-angle-down{padding:6px 6px;}
+.ztreeBox_down .input-lg ~ i.fa-angle-down{padding:14px 6px;}
+.form-sm .ztreeBox_down .fa-angle-down{padding:6px 6px;}
+
+/*表单组件下拉面板*/
+.combo-panel {position: absolute;z-index: 99999;max-height: 350px;font-size: 12px;overflow: auto;border: 1px solid rgba(0, 0, 0, 0.2);  background: #fff;box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);border-radius: 4px;display: none;margin: 0px;padding: 0;}
+.comboBox_option:hover{background-color: #2D86B9;color: #fff;}
+.comboBox_option_check{background-color: #2D86B9;color: #fff;padding:2px 4px;}
+.comboBox_option {padding: 2px 4px;height:1.7em}
+
+/*dform 生成表单元素*/
+.dform-input{height:34px;margin:5px 0 !important;}
+
+/* 下拉面板top值 */
+.dform-input .combo-panel{top:34px;}
+.form-sm .dform-input .combo-panel{top:30px;}
+
+/*表单尺寸*/
+.form-sm .dform-input{height:30px;}
+.form-sm .form-control{height:30px;padding:5px 10px;font-size:12px;}
+
+.ztreeBox_inp{display:inline-block; vertical-align:middle;}
+.ztreeBox_down{position:relative;}
+.ztreeBox_down input{width: 100%;}
+.ztreeBox_down i.fa-angle-down{position:absolute; right:2px; right:1px\9; top:2px; padding:8px 6px; background-color: #fff; color:#999; font-weight:600; font-size:14px; border-radius:0 4px 4px 0;}
+
+.ztreeBox{position: relative;}
+.ztree_abs{position:absolute; z-index:99999; max-height:360px; overflow-y:scroll; overflow-x:auto; border: 1px solid rgba(0, 0, 0, 0.2); background:#fff; box-shadow:0 5px 10px rgba(0, 0, 0, 0.2); border-radius:4px; display: none;}
+
+.bgwhite{background-color: #FFF!important;}
+.form-control[disabled="disabled"] ~ i.fa-angle-down{background-color: #eee;}
+
+@media (min-width: 768px){
+    .modal-dialog{width:400px;}
+}
+
+/* 会计核算公用样式 */
+.toolbar, .top-form{ background-color: #EBEBEB; border-bottom:1px solid #ddd; padding:10px;}
+.top-form label{margin:0; line-height: 30px;}
+
+.content, .treetable-head{width:98%; margin:0 0 0 10px;table-layout: fixed;}
+.treetable-head{position:fixed; left:10px; margin:0;}
+.table-bordered.treetable-head>tbody>tr>th{background:#7892C7; border:1px solid #4A68A5; color:#fff;}
+
+.toolFixed{padding-top:61px;}
+.toolFixed .toolbar, .toolFixed .top-form{position: fixed; left:0; top:0; z-index: 999; width:100%; outline:10px solid #fff;}
+
+.subtoolbar{position: fixed; width: 100%; height: 30px; line-height: 30px; background: #FFF; margin: 0; padding-left: 10px; font-size:18px;}
+.subtoolbar+.content{margin-top:30px;}
+#barcon{font-size:14px; line-height: normal;}
+
+.bootstrap-table-query, .btn-print{height: 30px; font-size:13px; padding: 0 10px 0 10px; background:#898ED3 url("../../images/tb.png") no-repeat 0px -955px; border:1px solid #755ed9; vertical-align: middle;}
+.btn-print{background-position:0 -475px; padding-left:25px;}
+.bootstrap-table-query:hover, .btn-print:hover{background-color: #5D67B9; border:1px solid #4A68A5;}
+
+.fa{font-family: FontAwesome \9;}

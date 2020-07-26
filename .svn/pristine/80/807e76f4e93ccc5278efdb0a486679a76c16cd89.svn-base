@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>bootstrapTable_demo</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <script>
+        var  combobox={
+            type:'comboBox',
+            id:'test001',
+            textField:'text',
+            valueField:'id',
+            required:true,
+            multiple:false,
+            panelWidth:200,
+            mappingText:'paywayName',
+            mappingValue:'paywaycode',
+            localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+            onChange:function(newValue,oldValue){
+                //联动  根据指定表单id 调用相应组件的方法
+                $("#combotree01").comboTree("setValue",newValue)
+            },
+            onShowPanel:function($p){//当显示下拉面板的时候触发。
+                //console.log($p)
+            }
+        };
+        var zNodes =[
+            { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+            { id:11, pId:1, name:"关键字可以是名字", test:123,ISLEAF:1},
+            { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+            { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+            { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+            { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+            { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+            { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+            { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+            { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+            { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+            { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+            { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+        ];
+        var combotree={
+            id:'combotree01',
+            panelWidth:200,
+            type:'comboTree',
+            name:'comboTree',
+            panelHeight:150,
+            multiple:false,
+            required:true,
+            validText:'测试',
+            localdata: zNodes,
+            rootElement:false,
+            onlyLeaf:false,
+            onChange:function(newValue,oldValue){
+                //console.log(newValue+",,,,"+oldValue);
+            }
+        };
+       var  datebox={
+            type:'dateBox',
+            name:'datebox',
+            removeIcon:false,
+            inline:true,
+            format : 'yyyy-mm-dd',
+            defaultValue:"2016-09-02 02:05"
+        };
+
+        var searchTree={
+            id:'testTree',
+            type:'searchTree',
+            name:'searchTree',
+            checkType:'radio',
+            required:true,
+            localdata: zNodes,
+            onlyLeaf:true,
+            onChange:function(newValue,oldValue){
+                //console.log(newValue+",,,,"+oldValue);
+            },
+            onAckCallback:function(nodes){
+                alert(nodes.length)
+            },
+            onLoaded:function(tree){
+                //console.log(tree.getNodes())
+            }
+        };
+        var textbox = {
+            type: "textBox",
+            name: "textBox",
+            onLoaded: function($el){
+                $el.on("click", function(){
+                    $.dopen({
+                        title: "11",
+                        area: ["500px", "300px"],
+                        content: "<form id='testform'></form>",
+                        btn: ["确认", "取消"],
+                        btn1: function(index){
+                            var formdata = $("#testform").dform("getData");
+                            $el.textBox("setValue", formdata.name);
+                            layer.close(index);
+                        }
+                    });
+                    $("#testform").dform({
+                        rownum:1,   //每行控件数目
+                        labelwidth:"150px",
+                        inputs:[
+                            {
+                                title:"姓名",
+                                name:"name",
+                                type:"textBox",
+                                required:true
+                            }
+                        ]
+                    })
+                })
+            }
+        };
+        $(function () {
+            $("#datatable").dtable({
+                //列参数
+//                height:$(window.parent.document).find("#myTabContent").height(),
+                columns: [[
+                    {checkbox: true},
+                    {field: 'status', title: '状态', width: '5%', align: 'center', formatter: statusFormatter},
+                    {field: 'agencyName', title: '代收机构', width: '5%', align: 'center'}
+                    ,//选择框类型，值为checkbox或radio或nocheck，默认为nocheck}},
+                    {field: 'appName', title: '接入应用', align: 'center',width: '5%', clickToSelect:false, editor:textbox},
+                    {field: 'paywayName', title: '支付方式',  align: 'center', clickToSelect:false, editor:combobox,width: '5%'},
+                    {field: 'postaccount', title: '商户号', align: 'center',width:'10%'},
+                    {field: 'isb2B', title: '商户类型',  align: 'center',width: '5%', clickToSelect:false, editor:combotree},
+                    {field: 'sortnum', title: '排序', align: 'center',width: '5%'},
+                    {field: 'bankName', title: '收款银行',  align: 'center',width: 90, clickToSelect:false, editor:searchTree},
+                    {field: 'accountbank', title: '开户银行',  align: 'center',width: 90},
+                    {field: 'accountname', title: '账户名称',  align: 'center',width: 90},
+                    {field: 'account', title: '账号',  align: 'center',width: 90},
+                    {field: 'startdate', title: '启用日期', align: 'center',width: 90, clickToSelect:false, editor:datebox},
+                    {field: 'enddate', title: '到期日期',  align: 'center',width: 90},
+                    {field: 'remark', title: '备注', align: 'center'}
+                ]],
+                //本地数据加载
+                data: localdata,
+                resizable:true, //单元格手动拉伸
+                pageNumber: 1,//起始页
+                pageSize: 10,//页面大小
+                queryParams: queryParams,//查询参数 queryParams(params) params 包含分页参数
+                pagination:true,
+                paginationHAlign: 'left',//分页按钮位置  left/right
+                sidePagination: 'client',//分页方式 client/server 服务端分页 如为客户端分页 数据格式参考底部pagedata
+                toolbar: '#bt',//工具栏 指定dom对象
+                showToggle: true,//是否使用列表显示开关
+                singleSelect: true,//是否启用单选
+                clickToSelect: true,//点击选中
+                idField: 'guid',
+                onEditLineSave:function(rowIndex,row,oldRow){
+                    //执行修改前回调函数  返回tree 将update 数据行   false 则不更新表格
+                    //todo 进行数据提交
+                    //console.log(row);
+                    //console.log(oldRow);
+                    return true
+                }
+            });
+        });
+
+        /**
+         * 设置查询参数  limit offset 为固定参数
+         * @param params
+         * @returns {{limit: (params.limit|*), offset: (params.offset|*), test: string}}
+         *          如return false 则终止请求
+         */
+        function queryParams(params) {
+            var param = {
+                limit: params.limit,
+                offset: params.offset
+            };
+            return param;
+        }
+
+        /**
+         * 格式化
+         */
+        function statusFormatter(value, row, index) {
+            switch (value) {
+                case 0:
+                    return '未缴款';
+                case 1:
+                    return '缴款';
+                case 2:
+                    return '退款';
+                case 3:
+                    return '重复缴款';
+            }
+        }
+        var rowIndex = '';
+        function edit(){
+            //todo 点击修改后  修改按钮改为 提交按钮
+            rowIndex = $("#datatable").find("[type='checkBox'][data-index]:checked").attr("data-index");
+            $("#datatable").tableEditor("init",rowIndex);
+        }
+        /**
+         * 保存数据 用于更新表格数据  实际修改的请求 需在 onEditLineSave回调函数中进行定义
+         */
+        function update(){
+            $("#datatable").tableEditor("update",rowIndex);
+            rowIndex = '';
+        }
+        /**
+         * 取消修改
+         */
+        function cancel(){
+            $("#datatable").tableEditor("cancel",rowIndex);
+            rowIndex = '';
+        }
+    </script>
+</head>
+<body>
+<!--工具栏-->
+<div id="bt">
+    <button class="btn btn-primary" type="button" onclick="edit()">修改</button>
+    <button class="btn btn-primary" type="button" onclick="cancel()">取消修改</button>
+    <button class="btn btn-primary" type="button" onclick="save()">提交</button>
+
+</div>
+<section class="parser"></section>
+<div style="width:120%;"><table id="datatable"></table></div>
+
+
+
+</body>
+
+<script>
+
+    //本地数据
+    var localdata = [{
+        "guid": 1,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "1",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": null,
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "2",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": 1
+    }, {
+        "guid": 2,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "2",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 3,
+        "postaccount": "777290058135724",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "3",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "05",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }, {
+        "guid": 4,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-12-08",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "4",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404843000,
+        "modifyuserid": null,
+        "modifyusername": "",
+        "appid": null,
+        "agencycode": "98",
+        "paywaycode": "06",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }];
+
+
+    var pagedata = {
+        "limit": 2,
+        "offset": 0,
+        "pageSize": null,
+        "pageNumber": null,
+        "total": 11,
+        "currentPage": null,
+        "searchText": null,
+        "sortName": null,
+        "sortOrder": null,
+        "rows": [{
+            "guid": 1,
+            "notice": "11",
+            "paylistno": "11114",
+            "paymoney": 1111.0,
+            "createtime": 1473503869000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473504015000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": null,
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": null,
+            "appid": 1,
+            "paylistinfo": null,
+            "remark": null
+        }, {
+            "guid": 2,
+            "notice": "11",
+            "paylistno": "11115",
+            "paymoney": 1111.0,
+            "createtime": 1473503145000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473506775000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": "",
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": "",
+            "appid": 1,
+            "paylistinfo": "",
+            "remark": ""
+        }]
+    }
+</script>
+</html>
+<style>
+    .btn-primary { background-color: #428BCA;border:1px solid #2E6DA4;font-family:"Microsoft YaHei";}
+    .btn-primary:hover{background-color: #3276b1;border:1px solid #125590;}
+</style>

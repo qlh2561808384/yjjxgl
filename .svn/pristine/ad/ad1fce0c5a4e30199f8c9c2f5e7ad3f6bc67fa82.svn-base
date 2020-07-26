@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> read me </TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="css/index.css" />
+	<style>
+		*{margin: 0; padding: 0;}
+		.readme{font-size:14px; color:#666; line-height: 2; padding: 0 10px;}
+	</style>
+</HEAD>
+
+<BODY>
+	<div class="readme">
+		<p>本框架基于bootstrap开发</p>
+		<p>源码地址：http://222.46.27.107:8089/svn/mavenmodel/front/bootstrap/codes/dn_bootstrap</p>
+		<p>帐号密码是view/DataNew11!! </p>
+		<p>应用引入此框架有以下方式：</p>
+		<p>1，普通项目直接把根目录下面bootstrap目录直接拷贝到应用中的根目录下</p>
+		<p>2，maven项目直接在pom.xml文件中直接添加</p>
+		<p>&lt;dependency&gt;</p>
+		<p style="text-indent:2em;">&lt;groupId&gt;com.datanew&lt;/groupId&gt;</p>
+		<p style="text-indent:2em;">&lt;artifactId&gt;dn_bootstrap&lt;/artifactId&gt;</p>
+		<p style="text-indent:2em;">&lt;version&gt;0.0.2-SNAPSHOT&lt;/version&gt;</p>
+		<p style="text-indent:2em;">&lt;type&gt;war&lt;/type&gt;</p>
+		<p>&lt;/dependency&gt;</p>
+	</div>
+</BODY>
+</HTML>

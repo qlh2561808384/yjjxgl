@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>input</title>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+	<style>
+		pre{box-shadow: inset 30px 0 0 #fbfbfc, inset 31px 0 0 #ececf0;}
+		ol{display: table;margin: 0 0 -20px 25px;padding: 0;}
+		.parser .table-border {border: 1px solid #dddddd;border-collapse: separate;border-left: 0;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;}
+		.parser>table {width: 100%;margin-bottom: 20px;}
+		tr {display: table-row;vertical-align: inherit;border-color: inherit;}
+		.parser>table tr th {border-top: 0;}
+		.parser>table th, .parser>table td {border-left: 1px solid #dddddd;border-top: 1px solid #dddddd;padding: 8px;line-height: 20px;text-align: left;vertical-align: top;}
+		.parser>table tbody tr:nth-child(odd) td {background-color: #F5F5F5;}
+		.datadiv{margin:0 0 10px;text-indent:20px;border: 1px solid #dddddd;border-collapse: separate;border-left: 0;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;}
+		.datadivdiv{height:20px;}
+		
+	</style>
+</head>
+<body>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+    	<h4>使用方法:</h4>
+	    <pre>
+	        <ol>
+            	<li><span>Object.dInputNumberAdd(numberType,defaultValue)</span></li>
+            	<li><span>Object.dInputNumberValClear(isDefaultValue)</span></li>
+	        </ol>
+	    </pre>
+	    <h4>方法:</h4>
+	    <table class=" table-border">
+	        <thead>
+	        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+	        </thead>
+	        <tbody>
+	        <tr><td>.dInputNumberAdd()</td><td>numberType,defaultValue</td><td>添加自定义数字输入框</td></tr>
+	        <tr><td>.dInputNumberValClear()</td><td>isDefaultValue</td><td>清除自定义数字输入框的值</td></tr>
+	        </tbody>
+	    </table>
+	    <h4>属性:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+	        <tbody>
+	        	<tr><td>numberType</td><td>String（字符串型）</td><td>身份证格式：idcard,电话号码格式：tel</td><td>必填</td></tr>
+	        	<tr><td>defaultValue</td><td>String（字符串型）</td><td>numberType对应的默认值设定</td><td>空</td></tr>
+	        	<tr><td>isDefaultValue</td><td>boolean（布尔型）</td><td>是否需要默认值</td><td>true</td></tr>
+	        </tbody>
+	    </table>
+	    <h4>事件:</h4>
+	    <table class=" table-border">
+	        <thead>
+	        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+	        </thead>
+	        <tbody>
+	        <tr><td></td><td></td><td></td></tr>
+	        </tbody>
+	    </table>
+	    <h4>案例:</h4>
+	</section>
+	<div class="datadiv">
+		<div class="datadivdiv"></div>
+		<table id="datatable">
+			<div class="idcardDemo"></div>
+			<br>
+		 	<div class="telDemo"></div>
+			<br>
+			<div class="numberDemo"></div>
+			<br>
+		</table>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$(".idcardDemo").dInputNumberAdd("idcard","330333199909090009");
+		$(".telDemo").dInputNumberAdd("tel");
+		$(".numberDemo").dInputNumberAdd("number");
+	});
+</script>
+</html>

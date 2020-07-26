@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../plugins/echarts/echarts.js"></script>
+    <script src="../../js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <section class="parser container-fluid">
+        <div class="page-header">
+            <h1>语法解析</h1>
+            <h3>扩展自ECharts，<a href="http://echarts.baidu.com/echarts2/doc/doc.html" target="_blank">文档</a>，<a href="http://echarts.baidu.com/echarts2/doc/example.html" target="_blank">实例</a></h3>
+        </div>
+    </section>
+
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+        var data=[{name:'杭州市',value:1000},{name:'上城区',value:300}];
+        var maps={'浙江省':'zhejiangsheng','杭州市':'hangzhoushi'};
+        var currentReigon='';
+        function initMapECharts(regionName){
+            currentReigon=regionName;
+            $.get('../../plugins/echarts/map/'+maps[regionName]+'.json', function (geoJson) {
+                echarts.registerMap(regionName, geoJson);
+                var chart = echarts.init(document.getElementById('main'));
+                chart.setOption({
+                    title:{text:'交易量查询',subtext:'当日',left: 'center'},
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        left:'left',
+                        data:['test']
+                    },
+                    graphic: [
+                        {
+                            type: 'circle',
+                            id: 'logo',
+                            right: 20,
+                            top: 20,
+                            z: 10,
+                            style: {
+                                fill: '#eee',
+                                text:'浙江省'
+                            },
+                            shape:{r:30},
+                            onclick:function(){
+                                initMapECharts("浙江省");
+                            }
+                        }
+                    ],
+                    series: [{
+                        name:'test',
+                        type: 'map',
+                        map: regionName,
+                        roam:true,   //'scale','move',true  缩放 ，拖拽 ，两者都开启
+                        label:{normal:{show:true}},
+                        data:data
+                    }]
+                });
+                chart.on('click', function (params) {
+                    var city = params.name;
+                    initMapECharts(city)
+                });
+//                chart.setOption(option)
+            })
+        }
+
+        $(function(){
+            initMapECharts("浙江省")
+        })
+    </script>
+</body>
+</html>

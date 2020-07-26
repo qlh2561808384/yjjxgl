@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>左侧树右侧表单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.datanew.js"></script>
+    <link rel="stylesheet" href="css/layout.css"/>
+    <script>
+        $(function () {
+            //左侧树
+            $("#sideTree").tree({
+                checkType: "nocheck",
+                url: './json/treeData.json',
+                onLoaded: function(ztree){
+                    ztree.expandAll(true);
+                }
+            });
+            //右侧表单
+            $("#form").dform({
+                rownum:2,
+                labelwidth:"100px",
+                inputs: [
+                    {name:"textBox", type:"textBox", title:"textBox", required:true},
+                    {name:"searchTree", type:"searchTree", title:"searchTree", url: './json/treeData.json', onLoaded:function(ztree){/* ztree.expandAll(true);*/}},
+                    {name:"comboBox", type:"comboBox", title:"comboBox", localdata: [{id:1,text:'79962450@qq.com'},{id:2,text:456}]},
+                    {name:"dateBox", type:"dateBox", title:"dateBox"}
+                ]
+            });
+
+            //左侧树高度
+            $(".leftTree").height($(window).height() - $("#toolbar").outerHeight(true));
+        })
+    </script>
+</head>
+<body>
+<div class="toolbar" id="toolbar">
+    <button class="bootstrap-table-add" type="button">新增</button>
+    <button class="bootstrap-table-edit" type="button">修改</button>
+    <button class="bootstrap-table-delete" type="button">删除</button>
+    <button class="bootstrap-table-download" type="button">导入</button>
+    <button class="bootstrap-table-upload" type="button">导出</button>
+    <button class="bootstrap-table-submit" type="button">保存</button>
+    <button class="bootstrap-table-disable" type="button">取消</button>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 leftTree">
+            <h4>项目清单</h4>
+            <div id="sideTree" class="ztree"></div>
+        </div>
+        <div class="col-xs-8 rightCon">
+            <h4>项目信息</h4>
+            <form id="form"></form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

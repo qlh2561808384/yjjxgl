@@ -1,0 +1,7 @@
+[
+  {"id":"WU_FILE_100", "fileId":"aaa-aaaa-aaaaaaaaaaaaaaaaaaaaaaaaaaaa", "name":"123.jpg", "type":"image/jpg", "size":949, "status":"complete", "uploadDate":"2018-05-24 09:23"},
+  {"id":"WU_FILE_101", "fileId":"bbb-bbbbbbbbbb-bbbbbbbbbbbbbbbb", "name":"index.html", "type":"text/html", "size":18641, "status":"complete", "uploadDate":"2018-05-25 19:45"},
+  {"id":"WU_FILE_102", "fileId":"ccc", "name":"index.html", "type":"text/html", "size":18641, "status":"complete", "uploadDate":"2018-05-25 19:45"},
+  {"id":"WU_FILE_103", "fileId":"fff", "name":"index.html", "type":"text/html", "size":18641, "status":"complete", "uploadDate":"2018-05-25 19:45"},
+  {"id":"WU_FILE_104", "fileId":"ddd", "name":"index.html", "type":"text/html", "size":18641, "status":"complete", "uploadDate":"2018-05-25 19:45"}
+]

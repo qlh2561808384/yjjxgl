@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <title>webuploader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <script src="../plugins/webuploader/webuploader.datanew.js"></script>
+</head>
+<script>
+
+$(function() {
+    var uploader = $("#uploader").webupload({
+        /*accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/!*'
+        },*/
+        isDel: true,
+        isDownload: true,
+        server: '../plugins/webuploader/webuploader.json',//用于提交文件
+        url: '../plugins/webuploader/filesList.json',//已上传的文件数据
+        delUrl: '../plugins/webuploader/webuploader.json',
+        downloadUrl: '../plugins/webuploader/webuploader.json',
+        onLoaded: function (obj) {
+            //console.log(obj)
+            $(this).webupload("loadData", obj.options.url)
+        }
+    });
+})
+
+function disable(){
+    $("#uploader").webupload("disable");
+}
+function enable(){
+    $("#uploader").webupload("enable");
+}
+function destroy(){
+    $("#uploader").webupload("destroy");
+}
+function clearFile(){
+    $("#uploader").webupload("clear");
+}
+function setValue(){
+    $("#uploader").webupload("setValue", '1122,1212');
+}
+function getValue(){
+    alert($("#uploader").webupload("getValue"));
+}
+</script>
+</head>
+<body>
+    <section class="parser container-fluid">
+        <div class="page-header"><h1>语法解析</h1></div>
+        <h3>扩展自webuploader，<a href="http://fex.baidu.com/webuploader/doc/index.html" target="_blank">参考链接</a></h3>
+        <h4 id="a1">使用方法</h4>
+        <pre>
+            <ol style="margin-bottom:10px;display:table">
+                <li>//html部分</li>
+                <li><span>&lt;div id="uploader" class="uploader"&gt;&lt;/div&gt;</span></li>
+            </ol>
+            <ol style="display:table">
+                <li>//js部分</li>
+                <li><span>$("#uploader").webupload({</span></li>
+                <li><span>    server: '../plugins/webuploader/webuploader.json',</span></li>
+                <li><span>    url: '../plugins/webuploader/filesList.json'</span></li>
+                <li><span>})</span></li>
+            </ol>
+        </pre>
+
+        <h4 id="a2">新增属性：</h4>
+        <table class="table-border">
+            <thead>
+            <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+            </thead>
+            <tbody>
+            <tr id="a2_tr_1"><td>isDel</td><td>Boolean</td><td>是否可删除</td><td>false</td></tr>
+            <tr><td>isDownload</td><td>Boolean</td><td>是否可下载</td><td>false</td></tr>
+            <tr><td>url</td><td>String</td><td>已提交的文件信息</td><td> </td></tr>
+            <tr><td>delUrl</td><td>String</td><td>用于删除文件</td><td> </td></tr>
+            <tr><td>downloadUrl</td><td>String</td><td>用于下载文件</td><td> </td></tr>
+            <tr><td>fileIdKey</td><td>String</td><td>上传文件时返回的用于保存文件id的属性</td><td>fileId</td></tr>
+            </tbody>
+        </table>
+        <h4 id="a3">原有属性：</h4>
+        <table class="table-border">
+            <thead>
+            <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+            </thead>
+            <tbody>
+            <tr id="a3_tr_1"><td>server</td><td>String</td><td>文件提交路径</td><td> </td></tr>
+            <tr><td>dnd</td><td>Selector</td><td>指定Drag And Drop拖拽的容器，如果不指定，则不启动</td><td>undefined</td></tr>
+            <tr><td>disableGlobalDnd</td><td>Selector</td><td>是否禁掉整个页面的拖拽功能，如果不禁用，图片拖进来的时候会默认被浏览器打开</td><td>false</td></tr>
+            <tr><td>paste</td><td>Selector</td><td>指定监听paste事件的容器，如果不指定，不启用此功能。此功能为通过粘贴来添加截屏的图片。建议设置为document.body</td><td>undefined</td></tr>
+            <tr><td rowspan="2">pick</td><td>Selector, Object</td><td>指定选择文件的按钮容器，不指定则不创建按钮</td><td>undefined</td></tr>
+            <tr><td colspan="3">
+                <p style="color:#f93;">例如：</p>
+                <pre style="padding: 0;">
+                    <ol style="display:table">
+                        <li><span>pick:{</span></li>
+                        <li><span>    id: ".filePicker", //{Seletor|dom} 指定选择文件的按钮容器，不指定则不创建按钮。注意 这里虽然写的是 id, 但是不是只支持 id, 还支持 class, 或者 dom 节点</span></li>
+                        <li><span>    label: "", //{String} 请采用 innerHTML 代替</span></li>
+                        <li><span>    innerHTML: "点击选择文件", //{String} 指定按钮文字。不指定时优先从指定的容器中看是否自带文字。</span></li>
+                        <li><span>    multiple: true/false //{Boolean} 是否开起同时选择多个文件能力。</span></li>
+                        <li><span>}</span></li>
+                    </ol>
+                </pre>
+            </td></tr>
+            <tr><td rowspan="2">accept</td><td>Array</td><td>指定接受哪些类型的文件</td><td>null</td></tr>
+            <tr><td colspan="3">
+                <p style="color:#f93;">例如： </p>
+                <pre style="padding: 0;">
+                    <ol style="display:table">
+                        <li><span>accept:{</span></li>
+                        <li><span>    title : "Image", //{String} 文字描述</span></li>
+                        <li><span>    extensions: "gif,jpg,jpeg,bmp,png", //{String} 允许的文件后缀，不带点，多个用逗号分割</span></li>
+                        <li><span>    mimeTypes: "image/*" //{String} 多个用逗号分割</span></li>
+                        <li><span>}</span></li>
+                        <li><b style="color:#f00; font-size:14px;">『mimeType类型可参考 <a href="http://www.w3school.com.cn/media/media_mimeref.asp" target="_blank">MIME 参考手册</a>』</b></li>
+                    </ol>
+                </pre>
+            </td></tr>
+            <tr><td rowspan="2">thumb</td><td>Object</td><td>配置生成缩略图的选项</td><td></td></tr>
+            <tr><td colspan="3">
+                <p style="color:#f00;"><b>默认为</b>：</p>
+                <pre style="padding: 0;">
+                    <ol style="display:table">
+                        <li><span>thumb:{</span></li>
+                        <li><span>    width: 110,</span></li>
+                        <li><span>    height: 110,</span></li>
+                        <li><span>    quality: 70, //图片质量，只有type为'image/jpeg'的时候才有效</span></li>
+                        <li><span>    allowMagnify: true, //是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false</span></li>
+                        <li><span>    crop: true, //是否允许裁剪</span></li>
+                        <li><span>    type: 'image/jpeg' //为空的话则保留原有图片格式。否则强制转换成指定的类型</span></li>
+                        <li><span>}</span></li>
+                    </ol>
+                </pre>
+            </td></tr>
+            <tr><td rowspan="2">compress</td><td>Object</td><td>配置压缩的图片的选项。如果此选项为false, 则图片在上传前不进行压缩</td><td></td></tr>
+            <tr><td colspan="3">
+                <p style="color:#f00;"><b>默认为</b>：</p>
+                <pre style="padding: 0;">
+                    <ol style="display:table">
+                        <li><span>compress:{</span></li>
+                        <li><span>    width: 1600,</span></li>
+                        <li><span>    height: 1600,</span></li>
+                        <li><span>    quality: 90, //图片质量，只有type为'image/jpeg'的时候才有效</span></li>
+                        <li><span>    allowMagnify: false, //是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false</span></li>
+                        <li><span>    crop: false, //是否允许裁剪</span></li>
+                        <li><span>    preserveHeaders: true, //是否保留头部meta信息</span></li>
+                        <li><span>    noCompressIfLarger: false, //如果发现压缩后文件大小比原来还大，则使用原来图片.此属性可能会影响图片自动纠正功能</span></li>
+                        <li><span>    compressSize: 0 //单位字节，如果图片大小小于此值，不会采用压缩。</span></li>
+                        <li><span>}</span></li>
+                    </ol>
+                </pre>
+            </td></tr>
+            <tr><td>auto</td><td>Boolean</td><td>设置为 true 后，不需要手动调用上传，有文件选择即开始上传</td><td>false</td></tr>
+            <tr><td>runtimeOrder</td><td>Object</td><td>指定运行时启动顺序。默认会想尝试 html5 是否支持，如果支持则使用 html5, 否则则使用 flash <br/>可以将此值设置成 flash，来强制使用 flash 运行时</td><td>html5,flash</td></tr>
+            <tr><td>prepareNextFile</td><td>Boolean</td><td>是否允许在文件传输时提前把下一个文件准备好。 对于一个文件的准备工作比较耗时，比如图片压缩，md5序列化。 如果能提前在当前文件传输期处理，可以节省总体耗时。</td><td>false</td></tr>
+            <tr><td>chunked</td><td>Boolean</td><td>是否要分片处理大文件上传</td><td>false</td></tr>
+            <tr><td>chunkSize</td><td>Boolean</td><td>如果要分片，分多大一片？ 默认大小为5M</td><td>5242880</td></tr>
+            <tr><td>chunkRetry</td><td>Boolean</td><td>如果某个分片由于网络问题出错，允许自动重传多少次？</td><td>2</td></tr>
+            <tr><td>threads</td><td>Boolean</td><td>上传并发数。允许同时最大上传进程数</td><td>3</td></tr>
+            <tr><td>formData</td><td>Object</td><td>文件上传请求的参数表，每次发送都会发送此对象中的参数</td><td>{}</td></tr>
+            <tr><td>fileVal</td><td>Object</td><td>file</td><td>设置文件上传域的name</td></tr>
+            <tr><td>method</td><td>Object</td><td>文件上传方式，POST或者GET</td><td>POST</td></tr>
+            <tr><td>sendAsBinary</td><td>Object</td><td>是否已二进制的流的方式发送文件，这样整个上传内容php://input都为文件内容， 其他参数在$_GET数组中</td><td>false</td></tr>
+            <tr><td>fileNumLimit</td><td>Int</td><td>验证文件总数量, 超出则不允许加入队列</td><td>undefined</td></tr>
+            <tr><td>fileSizeLimit</td><td>Int</td><td>验证文件总大小是否超出限制, 超出则不允许加入队列</td><td>undefined</td></tr>
+            <tr><td>fileSingleSizeLimit</td><td>Int</td><td>验证单个文件大小是否超出限制, 超出则不允许加入队列</td><td>undefined</td></tr>
+            <tr><td>duplicate</td><td>Boolean</td><td>去重，根据文件名字、文件大小和最后修改时间来生成hash Key</td><td>undefined</td></tr>
+            <tr><td>disableWidgets</td><td>String, Array</td><td>默认所有 Uploader.register 了的 widget 都会被加载，如果禁用某一部分，请通过此 option 指定黑名单</td><td>undefined</td></tr>
+            <tr><td>onExceedFileNum</td><td>Function</td><td></td><td>undefined</td></tr>
+            </tbody>
+        </table>
+        <h4 id="a4">方法：</h4>
+        <table class="table-border">
+            <thead>
+            <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+            </thead>
+            <tbody>
+            <tr id="a4_tr_1"><td>onLoaded</td><td>uploader：返回的uploader对象</td><td>组件加载完成后触发事件</td></tr>
+            <tr><td>onBeforeFileQueued</td><td>file</td><td>当文件被加入队列之前触发</td></tr>
+            <tr><td>onFileQueued</td><td>file</td><td>当文件被加入队列以后触发</td></tr>
+            <tr><td>onFilesQueued</td><td>files</td><td>当一批文件添加进队列以后触发</td></tr>
+            <tr><td>onFileDequeued</td><td>file</td><td>当文件被移除队列后触发</td></tr>
+            <tr><td>onReset</td><td></td><td>当 uploader 被重置的时候触发</td></tr>
+            <tr><td>onStartUpload</td><td></td><td>当开始上传流程时触发</td></tr>
+            <tr><td>onStopUpload</td><td></td><td>当开始上传流程暂停时触发</td></tr>
+            <tr><td>onUploadFinished</td><td></td><td>当所有文件上传结束时触发</td></tr>
+            <tr><td>onUploadStart</td><td>file</td><td>某个文件开始上传前触发，一个文件只会触发一次</td></tr>
+            <tr><td>onUploadBeforeSend</td><td>object, data, header</td><td>当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开起分片上传的前提下此事件可能会触发多次</td></tr>
+            <tr><td>onUploadAccept</td><td>object, ret</td><td>当某个文件上传到服务端响应后，会派送此事件来询问服务端响应是否有效</td></tr>
+            <tr><td>onUploadProgress</td><td>file, percentage</td><td>上传过程中触发，携带上传进度</td></tr>
+            <tr><td>onUploadError</td><td>file, reason</td><td>当文件上传出错时触发</td></tr>
+            <tr><td>onUploadSuccess</td><td>file, response</td><td>当文件上传成功时触发</td></tr>
+            <tr><td>onUploadComplete</td><td>file</td><td>不管成功或者失败，文件上传完成时触发</td></tr>
+            <tr><td>onError</td><td>type</td><td>验证不通过返回的错误</td></tr>
+            </tbody>
+        </table>
+        <h4 id="a5">案例:</h4>
+        <h4>后端处理:<button style="margin-left: 5px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn2">查看代码</button></h4>
+
+        <h4>前端处理:<button style="margin-left: 5px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn1">查看代码</button></h4>
+    </section>
+
+    <h4>案例1：</h4>
+    <div id="uploader"></div>
+
+    <div style="margin-top:10px;">
+        <button class="btn btn-primary" onclick="disable()">禁用</button>
+        <button class="btn btn-primary" onclick="enable()">启用</button>
+        <button class="btn btn-primary" onclick="destroy()">销毁</button>
+        <button class="btn btn-primary" onclick="clearFile()">清除数据</button>
+        <button class="btn btn-primary" onclick="setValue()">设值</button>
+        <button class="btn btn-primary" onclick="getValue()">取值</button>
+    </div>
+
+    <div class="siteDir">
+        <div class="dir-title">目录 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+        <div class="dir-list">
+            <ul id="dir_tree"></ul>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $(".siteDir .close").on("click", function(){
+                $(this).parents(".siteDir").hide();
+            });
+            function addEleId(ele) {
+                var i = 0;
+                $('#'+ele+'_tr_1').parent().find('tr').map(function (index,value) { //a3_tr_1
+                    $(this).attr('id',ele+"_tr_"+(++i));
+                })
+            }
+            addEleId('a2');//传入参数a2
+            addEleId('a3');//传入参数a3
+            addEleId('a4');//传入参数a4
+            function createObject(ele) { //创建一个对象，{id:3, pId:0, name:"方法", url:"#a4", target:"_self"}
+                var gdatastring = [];
+                var gdata = {
+                    arg:{},
+                    i:1,
+                    sumarg:[],
+                    glength:$('#a'+ele+'_tr_1').parent().find('tr').length,
+                    gseriesinfo:function () {
+                        let sumarg = [];
+                        for(;gdata.i<=gdata.glength;gdata.i++){
+                            gdata.arg.id = ele.toString()+gdata.i;
+                            gdata.arg.pId = ele;
+                            gdata.arg.name = $('#a'+ele+'_tr_'+gdata.i).find('td:first').html();
+                            gdata.arg.url = '#a'+ele+'_tr_'+gdata.i;
+                            gdata.arg.target = '_self';
+                            sumarg.push(JSON.stringify(gdata.arg));
+                        }
+                        return sumarg;
+                    }
+                }
+
+                gdata.gseriesinfo().map(function (i,v) {
+                    gdatastring.push(JSON.parse(i));
+                });
+                return gdatastring;
+            } //动态生成对象
+            $("#dir_tree").tree({
+                localdata: [
+                    {id:1, pId:0, name:"用法 & 数据格式", url:"#a1", target:"_self"},
+                    {id:2, pId:0, name:"新增属性", url:"#a2", target:"_self"},
+                    {id:3, pId:0, name:"原有属性", url:"#a3", target:"_self"},
+                    {id:4, pId:0, name:"方法", url:"#a4", target:"_self"},
+                    {id:5, pId:0, name:"案例", url:"#a5", target:"_self"}
+                ].concat(createObject(2),createObject(3),createObject(4)),
+                checkType:'nocheck',
+                view: {
+                    showIcon: false
+                },
+                data : { // 必须使用data
+                    simpleData : {
+                        enable : true,
+                        idKey : "id", // id编号命名 默认
+                        pIdKey : "pId", // 父id编号命名 默认
+                        rootPId : 0
+                    },
+                    key: {
+                        url: "url"
+                    }
+                },
+                callback:{
+                    clickNode : function(e,treeId,treeNode,clickFlag){
+                        var ztree = $("#"+treeId).tree("getTree");
+                        ztree.expandNode(treeNode);
+                    }
+                }
+            });
+        })
+    </script>
+
+    <br><br><br><br>
+    <div style="width:1px;height:1px;overflow:hidden;">
+    <textarea id="copyTarget1">
+        var uploader = $("#uploader").webupload({
+            isDel: true,
+            isDownload: true,
+            server: '../plugins/webuploader/webuploader.json',//用于提交文件
+            url: '../plugins/webuploader/filesList.json',//已上传的文件数据
+            delUrl: '../plugins/webuploader/webuploader.json',
+            downloadUrl: '../plugins/webuploader/webuploader.json',
+            onLoaded: function (obj) {
+                $(this).webupload("loadData", obj.options.url)
+            }
+        });
+    </textarea>
+    <textarea id="copyTarget2">
+        @RequestMapping("webupload")
+        @ResponseBody
+        public Map webupload(HttpServletRequest req,Integer chunks,Integer chunk,String name) throws IOException {
+          MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) req;
+          MultiValueMap<String, MultipartFile> map = multipartRequest.getMultiFileMap();
+          Integer count=0;
+          Iterator<String> iter = map.keySet().iterator();
+          while(iter.hasNext()) {
+              String str = (String) iter.next();
+              List<MultipartFile> fileList =  map.get(str);
+              for(MultipartFile multipartFile : fileList) {
+                  File targetFile=new File("E:/ace/"+name);
+                  if (chunks!=null && chunks > 1) {
+                      File tempFile = new File("E:/ace/" + name+"_temp");
+            //如果chunk==0,则代表第一块碎片,不需要合并
+                      saveUploadFile(multipartFile.getInputStream(), tempFile, chunk == 0 ? false : true);
+            //上传并合并完成，则将临时名称更改为指定名称
+                      if (chunks - chunk == 1) {
+                          tempFile.renameTo(targetFile);
+                      }
+                  } else {
+            //否则直接将文件内容拷贝至新文件
+                      saveUploadFile(multipartFile.getInputStream(), targetFile, false);
+                      multipartFile.transferTo(targetFile);
+                      count++;
+                  }
+              }
+            }
+            return super.toJsonSuccess(count+"");
+        }
+    </textarea>
+    </div>
+    <script>
+        $(function(){
+            $(".copyBtn").on("click", function(){
+                var num = $(this).attr("id").replace(/[^0-9]/ig, "");
+                var target = $("#copyTarget"+ num);
+                $.dopen({
+                    title: "查看代码",
+                    content: "<pre>"+ target.html() +"</pre>",
+                    area: ["1000px", "auto"],
+                    btn: ["复制", "取消"],
+                    btn1: function(index){
+                        var res = $.copyToClipboard(target.get(0));
+                        if(res){
+                            layer.msg('复制成功', {time: 2000});
+                            layer.close(index);
+                        }else{
+                            layer.msg('复制失败，请手动复制', {time: 2000});
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>desktop</title>
+    <script type="text/javascript" src="../../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap.datanew.js"></script>
+    <style>
+        html, body{height: 100%;}
+        ul,ol,li{list-style: none; margin-bottom: 0; padding: 0;}
+        a:link, a:hover, a:visited, a:active{text-decoration: none;}
+        *{-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none; -khtml-user-select:none; user-select:none;}
+
+        body{width:99.8% \9; margin:0 auto; background:url('images/1.jpg') no-repeat; background-size: 100% 100%; background-repeat: repeat \9;}
+
+        .deskWrap{position: relative; width: 100%; height: 100%;}
+        .deskWrap .deskTop, .deskWrap .deskBottom{position: absolute; left: 0; width:100%;}
+        .deskWrap .deskTop{top: 0; height:25px; line-height:25px; width:96% \9; padding: 0 2%; background:url('images/desk_top.png') repeat-x; background-size: 100% 100%; background:#EFEFEF \9;}
+        .deskWrap .deskBottom{bottom: 0; height:40px; width:98% \9; padding: 0 1%; opacity: 0.8; filter:alpha(opacity=80); background:url('images/desk_bottom.png') repeat-x; background-size: 100% 100%; background:#6D695D \9;}
+        .deskWrap .deskMain{position: absolute; top:25px; bottom:40px; left:0; right:0; margin:10px;}
+
+        .deskWrap .desk_icon{color:#FFF; font-weight:600; cursor: default; text-shadow:0 0 5px #000;}
+
+        .deskBottom .showDesk{border-radius:5px; padding:6px 12px; margin-top:4px; cursor: default;}
+        .deskBottom .showDesk:hover{background:#0F1212; background:rgba(15,18,18,.8);}
+        .deskBottom .showDesk img{display:block; width:22px; height:22px;}
+        .deskBottom .deskBtmTab{padding:5px 0 0 10px;}
+        .deskBottom .deskBtmTab li{float:left; margin-right:5px; width:150px; width:120px \9; height:30px; line-height: 30px; overflow:hidden; font-size:13px; padding:0 10px; border-radius:5px; background:#4D4F50; background:rgba(15,18,18,.5);}
+        .deskBottom .deskBtmTab li.tabActive, .deskBottom .deskBtmTab li:hover{background:#000;}
+        .deskBottom .deskBtmTab li img{width:22px; height:22px; margin-right:5px; vertical-align: middle;}
+
+        .deskMain .deskItem{position:absolute; width:80px; padding: 5px 0; text-align: center; border:1px solid transparent; border-radius:5px; font-size:14px; cursor: default;}
+        .deskMain .deskItem:hover{border-color:#B1CEF1; background:rgba(223,229,235, 0.5);}
+        .deskMain .deskItemAcyive{border-color:#7A9FCA; background:rgba(188,214,244, 0.5);}
+        .deskMain .deskItem .textover-ell{width:100%; margin-bottom:0;}
+        .deskMain .deskItem img{width:35px; height:35px;}
+
+        /* 弹窗标题 */
+        .windowTit img{width:25px; height:25px; margin-right:5px; vertical-align: middle;}
+    </style>
+</head>
+<body oncontextmenu="self.event.returnValue=false" onselectstart="return false">
+    <div class="deskWrap">
+        <div class="deskTop clearfix">
+            <div class="pull-left">desktop</div>
+            <div class="pull-right">desktop</div>
+        </div>
+        <div class="deskMain" id="deskMain">
+            <div class="deskItem desk_icon" data-id="id1" data-url="./example/table_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">1</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id2" data-url="./example/comboBox.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">2</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id3" data-url="./example/comboTree.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">3</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id4" data-url="./example/dalert_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">4</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id5" data-url="./example/dopen_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">5</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id6" data-url="./example/newform_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">6</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id7" data-url="./example/new_tree_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">7</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id8" data-url="./example/searchTree.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">8</p>
+            </div>
+        </div>
+        <div class="deskBottom clearfix">
+            <div class="pull-left showDesk" id="showDesk"><a href="javascript:void(0);" title="显示桌面"><img src="images/favicon.png" alt="显示桌面"/></a></div>
+            <div class="pull-left">
+                <ul class="deskBtmTab clearfix" id="deskBtmTab"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        //桌面图标排列
+        showDeskIcon();
+        //底部栏 点击tab
+        $("#deskBtmTab").on("click", "li", function(){
+            var layerId = $(this).attr("data-layerId");
+            var layero = $("#"+layerId);
+            var max = arrSort()+1;
+            if(layero.is(":hidden")){ //该窗口隐藏状态时，显示
+                layero.show()
+                    .css({zIndex: max+1})
+                    .attr("data-zindex", max+1);
+                $(this).addClass("tabActive").siblings().removeClass("tabActive");
+            }else if(!$(this).hasClass("tabActive")){ //该窗口不隐藏且不是置顶状态时，置顶
+                if(max != parseInt($(this).attr("data-zindex"))){
+                    layero.css({zIndex: max+1})
+                        .attr("data-zindex", max+1);
+                    $(this).addClass("tabActive").siblings().removeClass("tabActive");
+                }
+            }else if($(this).hasClass("tabActive")){ //该窗口置顶时，隐藏
+                layero.hide();
+                $(this).removeClass("tabActive");
+            }
+        });
+        //点击桌面图标
+        $("#deskMain").on("dblclick", ".deskItem", function(){
+            openWindow($(this), $(this).attr("data-url"));
+        }).on("click", ".deskItem", function(){
+            $(this).addClass("deskItemAcyive").siblings().removeClass("deskItemAcyive");
+        });
+        $("#deskMain").click(function(e){
+            var targetClass = $(e.target).attr("class");
+            if(targetClass.indexOf("deskItem") == -1 && !$(e.target).parent().is(".deskItem")){
+                $(".deskItem").removeClass("deskItemAcyive");
+            }
+        });
+
+        //点击左下角图标，显示桌面
+        $("#showDesk").on("click", function(){
+            $(".layui-layer").hide();
+            $("#deskBtmTab li").removeClass("tabActive");
+        })
+    });
+    //桌面图标排列
+    function showDeskIcon(){
+        var deskItem = $("#deskMain .deskItem");
+        var hasLiNum = deskItem.length;
+        var leftLen = 100, topLen = 100;
+        var colNum = Math.round($("#deskMain").height()/topLen),
+            rowNum = 0,
+            totalRowNum = Math.ceil(hasLiNum/colNum);
+        $.each(deskItem, function(i){
+            $(this).css({left:leftLen*rowNum, top:topLen*(i%colNum)});
+            if((i+1)%colNum == 0 && i!=0) rowNum++;
+        });
+    }
+    //打开窗口
+    function openWindow(obj, url){
+        var objDataid = obj.attr("data-id"),
+            winImg = obj.find(".item-img").attr("src"),
+            winTitle = obj.find(".item-txt").text(),
+            imgTxtHtml = "<img src='"+ winImg +"' />" + winTitle,
+            deskBtmTab = $("#deskBtmTab"),
+            layerId;
+        //若该窗口不存在
+        if($(".layui-layer[data-id='"+objDataid+"']").length==0){
+            $.dopen({
+                type: 2,
+                title: "<div class='windowTit'>" + imgTxtHtml+ "</div>",
+                area: ['700px', '400px'],
+                content: url,
+                shade: 0,
+                success: function(layero, index){
+                    layerId = layero.attr("id");
+
+                    //插入layer弹窗并置顶显示
+                    var tabli = "<li class='desk_icon tabActive' data-layerId='"+ layerId +"'>"+ imgTxtHtml +"</li>";
+                    deskBtmTab.find("li").removeClass("tabActive");
+                    deskBtmTab.append(tabli);
+                    var max = arrSort()+1;
+                    layero.css({zIndex: max}).attr({"data-zindex":layero.css("z-index"), "data-id":objDataid});
+
+                    var ulMaxWid;//底部tab最大宽度
+                    //ie6-8, 则加载js, 兼容
+                    if(navigator.userAgent.indexOf("MSIE")>0 && (navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0 || navigator.userAgent.indexOf("MSIE 8.0")>0)){
+                        ulMaxWid = $(".deskBottom").width()-$("#showDesk").outerWidth()-50;
+                    }else{
+                        ulMaxWid = $(".deskBottom").width()-$("#showDesk").outerWidth();
+                    }
+                    var ulCurWid = 0;
+                    deskBtmTab = $("#deskBtmTab");
+                    $.each(deskBtmTab.find("li"), function(){
+                        ulCurWid += $(this).outerWidth();
+                    });
+                    //如果tab标签打开过多，减小标签宽度
+                    if(ulCurWid >= ulMaxWid){
+                        deskBtmTab.css("max-width", ulMaxWid);
+                        var len = deskBtmTab.find("li").length;
+                        deskBtmTab.find("li").width(Math.floor(ulMaxWid/len)-30);
+                    }
+                },
+                min: function(layero){
+                    layero.hide();
+                    layer.restore();//隐藏时还原弹窗大小
+                    deskBtmTab.find("[data-layerId="+ layerId +"]").removeClass("tabActive");
+                },
+                full: function(layero){
+                    //修改最大化时弹窗的高度，只占满deskMain的高度
+                    var layerMaxH = $("#deskMain").outerHeight(true);
+                    var iframeMaxH = layerMaxH - $(".layui-layer-title").outerHeight();
+                    layero.css({height:layerMaxH, top: $(".deskTop").outerHeight()});
+                    layero.find("iframe").css("height", iframeMaxH);
+                },
+                end: function(){
+                    //底部tab标签删除
+                    deskBtmTab.find("[data-layerId="+ layerId +"]").remove();
+                }
+            });
+        }else{ //已存在该窗口，则置顶
+            var layero = $(".layui-layer[data-id='"+objDataid+"']");
+            var max = arrSort()+1;
+            layero.show().css({zIndex: max}).attr({"data-zindex":layero.css("z-index")});
+        }
+    }
+    //zindex值组成数组，排序后返回最大值
+    function arrSort(){
+        var zindexArr = [];
+        $(".layui-layer").each(function(){
+            zindexArr.push(parseInt($(this).attr("data-zindex")));
+        });
+        zindexArr.sort(function(a,b){return b-a});//数组倒序
+        return zindexArr[0];
+    }
+</script>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>bootstrapTable_demo</title>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+
+    <script src="../js/bootstrap.datanew.js"></script>
+    <script src="../plugins/input/input.js"></script>
+    <style>
+        .comboBox_option{
+            width:150px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#tt").textBox({
+                required:true,
+                validText:'测试',
+                validate:'email|phone',
+                validFail:function($el){
+                   alert($el.attr("id"))
+                }
+            });
+            $("#select").comboBox({
+                required:true,
+                validText:'测试',
+                multiple:true,
+//                url:'testJs.txt',
+                localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+//                validate:'email|phone',
+                onChange:function(newValue,oldValue){
+                    alert("newValue:"+newValue+" oldValue:"+oldValue)
+                },
+                onShowPanel:function($p){//当显示下拉面板的时候触发。
+//                    console.log("123")
+}
+            })
+
+        });
+        function disable(){
+            $("#select").comboBox("disable");
+        }
+        function enable(){
+            $("#select").comboBox("enable");
+        }
+        function getValue(){
+            alert($("#select").comboBox("getValue"));
+        }
+        function setValue(){
+            $('#select').comboBox("setValue",1)
+        }
+        function testVile(){
+            $("#select").comboBox("validate")
+        }
+        function destroy(){
+
+            $("#select").comboBox("destroy")
+        }
+        function selectSetValue(){
+            $("#select").comboBox("setValue",2)
+        }
+        function clear1(){
+            $("#select").comboBox("clear")
+        }
+        function setValues(){
+            $("#select").comboBox("setValues","1,2")
+        }
+
+
+
+    </script>
+</head>
+<body>
+<!--工具栏-->
+<div id="bt">
+    <button class="btn btn-primary bootstrap-table-add" type="button" onclick="disable()">禁用</button>
+    <button class="btn btn-primary bootstrap-table-edit" type="button" onclick="enable()">启用</button>
+    <button class="btn btn-primary bootstrap-table-delete" type="button" onclick="getValue()">取值</button>
+    <button class="btn btn-primary" type="button" onclick="setValue()">设值</button>
+    <button class="btn btn-primary" type="button" onclick="testVile()">表单验证</button>
+    <button class="btn btn-primary" type="button" onclick="destroy()">销毁</button>
+    <button class="btn btn-primary" type="button" onclick="selectSetValue()">selectSetValue</button>
+    <button class="btn btn-primary" type="button" onclick="clear1()">clear</button>
+    <button class="btn btn-primary" type="button" onclick="setValues()">setValues</button>
+</div>
+
+<input id="select"/>
+<input id="tt" type="text"/>
+
+
+</body>
+
+
+</html>

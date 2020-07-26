@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ztree </TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+
+<BODY>
+
+<section class="parser container-fluid">
+	<div class="page-header"><h1>语法解析</h1></div>
+    <h3>扩展自zTree，<a href="http://www.treejs.cn/v3/api.php" target="_blank">参考链接</a></h3>
+    <h4>使用方法1: 给出input框，点击后弹出树结构</h4>
+	<pre>
+		<ol style="margin-bottom:10px;display:table">
+			<li>//html部分</li>
+			<li><span>&lt;input id="treeSel" name="nameval" class="treeSel" type="text" value="" readonly="readonly" /&gt;</span></li>
+		</ol>
+        <ol style="display:table">
+        	<li>//js部分</li>
+            <li><span>$("#treeSel").dtree({</span></li>
+            <li><span>    localdata: zNodes,</span></li>
+            <li><span>    checkType: "checkbox",</span></li>
+            <li><span>    ISLEAF: false,</span></li>
+            <li><span>    isOpen: true,</span></li>
+            <li><span>    isPopupTree: true, //判断是否为弹出树</span></li>
+            <li><span>    rootElement: false, </span></li>
+			<li><span>    labelVal: "labelval", //弹出树 input前的标签文字</span></li>
+			<li><span>    data:{</span></li>
+			<li><span>        //参考属性data部分</span></li>
+			<li><span>    }</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    
+	<h4>使用方法2: 给出ul，默认显示树结构</h4>
+	<pre>
+		<ol style="margin-bottom:10px;">
+			<li>//html部分</li>
+			<li><span>&lt;ul id="treeDemo" class="ztree"&gt;&lt;/ul&gt;</span></li>
+		</ol>
+        <ol style="display:table">
+        	<li>//js部分</li>
+            <li><span>$("#treeDemo").dtree({</span></li>
+            <li><span>    localdata: zNodes,</span></li>
+            <li><span>    checkType: "checkbox",</span></li>
+            <li><span>    ISLEAF: false,</span></li>
+            <li><span>    isOpen: true,</span></li>
+            <li><span>    rootElement: true,</span></li>
+			<li><span>    data:{</span></li>
+			<li><span>        //参考属性data部分</span></li>
+			<li><span>    },</span></li>
+            <li><span>    callback:{</span></li>
+            <li><span>        onCheck: function(e, treeId, treeNode) { //节点的点击事件</span></li>
+            <li><span>            console.log(treeNode.tId)</span></li>
+            <li><span>        }</span></li>
+            <li><span>    }</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    
+    <h4>属性：</h4>
+	<table class=" table-border">
+		<thead>
+		<tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>localdata</td><td>Array</td><td>本地数据，zNodes =[{id:1, pId:0, name:"节点搜索演示 1"}]</td><td></td></tr>
+		<tr><td>url</td><td>String</td><td>获取数据库数据</td><td></td></tr>
+		<tr><td>checkType</td><td>String</td><td>定义选择框类型，设置为nocheck为无选择框，checkbox为多选框，radio为单选框</td><td>"nocheck"</td></tr>
+		<tr><td>ISLEAF</td><td>Boolean</td><td>当checkType为checkbox或radio时，父节点是否有选择框，设置为false表示父不可选</td><td>false</td></tr>
+		<tr><td>isOpen</td><td>Boolean</td><td>节点是否全部展开，默认为不展开</td><td>false</td></tr>
+		<tr><td>isPopupTree</td><td>Boolean</td><td>是否为弹出树，默认为否</td><td>fasle</td></tr>
+		<tr><td>rootElement</td><td>Boolean</td><td>是否添加“全部”节点</td><td>false</td></tr>
+		<tr><td>labelVal</td><td>String</td><td>若为弹出树时，input前的label文字</td><td></td></tr>
+		<tr><td>data</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+					<li><span>data:{</span></li>
+					<li><span>    key : {</span></li>
+					<li><span>        name: "name", //保存节点<span style="color:#F00;">名称</span>的属性名</span></li>
+					<li><span>        url: "url", //保存节点<span style="color:#F00;">链接url</span>的属性名</span></li>
+					<li><span>        icon: "icon", //保存节点<span style="color:#F00;">小图标</span>的属性名</span></li>
+					<li><span>    },</span></li>
+					<li><span>    simpleData : {</span></li>
+					<li><span>        enable: true, //数据是否采用简单数据模式(Array)，true为是</span></li>
+					<li><span>        idKey: "id", //保存节点<span style="color:#F00;">唯一标识</span>的属性名</span></li>
+					<li><span>        pIdKey: "pId",  //保存节点<span style="color:#F00;">其父节点的唯一标识</span>的属性名</span></li>
+					<li><span>        rootPId: null //指定<span style="color:#F00;">根节点</span>数据</span></li>
+					<li><span>    }</span></li>
+					<li><span>}</span></li>
+				</ol>
+			</pre>
+		</td></tr>
+		<tr><td colspan="4">其余为ztree自带属性，如要修改可查询ztree文档，地址<a href="http://www.treejs.cn/v3/api.php" target="_blank">http://www.treejs.cn/v3/api.php</a></td></tr>
+		</tbody>
+	</table>
+	<h4>案例:</h4>
+</section>
+
+<div class="container-fluid clearfix">
+	<!-- Sidebar -->
+	<div class="col-xs-6">
+        <p>1、弹出树</p>
+
+        <input id="treeSel1" name="qq" type="text" value="" />
+        <section class="parser container-fluid copyBox">
+            <a href="javascript:;" id="copybtn1">复制代码</a>
+            <textarea id="copytext1" style="width:1px; height:1px; padding:0; border:none;">
+                <input id="treeSel_1" name="qq" type="text" value="" />
+                <script type="text/javascript">
+                    var treeSel1 = $("#treeSel_1").dtree({
+                        url:"",
+                        checkType: "checkbox",
+                        isPopupTree: true,
+                        labelVal: "checkbox："
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;input id="treeSel_1" name="qq" type="text" value="" /&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel1 = $("#treeSel_1").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "checkbox",</span></li>
+                    <li><span>        isPopupTree: true,</span></li>
+                    <li><span>        labelVal: "checkbox："</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+
+		<br /><br />
+
+        <input id="treeSel2" name="aa" type="text" value="" />
+        <section class="parser ">
+            <a href="javascript:;" id="copybtn2">复制代码</a>
+            <textarea id="copytext2" style="width:1px; height:1px; padding:0; border:none;">
+                <input id="treeSel_2" name="qq" type="text" value="" />
+                <script type="text/javascript">
+                    var treeSel2 = $("#treeSel_2").dtree({
+                        url:"",
+                        checkType: "radio",
+                        isPopupTree: true,
+                        labelVal: "radio："
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;input id="treeSel_2" name="qq" type="text" value="" /&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel2 = $("#treeSel_2").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "radio",</span></li>
+                    <li><span>        isPopupTree: true,</span></li>
+                    <li><span>        labelVal: "radio："</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+	</div>
+	<!-- main -->
+	<div class="main-content-inner  col-xs-6">
+		<p>2、显示树结构</p>
+        <ul id="treeDemo"></ul>
+
+        <section class="parser container-fluid row">
+            <a href="javascript:;" id="copybtn3">复制代码</a><br/>
+            <textarea id="copytext3" style="width:1px; height:1px; padding:0; border:none;">
+                <ul id="treeDemo3"></ul>
+                <script type="text/javascript">
+                    var treeSel3 = $("#treeSel3").dtree({
+                        url:"",
+                        checkType: "checkbox",
+                        isOpen: true
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;ul id="treeDemo3"&gt;&lt;/ul&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel3 = $("#treeSel3").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "checkbox",</span></li>
+                    <li><span>        isOpen: true</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</BODY>
+</HTML>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("a[id^='copybtn']").click(function(){
+            var copyObj = $(this).siblings("textarea")[0];
+            copyObj.select();
+            document.execCommand("Copy");
+            alert("复制成功");
+        })
+
+        var tdata=zNodes.filter(function(node){
+            return (node.fRegicode!=null )
+        })
+
+		//左边弹出树
+		var treeSel1 = $("#treeSel1").tree({
+			localdata:tdata ,
+            data:{
+			    simpleData  :{
+                enable:true,
+                idKey:'fRegicode',
+                pIdKey:'pcode',
+                rootPId:0
+            }},
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: true, //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+			isOpen: true, //节点是否全部展开
+			isPopupTree: true, //是否为弹出树
+			rootElement: false, //是否添加根节点“全部”
+			labelVal: "checkbox：" //标签内文字
+		});
+		var treeSel2 = $("#treeSel2").dtree({
+			localdata: zNodes,
+			checkType: "radio", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: false, //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+			isPopupTree: true, //是否为弹出树
+			labelVal: "radio：" //标签内文字
+		});
+		//右边
+		var treeObj = $("#treeDemo").dtree({
+			localdata: zNodes,
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			isOpen: true, //节点是否全部展开，默认为不展开
+			rootElement: true, //是否添加根节点“全部”
+
+			callback:{
+				onCheck: function(e, treeId, treeNode) {
+					//console.log(treeNode.tId)
+				}
+			}
+		});
+	});
+	
+	var zNodes = [{"guid":1,"fRegicode":"330000","fsGuid":"3300002017","code":"970101","name":"浙江省财政厅","enabled":"1","pcode":"33"},
+        {"guid":2,"fRegicode":"330100","fsGuid":"3301002019","code":"970201","name":"杭州市财政局","enabled":"1","pcode":"3301"},
+        {"guid":3,"fRegicode":"330300","fsGuid":"3303002020","code":"970202","name":"温州市财政局","enabled":"1","pcode":"3303"},
+        {"guid":4,"fRegicode":"330400","fsGuid":"3304002021","code":"970203","name":"嘉兴市财政局","enabled":"1","pcode":"3304"},
+        {"guid":5,"fRegicode":"330500","fsGuid":"3305002022","code":"970204","name":"湖州市财政局","enabled":"1","pcode":"3305"},
+        {"guid":6,"fRegicode":"330600","fsGuid":"3306002023","code":"970205","name":"绍兴市财政局","enabled":"1","pcode":"3306"},
+        {"guid":7,"fRegicode":"330700","fsGuid":"3307002024","code":"970206","name":"金华市财政局","enabled":"1","pcode":"3307"},
+        {"guid":8,"fRegicode":"330800","fsGuid":"3308002025","code":"970207","name":"衢州市财政局","enabled":"1","pcode":"3308"},
+        {"guid":9,"fRegicode":"330900","fsGuid":"3309002026","code":"970208","name":"舟山市财政局","enabled":"1","pcode":"3309"},
+        {"guid":10,"fRegicode":"331000","fsGuid":"3310002027","code":"970209","name":"台州市财政局","enabled":"1","pcode":"3310"},
+        {"guid":11,"fRegicode":"331100","fsGuid":"3311002028","code":"970210","name":"丽水市财政局","enabled":"1","pcode":"3311"},
+        {"guid":12,"fRegicode":"330122","fsGuid":"3301222030","code":"970301","name":"桐庐县财政局","enabled":"1","pcode":"3301"},
+        {"guid":13,"fRegicode":"330127","fsGuid":"3301272031","code":"970302","name":"淳安县财政局","enabled":"1","pcode":"3301"},
+        {"guid":14,"fRegicode":"330182","fsGuid":"3301822032","code":"970303","name":"建德市财政局","enabled":"1","pcode":"3301"},
+        {"guid":15,"fRegicode":"330183","fsGuid":"3301832033","code":"970304","name":"富阳市财政局","enabled":"1","pcode":"3301"},
+        {"guid":16,"fRegicode":"330185","fsGuid":"3301852034","code":"970305","name":"临安市财政局","enabled":"1","pcode":"3301"},
+        {"guid":17,"fRegicode":"330322","fsGuid":"3303222035","code":"970306","name":"洞头县财政局","enabled":"1","pcode":"3303"},
+        {"guid":18,"fRegicode":"330324","fsGuid":"3303242036","code":"970307","name":"永嘉县财政局","enabled":"1","pcode":"3303"},
+        {"guid":19,"fRegicode":"330326","fsGuid":"3303262037","code":"970308","name":"平阳县财政局","enabled":"1","pcode":"3303"},
+        {"guid":20,"fRegicode":"330327","fsGuid":"3303272038","code":"970309","name":"苍南县财政局","enabled":"1","pcode":"3303"},
+        {"guid":21,"fRegicode":"330328","fsGuid":"3303282039","code":"970310","name":"文成县财政局","enabled":"1","pcode":"3303"},
+        {"guid":22,"fRegicode":"330329","fsGuid":"3303292040","code":"970311","name":"泰顺县财政局","enabled":"1","pcode":"3303"},
+        {"guid":23,"fRegicode":"330381","fsGuid":"3303812041","code":"970312","name":"瑞安市财政局","enabled":"1","pcode":"3303"},
+        {"guid":24,"fRegicode":"330382","fsGuid":"3303822042","code":"970313","name":"乐清市财政局","enabled":"1","pcode":"3303"},
+        {"guid":25,"fRegicode":"330421","fsGuid":"3304212043","code":"970314","name":"嘉善县财政局","enabled":"1","pcode":"3304"},
+        {"guid":26,"fRegicode":"330424","fsGuid":"3304242044","code":"970315","name":"海盐县财政局","enabled":"1","pcode":"3304"},
+        {"guid":27,"fRegicode":"330481","fsGuid":"3304812045","code":"970316","name":"海宁市财政局","enabled":"1","pcode":"3304"},
+        {"guid":28,"fRegicode":"330482","fsGuid":"3304822046","code":"970317","name":"平湖市财政局","enabled":"1","pcode":"3304"},
+        {"guid":29,"fRegicode":"330483","fsGuid":"3304832047","code":"970318","name":"桐乡市财政局","enabled":"1","pcode":"3304"},
+        {"guid":30,"fRegicode":"330521","fsGuid":"3305212048","code":"970319","name":"德清县财政局","enabled":"1","pcode":"3305"},
+        {"guid":31,"fRegicode":"330522","fsGuid":"3305222049","code":"970320","name":"长兴县财政局","enabled":"1","pcode":"3305"},
+        {"guid":32,"fRegicode":"330523","fsGuid":"3305232050","code":"970321","name":"安吉县财政局","enabled":"1","pcode":"3305"},
+        {"guid":33,"fRegicode":"330621","fsGuid":"3306212051","code":"970322","name":"绍兴县财政局","enabled":"1","pcode":"3306"},{"guid":34,"fRegicode":"330624","fsGuid":"3306242052","code":"970323","name":"新昌县财政局","enabled":"1","pcode":"3306"},{"guid":35,"fRegicode":"330681","fsGuid":"3306812053","code":"970324","name":"诸暨市财政局","enabled":"1","pcode":"3306"},{"guid":36,"fRegicode":"330682","fsGuid":"3306822054","code":"970325","name":"上虞市财政局","enabled":"1","pcode":"3306"},{"guid":37,"fRegicode":"330683","fsGuid":"3306832055","code":"970326","name":"嵊州市财政局","enabled":"1","pcode":"3306"},{"guid":38,"fRegicode":"330723","fsGuid":"3307232056","code":"970327","name":"武义县财政局","enabled":"1","pcode":"3307"},{"guid":39,"fRegicode":"330726","fsGuid":"3307262057","code":"970328","name":"浦江县财政局","enabled":"1","pcode":"3307"},{"guid":40,"fRegicode":"330727","fsGuid":"3307272058","code":"970329","name":"磐安县财政局","enabled":"1","pcode":"3307"},{"guid":41,"fRegicode":"330781","fsGuid":"3307812059","code":"970330","name":"兰溪市财政局","enabled":"1","pcode":"3307"},{"guid":42,"fRegicode":"330782","fsGuid":"3307822060","code":"970331","name":"义乌市财政局","enabled":"1","pcode":"3307"},{"guid":43,"fRegicode":"330783","fsGuid":"3307832061","code":"970332","name":"东阳市财政局","enabled":"1","pcode":"3307"},{"guid":44,"fRegicode":"330784","fsGuid":"3307842062","code":"970333","name":"永康市财政局","enabled":"1","pcode":"3307"},{"guid":45,"fRegicode":"330822","fsGuid":"3308222063","code":"970334","name":"常山县财政局","enabled":"1","pcode":"3308"},{"guid":46,"fRegicode":"330824","fsGuid":"3308242064","code":"970335","name":"开化县财政局","enabled":"1","pcode":"3308"},{"guid":47,"fRegicode":"330825","fsGuid":"3308252065","code":"970336","name":"龙游县财政局","enabled":"1","pcode":"3308"},{"guid":48,"fRegicode":"330881","fsGuid":"3308812066","code":"970337","name":"江山市财政局","enabled":"1","pcode":"3308"},{"guid":49,"fRegicode":"330921","fsGuid":"3309212067","code":"970338","name":"岱山县财政局","enabled":"1","pcode":"3309"},{"guid":50,"fRegicode":"330922","fsGuid":"3309222069","code":"970339","name":"嵊泗县财政局","enabled":"1","pcode":"3309"},{"guid":51,"fRegicode":"331021","fsGuid":"3310212070","code":"970340","name":"玉环县财政局","enabled":"1","pcode":"3310"},{"guid":52,"fRegicode":"331022","fsGuid":"3310222071","code":"970341","name":"三门县财政局","enabled":"1","pcode":"3310"},{"guid":53,"fRegicode":"331023","fsGuid":"3310232072","code":"970342","name":"天台县财政局","enabled":"1","pcode":"3310"},{"guid":54,"fRegicode":"331024","fsGuid":"3310242073","code":"970343","name":"仙居县财政局","enabled":"1","pcode":"3310"},{"guid":55,"fRegicode":"331081","fsGuid":"3310812074","code":"970344","name":"温岭市财政局","enabled":"1","pcode":"3310"},{"guid":56,"fRegicode":"331082","fsGuid":"3310822075","code":"970345","name":"临海市财政局","enabled":"1","pcode":"3310"},{"guid":57,"fRegicode":"331121","fsGuid":"3311212076","code":"970346","name":"青田县财政局","enabled":"1","pcode":"3311"},{"guid":58,"fRegicode":"331122","fsGuid":"3311222077","code":"970347","name":"缙云县财政局","enabled":"1","pcode":"3311"},{"guid":59,"fRegicode":"331123","fsGuid":"3311232078","code":"970348","name":"遂昌县财政局","enabled":"1","pcode":"3311"},{"guid":60,"fRegicode":"331124","fsGuid":"3311242079","code":"970349","name":"松阳县财政局","enabled":"1","pcode":"3311"},{"guid":61,"fRegicode":"331125","fsGuid":"3311252080","code":"970350","name":"云和县财政局","enabled":"1","pcode":"3311"},{"guid":62,"fRegicode":"331126","fsGuid":"3311262081","code":"970351","name":"庆元县财政局","enabled":"1","pcode":"3311"},{"guid":63,"fRegicode":"331127","fsGuid":"3311272082","code":"970352","name":"景宁畲族自治县财政局","enabled":"1","pcode":"3311"},{"guid":64,"fRegicode":"331181","fsGuid":"3311812083","code":"970353","name":"龙泉市财政局","enabled":"1","pcode":"3311"},{"guid":65,"fRegicode":"330102","fsGuid":"3301022085","code":"970401","name":"杭州市上城区财政局","enabled":"1","pcode":"3301"},{"guid":66,"fRegicode":"330103","fsGuid":"3301032086","code":"970402","name":"杭州市下城区财政局","enabled":"1","pcode":"3301"},{"guid":67,"fRegicode":"330104","fsGuid":"3301042087","code":"970403","name":"杭州市江干区财政局","enabled":"1","pcode":"3301"},{"guid":68,"fRegicode":"330105","fsGuid":"3301052088","code":"970404","name":"杭州市拱墅区财政局","enabled":"1","pcode":"3301"},{"guid":69,"fRegicode":"330106","fsGuid":"3301062089","code":"970405","name":"杭州市西湖区财政局","enabled":"1","pcode":"3301"},{"guid":70,"fRegicode":"330108","fsGuid":"3301082090","code":"970406","name":"杭州市滨江区财政局","enabled":"1","pcode":"3301"},{"guid":71,"fRegicode":"330109","fsGuid":"3301092091","code":"970407","name":"杭州市萧山区财政局","enabled":"1","pcode":"3301"},{"guid":72,"fRegicode":"330110","fsGuid":"3301102092","code":"970408","name":"杭州市余杭区财政局","enabled":"1","pcode":"3301"},{"guid":73,"fRegicode":"330302","fsGuid":"3303022093","code":"970409","name":"温州市鹿城区财政局","enabled":"1","pcode":"3303"},{"guid":74,"fRegicode":"330303","fsGuid":"3303032094","code":"970410","name":"温州市龙湾区财政局","enabled":"1","pcode":"3303"},{"guid":75,"fRegicode":"330304","fsGuid":"3303042095","code":"970411","name":"温州市瓯海区财政局","enabled":"1","pcode":"3303"},{"guid":76,"fRegicode":"330402","fsGuid":"3304022096","code":"970412","name":"嘉兴市南湖区财政局","enabled":"1","pcode":"3304"},{"guid":77,"fRegicode":"330411","fsGuid":"3304112097","code":"970413","name":"嘉兴市秀洲区财政局","enabled":"1","pcode":"3304"},{"guid":78,"fRegicode":"330602","fsGuid":"3306022098","code":"970414","name":"绍兴市越城区财政局","enabled":"1","pcode":"3306"},{"guid":79,"fRegicode":"330702","fsGuid":"3307022099","code":"970415","name":"金华市婺城区财政局","enabled":"1","pcode":"3307"},{"guid":80,"fRegicode":"330703","fsGuid":"3307032100","code":"970416","name":"金华市金东区财政局","enabled":"1","pcode":"3307"},{"guid":81,"fRegicode":"330802","fsGuid":"3308022101","code":"970417","name":"衢州市柯城区财政局","enabled":"1","pcode":"3308"},{"guid":82,"fRegicode":"330803","fsGuid":"3308032102","code":"970418","name":"衢州市衢江区财政局","enabled":"1","pcode":"3308"},{"guid":83,"fRegicode":"330902","fsGuid":"3309022103","code":"970419","name":"舟山市定海区财政局","enabled":"1","pcode":"3309"},{"guid":84,"fRegicode":"330903","fsGuid":"3309032104","code":"970420","name":"舟山市普陀区财政局","enabled":"1","pcode":"3309"},{"guid":85,"fRegicode":"331002","fsGuid":"3310022105","code":"970421","name":"台州市椒江区财政局","enabled":"1","pcode":"3310"},{"guid":86,"fRegicode":"331003","fsGuid":"3310032106","code":"970422","name":"台州市黄岩区财政局","enabled":"1","pcode":"3310"},{"guid":87,"fRegicode":"331004","fsGuid":"3310042107","code":"970423","name":"台州市路桥区财政局","enabled":"1","pcode":"3310"},{"guid":88,"fRegicode":"331102","fsGuid":"3311022108","code":"970424","name":"丽水市莲都区财政局","enabled":"1","pcode":"3311"},{"guid":89,"fRegicode":"330502","fsGuid":"3305022109","code":"970425","name":"湖州市吴兴区财政局","enabled":"1","pcode":"3305"},{"guid":90,"fRegicode":"330503","fsGuid":"3305032110","code":"970426","name":"湖州市南浔区财政局","enabled":"1","pcode":"3305"},{"guid":null,"fRegicode":"33","fsGuid":null,"code":null,"name":"浙江省","enabled":null,"pcode":"0"},{"guid":null,"fRegicode":"3301","fsGuid":null,"code":null,"name":"杭州市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3303","fsGuid":null,"code":null,"name":"温州市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3304","fsGuid":null,"code":null,"name":"嘉兴市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3305","fsGuid":null,"code":null,"name":"湖州市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3306","fsGuid":null,"code":null,"name":"绍兴市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3307","fsGuid":null,"code":null,"name":"金华市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3308","fsGuid":null,"code":null,"name":"衢州市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3309","fsGuid":null,"code":null,"name":"舟山市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3310","fsGuid":null,"code":null,"name":"台州市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":"3311","fsGuid":null,"code":null,"name":"丽水市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3303"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3301"},{"guid":null,"fRegicode":"3302","fsGuid":null,"code":null,"name":"宁波市","enabled":null,"pcode":"33"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3301"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3301"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3301"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3303"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3303"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3304"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3304"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3305"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3305"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3306"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3307"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3307"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3307"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3308"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3311"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"},{"guid":null,"fRegicode":null,"fsGuid":null,"code":null,"name":null,"enabled":null,"pcode":"3302"}]
+//        [
+//		{id:1, pId:0, name:"北京", ISLEAF:1},
+//   		{id:2, pId:0, name:"天津", ISLEAF:1},
+//   		{id:3, pId:0, name:"上海", ISLEAF:1},
+//   		{id:4, pId:0, name:"河北省", ISLEAF:0},
+//   		{id:41, pId:4, name:"石家庄", ISLEAF:0},
+//   		{id:411, pId:41, name:"dd", ISLEAF:1},
+//   		{id:42, pId:4, name:"保定", ISLEAF:1},
+//   		{id:43, pId:4, name:"邯郸", ISLEAF:1},
+//   		{id:44, pId:4, name:"承德", ISLEAF:1},
+//   		{id:5, pId:0, name:"广东省", ISLEAF:0},
+//   		{id:51, pId:5, name:"广州", ISLEAF:1},
+//   		{id:52, pId:5, name:"深圳", ISLEAF:1},
+//   		{id:53, pId:5, name:"东莞", ISLEAF:1},
+//   		{id:54, pId:5, name:"佛山", ISLEAF:1},
+//   		{id:6, pId:0, name:"福建省", ISLEAF:0},
+//   		{id:61, pId:6, name:"福州", ISLEAF:1},
+//   		{id:62, pId:6, name:"厦门", ISLEAF:1},
+//   		{id:63, pId:6, name:"泉州", ISLEAF:1},
+//   		{id:64, pId:6, name:"三明", ISLEAF:1}
+//	];
+</script>
+<style>
+	.ztree {width: 100%;}
+
+</style>

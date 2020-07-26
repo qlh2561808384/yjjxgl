@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.conBox{background:#FFFFFF; border-radius:0; color:#ac8d6e;}
+
+/* 表格样式 通用 */
+.infotable{width:100%; color:#ac8d6e;}
+.infotable th{text-align:center; padding-bottom:15px; font-size:22px;}
+.infotable td{padding:10px 0; font-size:18px; border-bottom:1px solid #E5E5E5;}
+
+/* 缴款单明细二维码 */
+.qrcode{width:17%; right:4.5%; top:20%; padding-left:30px; background-color:#FFF;}
+.qrcode img{width:100%;}
+
+/* 支付单详细信息 */
+.payinfo{padding-top:10px !important; border-left:1px solid #E7E7E7; border-right:1px solid #E7E7E7; vertical-align:top;}
+.payinfo > div{padding:0 8px 0 30px; margin-bottom:10px;}
+.payinfo .icon_tips{display:inline-block; width:16px; height:16px; margin-right:5px; margin-left:-20px; background:url('../images/icon_tips.png') no-repeat 0 -16px; background-size:100%; background-image:url('../images/icon_tips_small.png') \9;}
+.payinfo .inputBox{width:95%;}
+.payinfo .icon_add, .payinfo .icon_minus{width:35px; height:35px; background:url('../images/icon_add.png') no-repeat; background-size:200% 100%; background-image:url('../images/icon_add_small.png') \9; text-indent:-9999em;}
+.payinfo .icon_minus{background-position:-35px 0;}
+
+.payinfo .inputBox .inp_keyboard{padding-right:20%;}
+
+/* 下一步按钮 */
+.nextBtn{width:91%; margin:0 auto;}
+.nextBtn a{width:30%; margin-left:20px;}

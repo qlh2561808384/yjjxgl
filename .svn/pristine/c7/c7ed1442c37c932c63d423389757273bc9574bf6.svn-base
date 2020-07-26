@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ztree </TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+
+<BODY>
+
+<section class="parser container-fluid">
+	<div class="page-header"><h1>语法解析</h1></div>
+	
+	<h4>使用方法1: 给出input框，点击后弹出树结构</h4>
+	<pre>
+		<ol style="margin-bottom:10px;display:table">
+			<li>//html部分</li>
+			<li><span>&lt;input id="treeSel" name="nameval" class="treeSel" type="text" value="" readonly="readonly" /&gt;</span></li>
+		</ol>
+        <ol style="display:table">
+        	<li>//js部分</li>
+            <li><span>$("#treeSel").dtree({</span></li>
+            <li><span>    localdata: zNodes,</span></li>
+            <li><span>    checkType: "checkbox",</span></li>
+            <li><span>    ISLEAF: false,</span></li>
+            <li><span>    isOpen: true,</span></li>
+            <li><span>    isPopupTree: true, //判断是否为弹出树</span></li>
+            <li><span>    rootElement: false, </span></li>
+			<li><span>    labelVal: "labelval", //弹出树 input前的标签文字</span></li>
+			<li><span>    data:{</span></li>
+			<li><span>        //参考属性data部分</span></li>
+			<li><span>    }</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    
+	<h4>使用方法2: 给出ul，默认显示树结构</h4>
+	<pre>
+		<ol style="margin-bottom:10px;">
+			<li>//html部分</li>
+			<li><span>&lt;ul id="treeDemo" class="ztree"&gt;&lt;/ul&gt;</span></li>
+		</ol>
+        <ol style="display:table">
+        	<li>//js部分</li>
+            <li><span>$("#treeDemo").dtree({</span></li>
+            <li><span>    localdata: zNodes,</span></li>
+            <li><span>    checkType: "checkbox",</span></li>
+            <li><span>    ISLEAF: false,</span></li>
+            <li><span>    isOpen: true,</span></li>
+            <li><span>    rootElement: true,</span></li>
+			<li><span>    data:{</span></li>
+			<li><span>        //参考属性data部分</span></li>
+			<li><span>    },</span></li>
+            <li><span>    callback:{</span></li>
+            <li><span>        onCheck: function(e, treeId, treeNode) { //节点的点击事件</span></li>
+            <li><span>            console.log(treeNode.tId)</span></li>
+            <li><span>        }</span></li>
+            <li><span>    }</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    
+    <h4>属性：</h4>
+	<table class=" table-border">
+		<thead>
+		<tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>localdata</td><td>Array</td><td>本地数据，zNodes =[{id:1, pId:0, name:"节点搜索演示 1"}]</td><td></td></tr>
+		<tr><td>url</td><td>String</td><td>获取数据库数据</td><td></td></tr>
+		<tr><td>checkType</td><td>String</td><td>定义选择框类型，设置为nocheck为无选择框，checkbox为多选框，radio为单选框</td><td>"nocheck"</td></tr>
+		<tr><td>ISLEAF</td><td>Boolean</td><td>当checkType为checkbox或radio时，父节点是否有选择框，设置为false表示父不可选</td><td>false</td></tr>
+		<tr><td>isOpen</td><td>Boolean</td><td>节点是否全部展开，默认为不展开</td><td>false</td></tr>
+		<tr><td>isPopupTree</td><td>Boolean</td><td>是否为弹出树，默认为否</td><td>fasle</td></tr>
+		<tr><td>rootElement</td><td>Boolean</td><td>是否添加“全部”节点</td><td>false</td></tr>
+		<tr><td>labelVal</td><td>String</td><td>若为弹出树时，input前的label文字</td><td></td></tr>
+		<tr><td>data</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+					<li><span>data:{</span></li>
+					<li><span>    key : {</span></li>
+					<li><span>        name: "name", //保存节点<span style="color:#F00;">名称</span>的属性名</span></li>
+					<li><span>        url: "url", //保存节点<span style="color:#F00;">链接url</span>的属性名</span></li>
+					<li><span>        icon: "icon", //保存节点<span style="color:#F00;">小图标</span>的属性名</span></li>
+					<li><span>    },</span></li>
+					<li><span>    simpleData : {</span></li>
+					<li><span>        enable: true, //数据是否采用简单数据模式(Array)，true为是</span></li>
+					<li><span>        idKey: "id", //保存节点<span style="color:#F00;">唯一标识</span>的属性名</span></li>
+					<li><span>        pIdKey: "pId",  //保存节点<span style="color:#F00;">其父节点的唯一标识</span>的属性名</span></li>
+					<li><span>        rootPId: null //指定<span style="color:#F00;">根节点</span>数据</span></li>
+					<li><span>    }</span></li>
+					<li><span>}</span></li>
+				</ol>
+			</pre>
+		</td></tr>
+		<tr><td colspan="4">其余为ztree自带属性，如要修改可查询ztree文档，地址<a href="http://www.treejs.cn/v3/api.php" target="_blank">http://www.treejs.cn/v3/api.php</a></td></tr>
+		</tbody>
+	</table>
+	<h4>案例:</h4>
+</section>
+
+<div class="container-fluid clearfix">
+	<!-- Sidebar -->
+	<div class="col-xs-6">
+        <p>1、弹出树</p>
+
+        <input id="treeSel1" name="qq" type="text" value="" />
+        <section class="parser container-fluid copyBox">
+            <a href="javascript:;" id="copybtn1">复制代码</a>
+            <textarea id="copytext1" style="width:1px; height:1px; padding:0; border:none;">
+                <input id="treeSel_1" name="qq" type="text" value="" />
+                <script type="text/javascript">
+                    var treeSel1 = $("#treeSel_1").dtree({
+                        url:"",
+                        checkType: "checkbox",
+                        isPopupTree: true,
+                        labelVal: "checkbox："
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;input id="treeSel_1" name="qq" type="text" value="" /&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel1 = $("#treeSel_1").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "checkbox",</span></li>
+                    <li><span>        isPopupTree: true,</span></li>
+                    <li><span>        labelVal: "checkbox："</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+
+		<br /><br />
+
+        <input id="treeSel2" name="aa" type="text" value="" />
+        <section class="parser ">
+            <a href="javascript:;" id="copybtn2">复制代码</a>
+            <textarea id="copytext2" style="width:1px; height:1px; padding:0; border:none;">
+                <input id="treeSel_2" name="qq" type="text" value="" />
+                <script type="text/javascript">
+                    var treeSel2 = $("#treeSel_2").dtree({
+                        url:"",
+                        checkType: "radio",
+                        isPopupTree: true,
+                        labelVal: "radio："
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;input id="treeSel_2" name="qq" type="text" value="" /&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel2 = $("#treeSel_2").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "radio",</span></li>
+                    <li><span>        isPopupTree: true,</span></li>
+                    <li><span>        labelVal: "radio："</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+	</div>
+	<!-- main -->
+	<div class="main-content-inner  col-xs-6">
+		<p>2、显示树结构</p>
+        <ul id="treeDemo"></ul>
+
+        <section class="parser container-fluid row">
+            <a href="javascript:;" id="copybtn3">复制代码</a><br/>
+            <textarea id="copytext3" style="width:1px; height:1px; padding:0; border:none;">
+                <ul id="treeDemo3"></ul>
+                <script type="text/javascript">
+                    var treeSel3 = $("#treeSel3").dtree({
+                        url:"",
+                        checkType: "checkbox",
+                        isOpen: true
+                    });
+                </script>
+            </textarea>
+            <pre>
+                <ol style="display:table">
+                    <li><span>&lt;ul id="treeDemo3"&gt;&lt;/ul&gt;</span></li>
+                    <li><span>&lt;script type="text/javascript"&gt;</span></li>
+                    <li><span>    var treeSel3 = $("#treeSel3").dtree({</span></li>
+                    <li><span>        url:"",</span></li>
+                    <li><span>        checkType: "checkbox",</span></li>
+                    <li><span>        isOpen: true</span></li>
+                    <li><span>    });</span></li>
+                    <li><span>&lt;/script&gt;</span></li>
+                </ol>
+            </pre>
+        </section>
+    </div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</BODY>
+</HTML>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("a[id^='copybtn']").click(function(){
+            var copyObj = $(this).siblings("textarea")[0];
+            copyObj.select();
+            document.execCommand("Copy");
+            alert("复制成功");
+        })
+
+		//左边弹出树
+		var treeSel1 = $("#treeSel1").dtree({
+			localdata: zNodes,
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: true, //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+			isOpen: true, //节点是否全部展开
+			isPopupTree: true, //是否为弹出树
+			rootElement: false, //是否添加根节点“全部”
+			labelVal: "checkbox：" //标签内文字
+		});
+		var treeSel2 = $("#treeSel2").dtree({
+			localdata: zNodes,
+			checkType: "radio", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			ISLEAF: false, //checkType为checkbox或radio时，非叶子节点是否有选择框，false无可选框
+			isPopupTree: true, //是否为弹出树
+			labelVal: "radio：" //标签内文字
+		});
+		//右边
+		var treeObj = $("#treeDemo").dtree({
+			localdata: zNodes,
+			checkType: "checkbox", //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+			isOpen: true, //节点是否全部展开，默认为不展开
+			rootElement: true, //是否添加根节点“全部”
+
+			callback:{
+				onCheck: function(e, treeId, treeNode) {
+					console.log(treeNode.tId)
+				}
+			}
+		});
+	});
+	
+	var zNodes = [
+		{id:1, pId:0, name:"北京", ISLEAF:1},
+   		{id:2, pId:0, name:"天津", ISLEAF:1},
+   		{id:3, pId:0, name:"上海", ISLEAF:1},
+   		{id:4, pId:0, name:"河北省", ISLEAF:0},
+   		{id:41, pId:4, name:"石家庄", ISLEAF:0},
+   		{id:411, pId:41, name:"dd", ISLEAF:1},
+   		{id:42, pId:4, name:"保定", ISLEAF:1},
+   		{id:43, pId:4, name:"邯郸", ISLEAF:1},
+   		{id:44, pId:4, name:"承德", ISLEAF:1},
+   		{id:5, pId:0, name:"广东省", ISLEAF:0},
+   		{id:51, pId:5, name:"广州", ISLEAF:1},
+   		{id:52, pId:5, name:"深圳", ISLEAF:1},
+   		{id:53, pId:5, name:"东莞", ISLEAF:1},
+   		{id:54, pId:5, name:"佛山", ISLEAF:1},
+   		{id:6, pId:0, name:"福建省", ISLEAF:0},
+   		{id:61, pId:6, name:"福州", ISLEAF:1},
+   		{id:62, pId:6, name:"厦门", ISLEAF:1},
+   		{id:63, pId:6, name:"泉州", ISLEAF:1},
+   		{id:64, pId:6, name:"三明", ISLEAF:1}
+	];
+</script>

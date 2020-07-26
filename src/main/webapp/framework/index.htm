@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<TITLE>首页</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1"><!--IE8以上都可以（支持IE）-->
+	<script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap.datanew.js"></script>
+	<script src="../bootstrap/plugins/tree/js/jquery.ztree.sidebar.js"></script>
+	<script type="text/javascript" src="../js/ER_toolkit.js"></script>
+	<link rel="stylesheet" href="../bootstrap/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="../bootstrap/css/sideTree.css"/>
+	<link rel="stylesheet" href="../bootstrap/css/index.css"/>
+	<script type="text/javascript" src="../bootstrap/js/index.js"></script>
+	<script type="text/javascript" src="../js/ajaxM.js"></script>
+	<script type="text/javascript">
+	var currkey;
+    var sessId;
+    var payno="";
+    var auditstatus="";
+    var nodeNum = "";
+    var str = window.location.search.substring(1);
+    function getUrlString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    if(null != str && "" != str && str.indexOf("&") > 0) {
+	        currkey = str.substring(0, str.indexOf("&"));
+	        sessId=getUrlString("sessionId");
+	 }
+	</script>
+	<style>
+		.sidebar.menu-min {
+			-webkit-transition: all 0s ease;
+			-moz-transition: all 0s ease;
+			transition: all 0s ease;
+		}
+
+		.sidebar.menu-min + .main-content-inner {
+			-webkit-transition: all 0s ease;
+			-moz-transition: all 0s ease;
+			transition: all 0s ease;
+		}
+
+
+	</style>
+</HEAD>
+
+<BODY>
+<div class="main-content">
+<!-- 导航 -->
+	
+		<div class="navbar">
+			<div class="navbar-inner container-fluid">
+				<!-- <button data-target=".sidebar" data-toggle="collapse" class="btn btn-navbar collapsed pull-left" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> -->
+				<a href="#" class="brand"><images src="../img/tubiao.png" alt=""/>预算绩效管理平台</a>
+				
+			</div>
+		</div>
+	
+<div class="main-content">
+	<!-- Sidebar -->
+	<div class="sidebar" id="sidebar">
+		<div class="userInfo">
+			<div class="user_name">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<div><images src="/sjfxpt/img/gly2.png" alt=""/>
+						<span style="color: black;font-size: 16px;" class="uname" id="uname"><b class="caret"></b></span>
+					</div>
+				</a>
+				<ul class="dropdown-menu">
+					<!--<li><a style="color: black" href="javascript:void(0)" onclick="updatePassword()">修改密码</a></li>-->
+					<li><a style="color: black" href="javascript:logOut()">退出</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tree_side ztreeBox">
+			<ul class="ztree" id="treeSide" contenteditable="true">
+			</ul>
+		</div>
+		<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+			<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left"
+			   data-icon2="ace-icon fa fa-angle-double-right"></i>
+		</div>
+	</div>
+
+	<!-- main -->
+	<div class="main-content-inner">
+		<!-- tab标签 -->
+		<div class="tabBox">
+			<div class="tab_wrap clearfix">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active" id="tabli-11"><a href="#tab-11" id="tabclose-11" data-toggle="tab">首页 <i
+							class="fa fa-times-circle"></i></a></li>
+				</ul>
+			</div>
+			<div class="tab_btn">
+				<a href="javascript:;" class="closeAll pull-right hide">关闭所有</a>
+				<a href="javascript:;" class="showtab showRightTabs pull-right hide"><i
+						class="fa fa-angle-double-right"></i></a>
+				<a href="javascript:;" class="showtab showLeftTabs pull-right hide"><i
+						class="fa fa-angle-double-left"></i></a>
+			</div>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="tab-11">
+					<iframe src="indexcontent.jsp" frameborder="0" class="iframeCon" id="iframe-11"
+							width="100%"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+</BODY>
+</HTML>
+<script>
+	var usermenus; //用户对应的菜单权限
+	var loginuser; //用户信息
+	var userbuttons;//用户对应的按钮权限
+	$(function () {
+		ER_load_jquery_js();
+		$.dajax({
+			url: "../login/getUserInfo.do?currkey="+currkey, // Ajax 获取数据的 URL 地址
+			success: function (data) {
+				if (data.success) {
+					usermenus = data.usermenus;
+					if(usermenus==null || usermenus.length<=1){
+						$.dalert({text:"当前用户没有菜单权限,请联系管理员进行授权"});
+					}
+					loginuser = data.loginuser;
+					$("#uname").prepend(loginuser.name);
+					//侧边栏
+					var treeSide = $("#treeSide").dtree({
+						localdata: usermenus,
+						view: {
+							dblClickExpand: false,
+							showLine: false,
+							showBadge: true //显示消息数字
+						},
+						//oralce使用 
+ 						data: { // 必须使用data
+							simpleData: {
+								enable: true,
+								idKey: "id", // id编号命名 默认
+								pIdKey: "pId", // 父id编号命名 默认
+								rootPId: 0
+								// 用于修正根节点父节点数据，即 pIdKey 指定的属性值
+							},
+							key: {
+								name: "name",
+								url: "url",
+								icon: ""
+							}
+						},
+						callback: {
+							beforeExpand: beforeExpand,
+							onExpand: onExpand,
+							onClick: onClick
+						}
+					});
+				}
+			}
+		});
+	});
+	function toXml(obj){
+		var result="<Request>";
+		for(var i in obj){
+			result+="<Param><Name><![CDATA["+i+"]]></Name><Value><![CDATA["+obj[i]+"]]></Value></Param>";
+		}
+		result+="</Request>";
+		return result.replace(/__/g, ".");
+	}
+	$(function(){
+			var obj=new Object();
+			obj.appCode='jxgl';
+			obj.curr_sessionid=sessId;
+			var d=toXml(obj);
+			$.ajax({
+				type:"post",
+				url:"../framework.do;jsessionid="+sessId+"?currentYear=" + 0 + "&" + "",
+				data:d,
+				beforeSend: function(request) {
+					var query = location.search.substring(1);
+                    request.setRequestHeader('REQUEST-TYPE','xmlhttp');
+                    var x=query.substr(0,query.indexOf("&"));
+                    request.setRequestHeader('current_user_logon_key',x);
+                    request.setRequestHeader('current_user_logon_session',obj.curr_sessionid);
+                    if("-1"==query.indexOf("&") && ""!=query){
+					    request.setRequestHeader("_key" , query);
+				    }
+                },
+                success: function(r) {
+                	/* var xmlDoc=getXmlDoc(r);
+                	//获取操作员名字
+                	var userNameNode =$(xmlDoc).find("operator").find("name").text();
+                	//获取操作员Code
+                	var userCodeNode =$(xmlDoc).find("operator").find("code").text(); */
+               	}
+			},'xml');
+		});
+	function logOut() {
+        AM.ajax({
+            url:"../login/logOut.do",
+            beforeSend:function (request) {
+                request.setRequestHeader("current_user_logon_key",currkey);
+            },
+            success:function (data) {
+                if(data.length>0){
+                    window.location.href="../login.jsp";
+                }
+            }
+        });
+
+    }
+
+</script>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>bootstrapTable_demo</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../plugins/table/js/bootstrap-table_v1.js"></script>
+    <script src="../plugins/table/js/bootstrap-table-zh-CN.js"></script>
+    <script src="../plugins/table/js/inlineBox.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <link href="../plugins/table/css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+    <link href="../plugins/table/css/bootstrap-table-custom.css" rel="stylesheet" type="text/css" />
+    <script>
+
+        //本地数据
+        var localdata = [{
+            "guid": 1,
+            "postaccount": "1",
+            "account": "1",
+            "accountname": "中国银行",
+            "accountbank": "中国银行",
+            "startdate": "2016-08-29",
+            "enddate": "2016-11-25",
+            "secretkey": "1111",
+            "status": 1,
+            "sortnum": 1,
+            "remark": "1",
+            "writedate": 1473324355000,
+            "writeuserid": 1,
+            "writeusername": "张三",
+            "isb2B": 1,
+            "modifydata": 1473404834000,
+            "modifyuserid": null,
+            "modifyusername": null,
+            "appid": null,
+            "agencycode": "99",
+            "paywaycode": "03",
+            "bankcode": "980101",
+            "agencyName": null,
+            "bankName": null,
+            "appName": null,
+            "paywayName": null
+        }, {
+            "guid": 2,
+            "postaccount": "1",
+            "account": "1",
+            "accountname": "中国银行",
+            "accountbank": "中国银行",
+            "startdate": "2016-08-29",
+            "enddate": "2016-12-08",
+            "secretkey": "1111",
+            "status": 1,
+            "sortnum": 1,
+            "remark": "2",
+            "writedate": 1473324355000,
+            "writeuserid": 1,
+            "writeusername": "张三",
+            "isb2B": 1,
+            "modifydata": 1473404843000,
+            "modifyuserid": null,
+            "modifyusername": "",
+            "appid": null,
+            "agencycode": "98",
+            "paywaycode": "03",
+            "bankcode": "980101",
+            "agencyName": null,
+            "bankName": null,
+            "appName": null,
+            "paywayName": null
+        }, {
+            "guid": 3,
+            "postaccount": "777290058135724",
+            "account": "1",
+            "accountname": "中国银行",
+            "accountbank": "中国银行",
+            "startdate": "2016-08-29",
+            "enddate": "2016-11-25",
+            "secretkey": "1111",
+            "status": 1,
+            "sortnum": 1,
+            "remark": "3",
+            "writedate": 1473324355000,
+            "writeuserid": 1,
+            "writeusername": "张三",
+            "isb2B": 1,
+            "modifydata": 1473404834000,
+            "modifyuserid": null,
+            "modifyusername": "",
+            "appid": null,
+            "agencycode": "99",
+            "paywaycode": "05",
+            "bankcode": "980101",
+            "agencyName": null,
+            "bankName": null,
+            "appName": null,
+            "paywayName": null
+        }, {
+            "guid": 4,
+            "postaccount": "1",
+            "account": "1",
+            "accountname": "中国银行",
+            "accountbank": "中国银行",
+            "startdate": "2016-08-29",
+            "enddate": "2016-12-08",
+            "secretkey": "1111",
+            "status": 1,
+            "sortnum": 1,
+            "remark": "4",
+            "writedate": 1473324355000,
+            "writeuserid": 1,
+            "writeusername": "张三",
+            "isb2B": 1,
+            "modifydata": 1473404843000,
+            "modifyuserid": null,
+            "modifyusername": "",
+            "appid": null,
+            "agencycode": "98",
+            "paywaycode": "06",
+            "bankcode": "980101",
+            "agencyName": null,
+            "bankName": null,
+            "appName": null,
+            "paywayName": null
+        }];
+
+        $(function () {
+            var t=$("#datatable").dtable({
+                //列参数
+                columns: [
+                    {radio:true},
+                    {field: 'status', title: '状态', width: 100, align: 'center', formatter: statusFormatter},
+                    {field: 'agencyName', title: '代收机构', width: 100, align: 'center',
+                        inlineBox:{
+                            required:true,
+                            boxType:'dateBox'},
+                        formatter:function(value){return value+'TEST'},
+                        edited:function(value){}}
+                    ,//选择框类型，值为checkbox或radio或nocheck，默认为nocheck}},
+                    {field: 'appName', title: '接入应用', align: 'center'},
+                    {field: 'paywayName', title: '支付方式',  align: 'center',
+                        inlineBox:{
+                            onBlur:function(){
+                               return [{column:'remark',value:'444'}]
+                            }
+                        }
+                    },
+                    {field: 'postaccount', title: '商户号', align: 'center'},
+                    {field: 'isb2B', title: '商户类型',  align: 'center'},
+                    {field: 'sortnum', title: '排序', align: 'center'},
+                    {field: 'bankName', title: '收款银行',  align: 'center'},
+                    {field: 'accountbank', title: '开户银行',  align: 'center'},
+                    {field: 'accountname', title: '账户名称',  align: 'center'},
+                    {field: 'account', title: '账号',  align: 'center'},
+                    {field: 'startdate', title: '启用日期', align: 'center'},
+                    {field: 'enddate', title: '到期日期',  align: 'center'},
+                    {field: 'remark', title: '备注', align: 'center'}
+                ],
+                //本地数据加载
+                data: localdata,
+                //搜索栏初始化
+                searchbar: {
+                    rownum: 3,//搜索栏表单列数  最大支持3
+                    inputs: [//搜索栏表单参数
+                        {
+                            title: '姓名',//表单lable显示名
+                            name: 'name',//表单name属性
+                            type: 'text',//表单类型：目前支持 select/text
+                            placeholder: '输入姓名'//text提示文字
+                        }, {
+                            title: 'test',
+                            name: 'test',
+                            type: 'select',
+                            localdata: [{guid: 1, postaccount: 'test'}],//select 本地数据加载
+//                        url:'',//远程加载请求地址
+                            valueField: 'guid',//指定option value的属性
+                            textField: 'postaccount',//指定option text的属性
+                            searchOption: true//是否作为查询选项 默认false 当为true时 额外添加 “全部”选项
+                        }
+                    ]
+                },
+                resizable:true, //单元格手动拉伸
+                pageNumber: 1,//起始页
+                pageSize: 10,//页面大小
+                queryParams: queryParams,//查询参数 queryParams(params) params 包含分页参数
+                pagination:true,
+                paginationHAlign: 'left',//分页按钮位置  left/right
+                sidePagination: 'client',//分页方式 client/server 服务端分页 如为客户端分页 数据格式参考底部pagedata
+                toolbar: '#bt',//工具栏 指定dom对象
+                showToggle: true,//是否使用列表显示开关
+//                singleSelect: true,//是否启用单选
+                clickToSelect: true,//点击选中
+                idField: 'guid',
+                resizable:true,
+                onClickCell: function (field, value, row, $element) {
+                    if(field!='status'){
+                        return
+                    }
+                    var t=$element;
+                    $element.html('ceshi');
+                    row.status='ceshi1';
+
+                },
+                onLoaded:function(){
+//                    $("#datatable").bootstrapTable("resetView")
+
+                    $("#datatable").inlineBox("init");
+                }
+
+            });
+        });
+
+        /**
+         * 设置查询参数  limit offset 为固定参数
+         * @param params
+         * @returns {{limit: (params.limit|*), offset: (params.offset|*), test: string}}
+         *          如return false 则终止请求
+         */
+        function queryParams(params) {
+            //            var paramSearch=DataDeal("#formSearch");
+            var param = {
+                limit: params.limit,
+                offset: params.offset
+            };
+            return param;
+            //            return $.extend({},param,paramSearch)
+        }
+
+        function cancel(){
+            $("#datatable").inlineBox("cancel")
+        }
+
+        function submitNewData(){
+            var data=$("#datatable").bootstrapTable("getData");
+            //console.log(data)
+        }
+
+        function refresh() {
+            $("#datatable").bootstrapTable("refresh");
+        }
+
+        /**
+         * 格式化
+         */
+        function statusFormatter(value, row, index) {
+            switch (value) {
+                case 0:
+                    return '未缴款';
+                case 1:
+                    return '缴款';
+                case 2:
+                    return '退款';
+                case 3:
+                    return '重复缴款';
+            }
+        }
+function test(){
+    $("#datatable").bootstrapTable("insertRow",{index:2,row:{
+        "guid": 1,
+        "postaccount": "1",
+        "account": "1",
+        "accountname": "中国银行",
+        "accountbank": "中国银行",
+        "startdate": "2016-08-29",
+        "enddate": "2016-11-25",
+        "secretkey": "1111",
+        "status": 1,
+        "sortnum": 1,
+        "remark": "1",
+        "writedate": 1473324355000,
+        "writeuserid": 1,
+        "writeusername": "张三",
+        "isb2B": 1,
+        "modifydata": 1473404834000,
+        "modifyuserid": null,
+        "modifyusername": null,
+        "appid": null,
+        "agencycode": "99",
+        "paywaycode": "03",
+        "bankcode": "980101",
+        "agencyName": null,
+        "bankName": null,
+        "appName": null,
+        "paywayName": null
+    }});
+    $("#datatable").inlineBox("init");
+}
+    </script>
+</head>
+<body>
+<!--工具栏-->
+<div id="bt">
+    <button class="btn btn-primary" type="button" onclick="edit()">修改</button>
+    <button class="btn btn-primary" type="button" onclick="cancel()">取消修改</button>
+    <button class="btn btn-primary" type="button" onclick="submitNewData()">提交</button>
+    <button class="btn btn-primary" type="button" onclick="test()">TEST</button>
+
+</div>
+<section class="parser"></section>
+<div style="width:120%;"><table id="datatable"></table></div>
+
+
+
+</body>
+
+<script>
+	$("body").css("width", $(window).width());
+	
+
+
+
+    var pagedata = {
+        "limit": 2,
+        "offset": 0,
+        "pageSize": null,
+        "pageNumber": null,
+        "total": 11,
+        "currentPage": null,
+        "searchText": null,
+        "sortName": null,
+        "sortOrder": null,
+        "rows": [{
+            "guid": 1,
+            "notice": "11",
+            "paylistno": "11114",
+            "paymoney": 1111.0,
+            "createtime": 1473503869000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473504015000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": null,
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": null,
+            "appid": 1,
+            "paylistinfo": null,
+            "remark": null
+        }, {
+            "guid": 2,
+            "notice": "11",
+            "paylistno": "11115",
+            "paymoney": 1111.0,
+            "createtime": 1473503145000,
+            "orderTimeoutInterval": 111,
+            "payTimeout": 1473506775000,
+            "txnTime": 1473503181000,
+            "paystatus": 0,
+            "reqReserved": "",
+            "frontUrl": "\"\"",
+            "backUrl": "\"\"",
+            "frontFailUrl": "",
+            "appid": 1,
+            "paylistinfo": "",
+            "remark": ""
+        }]
+    }
+</script>
+</html>
+<style>
+    .btn-primary { background-color: #428BCA;border:1px solid #2E6DA4;font-family:"Microsoft YaHei";}
+    .btn-primary:hover{background-color: #3276b1;border:1px solid #125590;}
+    .bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:nth-child(odd)>td:nth-child(2),.bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:nth-child(odd)>td:nth-child(4){background-color:#E0E8F7 !important;}
+    .bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:nth-child(even)>td:nth-child(2),.bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:nth-child(even)>td:nth-child(4){background-color:#FCFCD8 !important;}
+</style>

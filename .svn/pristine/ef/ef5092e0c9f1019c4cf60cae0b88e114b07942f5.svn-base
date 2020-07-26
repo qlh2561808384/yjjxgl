@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <title>comboBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.datanew.js"></script>
+</head>
+<script>
+  $(function(){
+    $("#select").comboBox({
+      selected:1,
+      searchOption:true,
+      width:200,
+      required:true,
+      multiple:false,
+      localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+      panelHeight:200,
+      onChange:function(newValue,oldValue,optionObj){
+        //console.log("newValue:"+newValue+" oldValue:"+oldValue)
+        //console.log(optionObj)
+      },
+      onShowPanel:function($p){//当显示下拉面板的时候触发。
+          //console.log($p)
+      }
+    });
+    $("#select1").comboBox({
+      width:200,
+//      required:true,
+      multiple:true,
+      localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+      onChange:function(newValue,oldValue,optionObj){
+        //console.log("newValue:"+newValue+" oldValue:"+oldValue)
+        //console.log(optionObj)
+      },
+      onShowPanel:function($p){//当显示下拉面板的时候触发。
+        //console.log($p)
+      }
+    });
+
+
+  });
+  function disable(){
+    $("#select").comboBox("disable");
+  }
+  function enable(){
+    $("#select").comboBox("enable");
+  }
+  function getValue(){
+    alert($("#select").comboBox("getValue"));
+  }
+  function setValue(){
+    $('#select').comboBox("setValue",'1,2')
+  }
+  function testVile(){
+    $("#select").comboBox("validate")
+  }
+  function destroy(){
+    $("#select").comboBox("destroy")
+  }
+  function clear1(){
+    $("#select")["comboBox"]("clear");
+  }
+
+  function reload(){
+    $("#select").comboBox("reload",[{id:1,text:'test001'},{id:2,text:'test002'}])
+  }
+
+
+
+
+</script>
+</head>
+<body>
+
+<section class="parser container-fluid">
+  <div class="page-header" id="a1"><h1>comboBox —— 下拉框</h1></div>
+  comboBox 继承自 textBox
+  默认参数 继承自 comboBox.default
+  <h4>语法：</h4>
+     <pre>
+        <ol style="display:table">
+          <li><span>初始化：</span></li>
+          <li><span>jquery对象.comboBox(初始化参数对象)</span></li>
+          <li><span>方法调用：</span></li>
+          <li><span>jquery对象comboBox('方法名',参数)</span></li>
+        </ol>
+    </pre>
+  <h4>数据格式：</h4>
+     <pre>
+        <ol style="display:table">
+          <li><span>[</span></li>
+          <li><span>  {id:1,text:'79962450@qq.com'},</span></li>
+          <li><span>  {id:2,text:456}</span></li>
+          <li><span>]</span></li>
+        </ol>
+    </pre>
+  <h4 id="a2">初始化参数</h4>
+  <table class=" table-border">
+    <thead>
+    <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+    </thead>
+    <tbody>
+    <tr id="a2_tr_1"><td>width</td><td>int</td><td>input宽度</td><td>100%</td></tr>
+    <tr><td>selected</td><td>int</td><td>默认选中  参数为 option index  由于0表非 从1开始计</td><td>0</td></tr>
+    <tr><td>defaultValue</td><td>string</td><td>根据匹配的 option value 进行默认选中</td><td>""</td></tr>
+    <tr><td>required</td><td>Boolean</td><td>是否必选</td><td>false</td></tr>
+    <tr><td>validate</td><td>Function OR String</td>
+      <td>定义表单验证规则。可使用globalValid中定义的正则名称 支持多种正则验证 多个 正则名间用'|'进行分割。如正则无法满足 可定义function(value){return {result:false,msg:''}} 参数为表单value 返回值 包含boolean 标识验证是否成功 当result为false时 提示msg 错误信息</td><td>false</td></tr>
+    <tr><td>validText</td><td>String</td><td>自定义验证提示文本</td><td>""</td></tr>
+    <tr><td>validFail</td><td>Function</td><td>验证失败触发回调方法 参数为 fn jquery对象</td><td>function($el){return false}</td></tr>
+    <tr><td>searchOption</td><td>boolean</td><td>true时 添加一个value为'ALL'的'全部'选项  false时 添加一个value为''的空选项</td><td>null</td></tr>
+    <tr><td>valueField</td><td>String</td><td>定义取值字段名</td><td>'id'</td></tr>
+    <tr><td>textField</td><td>String</td><td>定义显示文本 字段名</td><td>'text'</td></tr>
+    <tr><td>localdata</td><td>[]</td><td>本地数据 用于加载本地数据</td><td>[]</td></tr>
+    <tr><td>url</td><td>String</td><td>远程数据请求路径</td><td>''</td></tr>
+    <tr><td>queryParam</td><td>obj</td><td>远程请求参数对象 例：{param1:123,param2:456}</td><td>{}</td></tr>
+    <tr><td>panelWidth</td><td>int</td><td>下拉面板宽度</td><td>auto</td></tr>
+    <tr><td>panelHeight</td><td>int</td><td>下拉面板高度</td><td>auto</td></tr>
+    <tr><td>multiple</td><td>boolean</td><td>是否支持多选</td><td>false</td></tr>
+    <tr><td>separator</td><td>String</td><td>多选状态下数值和文本间的分隔符符号</td><td>','</td></tr>
+    <tr><td>hasDownArrow</td><td>boolean</td><td>是否显示下拉按钮</td><td>true</td></tr>
+    <tr><td>onShowPanel</td><td>Function</td><td>下拉面板展开时的回调方法 </td><td>return false</td></tr>
+    <tr><td>onHidePanel</td><td>Function</td><td>下拉面板隐藏时的回调方法</td><td>return false</td></tr>
+    <tr><td>onChange</td><td>Function</td><td>change触发回调方法 参数1：newValue参数2：oldValue</td><td>return false</td></tr>
+    <tr><td>onClick</td><td>Function</td><td>点击时触发回调方法</td><td>return false</td></tr>
+    </tbody>
+  </table>
+  <h4 id="a3">方法:</h4>
+  <table class=" table-border">
+    <thead>
+    <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+    </thead>
+    <tbody>
+    <tr id="a3_tr_1"><td>destroy</td><td>none</td><td>销毁表单组件</td></tr>
+    <tr><td>validate</td><td>none</td><td>对input进行表单验证 返回boolean</td></tr>
+    <tr><td>clear</td><td>none</td><td>清除文本内容</td></tr>
+    <tr><td>getValue</td><td>none</td><td>获取value</td></tr>
+    <tr><td>setValue</td><td>String</td><td>设值回写  多选模式下 逗号进行分隔</td></tr>
+    <tr><td>disable</td><td>none</td><td>禁用组件</td></tr>
+    <tr><td>showPanel</td><td>none</td><td>显示下拉面板</td></tr>
+    <tr><td>hidePanel</td><td>none</td><td>隐藏下拉面板</td></tr>
+    <tr><td>getText</td><td>none</td><td>获取显示文本内容</td></tr>
+    <tr><td>setText</td><td>String</td><td>设置显示文本内容</td></tr>
+    <tr><td>reload</td><td>object</td><td>重新加载选项数据 参数为 请求对象：{url:'',queryParam:{}} 或 本地数据对象:[{},{}] </td></tr>
+    </tbody>
+  </table>
+  <h4 id="a4">案例1:单选下拉框</h4>
+  <!--工具栏-->
+  <div class="outbackframe">
+    <button style="margin-left: 5px;margin-bottom: 10px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn9">查看代码</button>
+    <div class="innerback">
+      <div id="bt">
+        <button class="btn btn-primary bootstrap-table-add" type="button" onclick="disable()">禁用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn1">查看代码</button> |
+        <button class="btn btn-primary bootstrap-table-edit" type="button" onclick="enable()">启用</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn2">查看代码</button> |
+        <button class="btn btn-primary bootstrap-table-delete" type="button" onclick="getValue()">取值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn3">查看代码</button> |
+        <button class="btn btn-primary" type="button" onclick="setValue()">设值</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn4">查看代码</button> |
+        <button class="btn btn-primary" type="button" onclick="testVile()">表单验证</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn5">查看代码</button><br><br>
+        <button class="btn btn-primary" type="button" onclick="destroy()">销毁</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn6">查看代码</button> |
+        <button class="btn btn-primary" type="button" onclick="clear1()">clear</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn7">查看代码</button> |
+        <button class="btn btn-primary" type="button" onclick="reload()">reload</button>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn8">查看代码</button>
+      </div>
+      <input id="select" name="test"/>
+    </div>
+  </div>
+
+  <div style="width:1px;height:1px;overflow:hidden;">
+    <textarea id="copyTarget1">
+        function disable(){
+          $("#select").comboBox("disable");
+        }
+        </textarea>
+    <textarea id="copyTarget2">
+        function enable(){
+          $("#select").comboBox("enable");
+        }
+    </textarea>
+    <textarea id="copyTarget3">
+        function getValue(){
+          alert($("#select").comboBox("getValue"));
+        }
+    </textarea>
+    <textarea id="copyTarget4">
+        function setValue(){
+          $('#select').comboBox("setValue",'1,2')
+        }
+    </textarea>
+    <textarea id="copyTarget5">
+        function testVile(){
+          $("#select").comboBox("validate")
+        }
+    </textarea>
+    <textarea id="copyTarget6">
+       function destroy(){
+          $("#select").comboBox("destroy")
+        }
+    </textarea>
+    <textarea id="copyTarget7">
+        function clear1(){
+          $("#select")["comboBox"]("clear");
+        }
+     </textarea>
+    <textarea id="copyTarget8">
+        function reload(){
+          $("#select").comboBox("reload",[{id:1,text:'test001'},{id:2,text:'test002'}])
+        }
+    </textarea>
+    <textarea id="copyTarget9">
+        $("#select").comboBox({
+          selected:1,
+          searchOption:true,
+          required:true,
+          multiple:false,
+          localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+          onChange:function(newValue,oldValue){
+            console.log("newValue:"+newValue+" oldValue:"+oldValue)
+          }
+        });
+    </textarea>
+    <textarea id="copyTarget10">
+        $("#select1").comboBox({
+          multiple:true,
+          localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+        });
+    </textarea>
+  </div>
+  <script>
+      $(function(){
+          $(".copyBtn").on("click", function(){
+              var num = $(this).attr("id").replace(/[^0-9]/ig, "");
+              var target = $("#copyTarget"+ num);
+              $.dopen({
+                  title: "查看代码",
+                  content: "<pre>"+ target.html() +"</pre>",
+                  area: ["1000px", "auto"],
+                  btn: ["复制", "取消"],
+                  btn1: function(index){
+                      var res = $.copyToClipboard(target.get(0));
+                      if(res){
+                          layer.msg('复制成功', {time: 2000});
+                          layer.close(index);
+                      }else{
+                          layer.msg('复制失败，请手动复制', {time: 2000});
+                      }
+                  }
+              });
+          })
+      })
+  </script>
+  <h4>案例2:多选下拉框</h4>
+  <div class="outbackframe">
+    <button style="margin-left: 5px;margin-bottom: 10px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn10">查看代码</button>
+    <div class="innerback">
+      <input id="select1"/>
+    </div>
+  </div>
+</section>
+
+<div class="siteDir">
+  <div class="dir-title">目录 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+  <div class="dir-list">
+    <ul id="dir_tree"></ul>
+  </div>
+</div>
+<script>
+    $(function(){
+        $(".siteDir .close").on("click", function(){
+            $(this).parents(".siteDir").hide();
+        });
+        function addEleId(ele) {
+            var i = 0;
+            $('#'+ele+'_tr_1').parent().find('tr').map(function (index,value) { //a3_tr_1
+                $(this).attr('id',ele+"_tr_"+(++i));
+            })
+        }
+        addEleId('a2');//传入参数a2
+        addEleId('a3');
+        function createObject(ele) { //创建一个对象，{id:3, pId:0, name:"方法", url:"#a4", target:"_self"}
+            var gdatastring = [];
+            var gdata = {
+                arg:{},
+                i:1,
+                sumarg:[],
+                glength:$('#a'+ele+'_tr_1').parent().find('tr').length,
+                gseriesinfo:function () {
+                    let sumarg = [];
+                    for(;gdata.i<=gdata.glength;gdata.i++){
+                        gdata.arg.id=ele.toString()+gdata.i;
+                        gdata.arg.pId = ele;
+                        gdata.arg.name = $('#a'+ele+'_tr_'+gdata.i).find('td:first').html();
+                        gdata.arg.url = '#a'+ele+'_tr_'+gdata.i;
+                        gdata.arg.target = '_self';
+                        sumarg.push(JSON.stringify(gdata.arg));
+                    }
+                    return sumarg;
+                }
+            }
+
+            gdata.gseriesinfo().map(function (i,v) {
+                gdatastring.push(JSON.parse(i));
+            });
+            return gdatastring;
+        } //动态生成对象
+        $("#dir_tree").tree({
+            localdata: [
+                {id:1, pId:0, name:"用法 & 数据格式", url:"#a1", target:"_self"},
+                {id:2, pId:0, name:"初始化参数", url:"#a2", target:"_self"},
+
+                {id:3, pId:0, name:"方法", url:"#a3", target:"_self"},
+                {id:4, pId:0, name:"案例", url:"#a4", target:"_self"}
+            ].concat(createObject(2),createObject(3)),
+            checkType:'nocheck',
+            view: {
+                showIcon: false
+            },
+            data : { // 必须使用data
+                simpleData : {
+                    enable : true,
+                    idKey : "id", // id编号命名 默认
+                    pIdKey : "pId", // 父id编号命名 默认
+                    rootPId : 0
+                },
+                key: {
+                    url: "url"
+                }
+            },
+            callback:{
+                clickNode : function(e,treeId,treeNode,clickFlag){
+                    var ztree = $("#"+treeId).tree("getTree");
+                    ztree.expandNode(treeNode);
+                }
+            }
+        });
+    })
+</script>
+
+<br><br><br><br>
+</body>
+
+
+</html>
+<style>
+  .ztreeBox_down{margin:10px 0;}
+  .btn-primary { background-color: #428BCA;border:1px solid #2E6DA4;}
+  .btn-primary:hover{background-color: #3276b1;border:1px solid #125590;}
+</style>

@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".popup_modal").addClass("hide fade");var a=($(document).width()-$(".popup_modal").outerWidth())/2;$(".popup_modal").css({left:a})});

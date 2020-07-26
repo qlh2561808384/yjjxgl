@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.conBox{background: #FFFFFF; border-radius: 0; color: #ac8d6e;}
+
+.fillInBill .bill_hd{text-align: center; font-weight: 700; padding-bottom: 15px;}
+.fillInBill .bill_bd{font-size:16px;}
+.fillInBill .subBill_hd{padding:6px 0; margin-top:-1px; border:solid #E5E5E5; border-width:1px 0;}
+.fillInBill .subBill_hd:first-child{border-top:none;}
+
+.fillInBill .divideTo2{float:left; width:50%;}
+.fillInBill .divideTo3{float:left; width:33.3%;}
+.fillInBill .divideTo3 label{display:inline-block; width:38%;}
+.fillInBill .divideTo3 .inputBox{width:55%;}
+
+.fillInBill .info_item,
+.fillInBill .info_line{height:30px; line-height:25px; padding:6px 0; border-bottom:1px solid #E5E5E5;}
+
+.fillInBill .info_item label.smallStype{font-size:14px; line-height:1.2;}
+
+.fillInBill .info_line .info_line_item{float:left;}
+.fillInBill .info_line .info_line_item_1{width:38%; line-height:30px; padding-right:2%;}
+.fillInBill .info_line .info_line_item_2{width:20%;}
+.fillInBill .info_line .inputBox{width:55%;}
+.fillInBill .info_line .inputBox .icon_keyboard{width:20%;}
+
+.fillInBill .inputBox .inp_keyboard{width:75%; height:18px; font-size:14px;padding-right: 20%; vertical-align: middle;}
+
+.nextBtn{width: 91%; margin: 0 auto;}
+.nextBtn .totalMoney{display: block; padding: 10px 0; margin: 0 30px 0 0; color:#333; font-size:30px; line-height:2.2;}
+.nextBtn a{width: 30%; margin-left: 20px;}.nextBtn a{width: 30%; margin-left: 20px;}
+
+.areaList .area_hd li, .areaList .area_bd li{font-size:18px;}
+
+.standardList{width:99%;}
+.standardList .standard_bd{padding: 15px 8px 10px;}
+.standardList .standard_bd li{float: left; font-size: 24px; width: 23%; margin: 0 1% 10px; cursor: pointer;}
+.standardList .standard_bd li span{display: block; padding: 3px 0; border: 1px solid #145B89; border-radius: 4px; text-align: center;}
+.standardList .standard_bd li.active span{background-color:#145B89; color:#fff;}
+
+

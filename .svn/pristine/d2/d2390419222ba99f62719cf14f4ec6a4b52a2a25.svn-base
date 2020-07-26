@@ -1,0 +1,57 @@
+.main-content {background-color: #2F363E;}
+.sidebar {background-color: #2F363E; border-right:none;}
+.navbar-inner {min-height: 70px;}
+/*.userInfo {padding: 0;  background-color: #206FAA; position: relative; }
+.userInfo .user_img img {width: 40px; height:40px; border-radius: 20px; border: 2px solid #E0EDF5; margin: 15px 0 15px 5px;}
+.userInfo .user_name {  position: absolute;  top: 10px;  left: 55px;}
+.userInfo .user_name .dropdown-toggle{color:#E0EDF5;font-size:12px; }
+.userInfo .user_name .dropdown-toggle .caret {border-top-color: #E0EDF5;}*/
+.tree_side .ztree > li { background-color: #2F363E;  }
+.tree_side .ztree li > a {line-height: 22px;  padding: 9px 8px;color: #BBC1D6; border-bottom:none;}
+.tree_side .ztree li > a:hover{background-color:#1F2734;color:#FFF;}
+.tree_side .ztree > li a.curSelectedNode{background-color:#1F2734;color:#FFF;}
+.tree_side .ztree > li > span.switch.noline_docu + a.curSelectedNode {  background-color:#1F2734;color:#FFF;  }
+.tree_side .ztree > li > a > span.button {height:22px;}
+.tree_side .ztree li > ul a { background-color:#273d57; border-bottom:1px solid #29313E;border-left:4px solid #2D435E;font-size:13px; }
+.tree_side .ztree li > ul a:hover{background-color:#273d57;color:#2a92c9;border-left:4px solid #2A92C9;}
+.tree_side .ztree li > ul:before{border-left:none;}
+.tree_side .ztree li ul a:before {content: "";  }
+.tree_side .ztree li.level0 > a:before { background: none;}
+.tree_side .ztree > li ul a.curSelectedNode {  background-color: #273D57; color:#fff;border-left:4px solid #2A92C9; }
+.main-content-inner {border-left:none;}
+.sidebar .ztreeBox {width: 109%;}
+.sidebar .sidebar-toggle {border-bottom: none;}
+.sidebar .sidebar-toggle:before {  border-top: 1px solid #1F2B39;  border-bottom: 1px solid #3E434D;  }
+.sidebar .sidebar-toggle>.ace-icon{border-color: #5B6582;  color: #5B6582;  background-color: #1E2835;}
+.tree_side .ztree li > span.button.switch.noline_open:before, .tree_side .ztree li > span.button.switch.noline_close:before {color: #7681A3;  }
+/*侧边收缩*/
+.sidebar.menu-min { width: 60px;}
+.sidebar.menu-min + .main-content-inner { margin-left: 60px;}
+.sidebar.menu-min .tree_side .ztree > li > a > span.node_name {left: 60px; border:none;}
+.sidebar.menu-min .tree_side .ztree > li > a + ul {left: 60px;}
+
+.main-content .navbar-inner { background-color: #2E87BF;}
+.navbar .nav {margin-top:15px;}
+.navbar .brand {margin-top:15px;}
+.navbar .nav_news_green,.navbar .nav_news_purple,.navbar .nav_news_grey{ background-color:inherit;}
+.navbar .nav>li>a {padding:10px;}
+
+.tabBox .tab_wrap {background-color: #E1E3EB; height:45px;margin-top:0; border-top:1px solid #CED6E2; border-bottom:1px solid #CED6E2;}
+.nav-tabs>li>a {  padding-top: 12px;  padding-bottom: 13px;border-width:0 1px 0 0; border-right:1px solid #CED6E2;border-radius: 0;}
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus {  background-color: #ffffff;border-radius: 0;  }
+.tabBox .nav-tabs>.active > a {background-color: #fff;  }
+.nav-tabs>li>a, .nav-pills>li>a {padding-top: 12px;  padding-bottom: 13px;margin-right:0;}
+.nav-tabs>li>a:hover, .nav-tabs>li>a:focus {border-right:1px solid #CED6E2;  }
+.tabBox .nav-tabs li:first-child a {  margin-left:0;  }
+
+.tabBox .tab_btn {height:45px;background-color: #E1E3EB;}
+.tabBox .tab_btn .closeAll {  background: inherit;  color: #555555;  padding: 0 9px; margin-left: 0;  line-height: 44px;  border-radius: 0;border-left:1px solid #CED6E2;border-bottom:1px solid #CED6E2;}
+.tabBox .tab_btn .showtab.showRightTabs,.tabBox .tab_btn .showtab.showLeftTabs {  margin: 0 ;padding:0 12px;  border-radius: 0; height:45px;line-height:42px; border-right:none;border-left:1px solid #CED6E2; background: inherit;}
+.tab_btn  .fa-angle-double-right,.tab_btn  .fa-angle-double-left {  width:20px;height:43px;  background: url(./zTreeStyle/img/diy/zhizheng.png) -12px -45px no-repeat;  }
+.tab_btn  .fa-angle-double-left {background-position: -12px 0;}
+.tab_btn .fa-angle-double-right:before,.tab_btn .fa-angle-double-left:before  {  content: "";  }
+
+.tabBox .tab_btn-left{height:45px;background-color: #E1E3EB; float:left;}
+.tabBox .tab_btn-left .showtab.showLeftTabs{ position:absolute; left:0; top:0;width:20px; margin: 0 ;padding:0 12px;  border-radius: 0; height:45px;line-height:42px; border-right:1px solid #CED6E2; border-bottom:1px solid #CED6E2;background: inherit;}
+.tabBox .tab_btn-left  .fa-angle-double-left {  width:20px;height:43px;  background: url(./zTreeStyle/img/diy/zhizheng.png) -57px 0 no-repeat; }
+.tabBox .tab_btn-left  .fa-angle-double-left:before {  content: "";  }

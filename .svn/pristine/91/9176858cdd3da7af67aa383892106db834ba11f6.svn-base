@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>treeGrid</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+</head>
+
+<script>
+    var jsoninitNodes = [
+        {
+            id: 'group_a',
+            order: 1,
+            match: 'Group A',
+            userObject: {isGroup: true},
+            isOpen: true
+        },
+        {
+            id: 'group_b',
+            order: 2,
+            isLeaf: false,
+            match: 'Group B',
+            userObject: {isGroup: true, jsonName: 'jsonNodes_B'}
+        },
+        {
+            id: 'group_c',
+            order: 3,
+            isLeaf: false,
+            match: 'Group C',
+            userObject: {isGroup: true, jsonName: 'jsonNodes_C'}
+        },
+        {
+            id: 'group_d',
+            order: 4,
+            isLeaf: false,
+            match: 'Group D',
+            userObject: {isGroup: true, jsonName: 'jsonNodes_D'}
+        },
+        {
+            id: 'match_1',
+            pid: 'group_a',
+            match: 'South Africa - Mexico',
+            datetime: '11/06 16:00',
+            result: '1:1 (0:0)',
+            venue: 'Johannesburg - JSC'
+        }, {
+            id: 'match_2',
+            pid: 'group_a',
+            match: 'Uruguay - France', datetime: '11/06 20:30', result: '0:0', venue: 'Cape Town'
+        },
+        {
+            id: 'match_17',
+            pid: 'group_a',
+            match: 'South Africa - Uruguay',
+            datetime: '16/06 20:30',
+            result: 'Background',
+            venue: 'Tshwane/Pretoria'
+        },
+        {
+            id: 'match_18',
+            pid: 'group_a',
+            match: 'France - Mexico', datetime: '17/06 20:30', result: 'Background', venue: 'Polokwane'
+        },
+        {
+            id: 'match_33',
+            pid: 'group_a',
+            match: 'Mexico - Uruguay', datetime: '22/06 16:00', result: 'Background', venue: 'Rustenburg'
+        },
+        {
+            id: 'match_34',
+            pid: 'group_a',
+            match: 'France - South Africa',
+            datetime: '22/06 16:00',
+            result: 'Background',
+            venue: 'Mangaung/Bloemfontein'
+        },
+        {
+            id: 'match_7',
+            pid: 'group_d',
+            match: 'Germany - Australia', datetime: '13/06 20:30', result: 'Preview', venue: 'Durban'
+        },
+        {
+            id: 'match_8',
+            pid: 'group_d',
+            match: 'Serbia - Ghana',
+            datetime: '13/06 16:00',
+            result: 'Background',
+            venue: 'Tshwane/Pretoria'
+        },
+        {
+            id: 'match_21',
+            pid: 'group_d',
+            match: 'Germany - Serbia',
+            datetime: '18/06 13:30',
+            result: 'Background',
+            venue: 'Nelson Mandela Bay/Port Elizabeth'
+        },
+        {
+            id: 'match_24',
+            pid: 'group_d',
+            match: 'Ghana - Australia',
+            datetime: '19/06 16:00',
+            result: 'Background',
+            venue: 'Rustenburg'
+        },
+        {
+            id: 'match_39',
+            pid: 'group_d',
+            match: 'Ghana - Germany',
+            datetime: '23/06 20:30',
+            result: 'Background',
+            venue: 'Johannesburg - JSC'
+        },
+        {
+            id: 'match_40',
+            pid: 'group_d',
+            match: 'Australia - Serbia',
+            datetime: '23/06 20:30',
+            result: 'Background',
+            venue: 'Nelspruit'
+        }
+    ];
+    $(function () {
+        $('#worldcupgird').treeGrid({
+            height: 346,
+            columns: [{
+                field: 'datetime', title: '时间', width: 350,
+                formatter: function (infoObj) {
+                    return infoObj.dataValue
+                },
+                nodeControl: true//是否用于节点控制
+            }, {
+                field: 'match',
+                title: 'Match',
+                width: 300
+            }, {
+                field: 'venue',
+                title: 'Venue',
+                width: 300
+            }, {
+                field: 'result',
+                title: 'Result',
+                width: 200
+            }, {
+                field: 'operate',
+                title: 'Operate',
+                width: 200,
+                formatter:function(infoObj){
+                    operateRenderFunction(infoObj);
+                }
+            }],
+            isOpen: true,
+            treeMode: 'gird',
+            onExpandNodeEvents: [expandNode],
+            themeName: 'arrow',
+            selectMode: 'single',
+            data: jsoninitNodes,
+            footers: [
+                {columns: [{dataIndex: 'a'}, {dataIndex: 'b'}], dataObject: {a: 1, b: 2}},
+                {columns: [{dataIndex: 'a'}, {dataIndex: 'b'}], dataObject: {a: 3, b: 4}}
+            ]
+        })
+    })
+
+    var jsonNodes_B = [
+        {
+            id: 'match_3',
+            pid: 'group_b',
+            match: 'Argentina - Nigeria',
+            datetime: '12/06 16:00',
+            result: 'Live',
+            venue: 'Johannesburg - JEP'
+        }, {
+            id: 'match_4',
+            pid: 'group_b',
+            match: 'Korea Republic - Greece',
+            datetime: '12/06 13:30',
+            result: '2:0 (1:0)',
+            venue: 'Nelson Mandela Bay/Port Elizabeth'
+        }, {
+            id: 'match_19',
+            pid: 'group_b',
+            match: 'Greece - Nigeria',
+            datetime: '17/06 16:00',
+            result: 'Background',
+            venue: 'Mangaung/Bloemfontein'
+        }, {
+            id: 'match_20',
+            pid: 'group_b',
+            match: 'Argentina - Korea Republic',
+            datetime: '17/06 13:30',
+            result: 'Background',
+            venue: 'Johannesburg - JSC'
+        }, {
+            id: 'match_35',
+            pid: 'group_b',
+            match: 'Nigeria - Korea Republic',
+            datetime: '22/06 20:30',
+            result: 'Background',
+            venue: 'Durban'
+        }, {
+            id: 'match_36',
+            pid: 'group_b',
+            match: 'Greece - Argentina',
+            datetime: '22/06 20:30',
+            result: 'Background',
+            venue: 'Polokwane'
+        }
+    ];
+
+    var jsonNodes_C = [];
+    var jsonNodes_D = [];
+
+    function operateRenderFunction(infoObj){
+        //console.log(infoObj)
+        var contain = infoObj.container;
+        var aElobj = $(contain).append("<a href='#'>操作</a>").find("a");
+        return aElobj;
+    }
+
+    /**
+     * 展开回调
+     * @param node
+     * @param tree
+     */
+    function expandNode(node, tree) {
+        if (node.isLoad == false) {
+            var jsonName = node.userObject.jsonName;
+            tree.startLoadingNode(node); // startLoadingNode endLoadingNode控制loading图标
+            tree.loadingAddNodes($('#worldcupgird').treeGrid('transData', eval(jsonName)).map(function (item) {
+                item.dataObject = $.extend(true, {}, item);
+                return item;
+            }), node.id);
+            tree.endLoadingNode(node);
+        }
+    }
+    function getSelectRows() {
+        /*console.log(
+            $('#worldcupgird').treeGrid('getSelectNodes')
+        )*/
+    }
+
+    $(function(){
+        $("#treeGrid").treeGrid({
+            idKey:"idd",
+            pIdKey:"ppid",
+            columns: [
+                {field: 'datetime', title: '时间', width: '40%', nodeControl: true},
+                {field: 'name', title: '姓名', width: '30%', align:"center"},
+                {field: 'result', title: '结果', width: '30%', align:"right"}
+            ],
+            //isOpen: true,
+            treeMode: 'gird',
+            useOrder: false, //tabletree是否根据节点设定的order值排序，默认true
+            onExpandNodeEvents: [expandNode1, InitSubTable],
+            onCollapseNodeEvents: [closeSubTable],
+            themeName: 'arrow',
+            selectMode: 'single',
+            data: [
+                {idd:'a1', order:1, datetime: '06', name:'zhang', result:40, isLoad:false, isLeaf:false, isOpen: true},
+                {idd:'a2', order:2, datetime: '07', name:'li', result:50, isLoad:false, isLeaf:false, isOpen: false},
+                {idd:'11', ppid: 'a1', datetime:'06-01', name:'zhang1', result:41, canSelect:true},
+                {idd:'12', ppid: 'a1', datetime:'06-02', name:'zhang2', result:42}
+            ],
+            footers: []
+        });
+    });
+    //展开
+    function expandNode1(node, tree){
+        if (node.isLoad == false) {
+            var jsonName = [
+                {idd:'21b', ppid: 'a2', datetime:'07-01', name:'li1', result:41, isLeaf:false},
+                {idd:'22b', ppid: 'a2', datetime:'07-02', name:'li2', result:42}
+            ];
+            tree.startLoadingNode(node); // startLoadingNode endLoadingNode控制loading图标
+            tree.loadingAddNodes($('#'+tree.renderTo).treeGrid('transData', eval(jsonName)).map(function (item) {
+                item.dataObject = $.extend(true, {}, item);
+                return item;
+            }), node.id);
+            tree.endLoadingNode(node);
+        }
+    }
+    //子表
+    function InitSubTable(node, tree){
+        if(node.id=="21b"){
+            var addnode = new Core4j.toolbox.TableTreeNode({
+                id: node.id +"_subTable",
+                dataObject:{}
+            });
+            $('#treeGrid').treeGrid('addNode', addnode, node.id);
+
+            var addnodeId = tree.id + "_" + node.id +"_subTable";
+            var newaddNode = $("#"+ addnodeId);
+            newaddNode.addClass("detail-view").html("<td colspan='"+ tree.columns.length +"'><div class='tabletree_subTable' id='"+ addnodeId +"_div'></div></td>");
+            $("#"+ addnodeId +"_div").treeGrid({
+                idKey:"idd",
+                pIdKey:"ppid",
+                columns: [
+                    {field: 'datetime', title: '时间', width: '40%', nodeControl: true},
+                    {field: 'name', title: '姓名', width: '30%', formatter :function(infoObj){
+                            return '<a href="###" onclick="showQRSList()">'+infoObj.dataValue+'</a>';
+                        }},
+                    {field: 'result', title: '成绩', width: '30%'}
+                ],
+                isOpen: false,
+                treeMode: 'gird',
+                themeName: 'arrow',
+                selectMode: 'single',
+                data: [
+                    {idd:'b1', datetime: '06', name:'zhang', result:40, isLoad:false},
+                    {idd:'b2', datetime: '07', name:'li', result:50, isLoad:false},
+                    {idd:'b3', datetime: '07', name:'li', result:50, isLoad:false}
+                ]
+            });
+        }
+    }
+    function closeSubTable(node, tree){
+        $("#"+ node.rowObj.id +"_subTable").parents("tr").remove();
+    }
+    //弹出附件列表
+    function showQRSList(){
+        var list=[
+            {name:"附件1", url:""},
+            {name:"附件2", url:""},
+            {name:"附件3", url:""}
+        ];
+        $.dopen({
+            title: "确认书列表",
+            content: '<ul class="dopenList" id="qrsList"></ul>',
+            area: ['310px','350px'],
+            btn: ['关闭'],
+            btn1:function(index){
+                layer.close(index);
+            }
+        });
+        $.each(list, function(i){
+            $("#qrsList").append("<li><a href='"+ list[i].url +"'>"+ list[i].name +"</a></li>");
+        });
+    }
+
+    //重新加载数据
+    function reloadData(){
+        var loadjson = [
+            {idd:'a1', order:1, datetime: '06/01', name:'hhha', result:4021213, isLoad:false, isLeaf:false, isOpen: true},
+            {idd:'a2', order:2, datetime: '07/01', name:'llla', result:52220, isLoad:false, isLeaf:false, isOpen: false, userObject:{jsonName:'test_json'}},
+            {idd:'11', ppid: 'a1', datetime:'06-01', name:'zhang1', result:41, canSelect:true},
+            {idd:'12', ppid: 'a1', datetime:'06-02', name:'zhang2', result:42}
+        ];
+
+        $('#treeGrid').treeGrid('rebuildTreeByNodes', $(this).treeGrid('transData', eval(loadjson)), true);
+    }
+</script>
+<body>
+<section class="parser">
+    <div class="page-header"><h1>treeGrid</h1></div>
+    <h3>扩展自tabletree4j，<a href="../plugins/treegrid2/TableTree4j-api.html" target="_blank">参考链接</a></h3>
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$("#treeGrid").treeGrid({</span></li>
+            <li><span>    height:500,</span></li>
+            <li><span>    …,</span></li>
+            <li><span>})</span></li>
+        </ol>
+    </pre>
+    <table class="table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>height</td><td>Number</td><td>定义表格的高度。</td><td>undefined</td></tr>
+        <tr><td>columns</td><td>Array</td><td>列配置项,详情请查看 <a href="#columns">列参数 表格</a></td><td>[]</td></tr>
+        <tr><td>data</td><td>Array</td><td>加载json格式的数据</td><td>[]</td></tr>
+        <tr><td>url</td><td>String</td><td>服务器数据的加载地址</td><td>undefined</td></tr>
+        <tr><td>isOpen</td><td>boolean</td><td>节点是否展开</td><td>false</td></tr>
+        </tbody>
+    </table>
+
+    <h4><a id="columns">列参数:</a></h4>columns:[]
+    <pre>
+        <ol style="display: table">
+            <li><span>{field: 'status', title: '状态', width: 100, align:"center", formatter: function(infoObj) {}},</span></li>
+        </ol>
+    </pre>
+    <table class="table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>field</td><td>String</td><td>列字段名</td></tr>
+        <tr><td>title</td><td>String</td><td>列标题</td></tr>
+        <tr><td>width</td><td>Number </td><td>列宽 未指定 则自适应</td></tr>
+        <tr><td>align</td><td>String</td><td>水平对齐方式</td></tr>
+        <tr><td>formatter</td><td>Function</td><td>格式化方法，该方法有一个参数 infoObj，包含多个属性信息</td></tr>
+        </tbody>
+    </table>
+
+    <h4>方法:</h4><h5>调用语法：fn.treeGrid('method',param)</h5>
+    <h5><a href="../plugins/treegrid2/TableTree4j-api.html" target="_blank">全部方法可参考 Core4j.toolbox.TableTree4j ——> Method</a></h5>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>getSelectNodes</td><td></td><td>获得当前选中的所有节点</td></tr>
+        <tr><td>setSelectNode</td><td>node</td><td>设置选中某个节点</td></tr>
+        <tr><td>clearSelects</td><td></td><td>取消选中的所有节点</td></tr>
+        <tr><td>reFreshTableTreeView</td><td></td><td>刷新tabletree</td></tr>
+        <tr><td>rebuildTreeByNodes</td><td>nodes, isJsondata</td><td>根据传入的节点重新构建treeGrid, isJsondata参数说明 nodes是否是json数据</td></tr>
+        </tbody>
+    </table>
+
+    <h4>事件:</h4>
+    <h5><a href="../plugins/treegrid2/TableTree4j-api.html" target="_blank">全部事件可参考 Core4j.toolbox.TableTree4j ——> ConfigerObject</a></h5>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>onExpandNodeEvents</td><td>node, tree</td><td>当展开节点的时候激活这些事件function,传入的参数有(展开的节点对象,tabletree对象)</td></tr>
+        <tr><td>onCollapseNodeEvents</td><td>node, tree</td><td>当关闭节点的时候激活这些事件function,传入的参数有(关闭的节点对象,tabletree对象)</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<h2>案例1</h2>
+<button onclick="reloadData()">刷新数据</button>
+<div id="treeGrid"></div>
+
+<h2 >案例2</h2>
+<button onClick="getSelectRows()">获取选中行</button>
+<div id="worldcupgird" class="content clearfix"></div>
+
+<br><br><br><br>
+</body>
+</html>

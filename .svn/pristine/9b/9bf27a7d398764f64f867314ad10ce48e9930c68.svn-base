@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.ztreeBox{position: relative;}
+.ztree_abs{position:absolute; z-index:99999; max-height:360px; overflow-y:scroll; overflow-x:auto; border:1px solid #ccc; border: 1px solid rgba(0, 0, 0, 0.2); background:#fff; box-shadow:0 5px 10px rgba(0, 0, 0, 0.2); border-radius:4px; display: none;}
+
+.search_modal .ztree{height: 300px;}
+.search_modal .searchKey{width:100%;}
+
+.ztreeBox_inp{display:inline-block;}
+.ztreeBox_down{position:relative;}
+.ztreeBox_down input{width: 100%;}
+.ztreeBox_down i.fa-angle-down{position:absolute; right:2px; top:2px; padding:8px 6px; background-color: #fff; color:#999; font-weight:600; font-size:14px; border-radius:0 4px 4px 0;}

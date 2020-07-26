@@ -1,0 +1,6 @@
+[
+  {"guid":4083,"code":"2017001002001","name":"部门预算培训","money":28,"lmoney":10,"cmoney":8,"nmoney":10,"reportdivname":null,"programsource":"3","businesscontact":null,"programleader":"金国兴","remark":null},
+  {"guid":4084,"code":"2017001002002","name":"大平台","money":36,"lmoney":20,"cmoney":8,"nmoney":8,"reportdivname":null,"programsource":"3","businesscontact":null,"programleader":"陈健东","remark":null},
+  {"guid":4085,"code":"2017001002003","name":"非税管理系统培训","money":0,"lmoney":0,"cmoney":0,"nmoney":0,"reportdivname":null,"programsource":"3","businesscontact":null,"programleader":"聂勇","remark":null},
+  {"guid":4087,"code":"2017001003001","name":"统一账户管理、财税文化建设等其他配套费用","money":null,"lmoney":null,"cmoney":null,"nmoney":null,"reportdivname":null,"programsource":"3","businesscontact":null,"programleader":null,"remark":null}
+]

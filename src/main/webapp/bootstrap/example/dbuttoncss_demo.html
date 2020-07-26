@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE></TITLE>
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+   <section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+    	<h4>使用方法:</h4>
+	    <pre>
+	        <ol style="display: table;">
+	        	<li><span>新增按钮例子：&#60;input value="新增" class="bootstrap-table-add" type="button" /&#62;</span></li>
+	        </ol>
+	    </pre>
+	    <h4>属性:</h4>
+	    <form id="formbutton"></form>
+	</section>
+	
+</BODY>
+<script>
+   $(function(){
+	   $("#formbutton").dform({
+	 		 rownum:4,   //每行控件数目
+	 		 labelwidth:"140px",
+	 		 inputs:[
+	 		         {
+	 		        	 title:"bootstrap-table-add",
+	 		        	 type:"html",
+	 		        	 html:'<input value="新增" class="bootstrap-table-add" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-edit",
+	 		        	 type:"html",
+	 		        	 html:'<input value="修改" class="bootstrap-table-edit" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-delete",
+	 		        	 type:"html",
+	 		        	 html:'<input value="删除" class="bootstrap-table-delete" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-download",
+	 		        	 type:"html",
+	 		        	 html:'<input value="下载" class="bootstrap-table-download" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-upload",
+	 		        	 type:"html",
+	 		        	 html:'<input value="上传" class="bootstrap-table-upload" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-submit",
+	 		        	 type:"html",
+	 		        	 html:'<input value="提交" class="bootstrap-table-submit" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-query",
+	 		        	 type:"html",
+	 		        	 html:'<input value="查询" class="bootstrap-table-query" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-review",
+	 		        	 type:"html",
+	 		        	 html:'<input value="查看" class="bootstrap-table-review" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-clear",
+	 		        	 type:"html",
+	 		        	 html:'<input value="清除" class="bootstrap-table-clear" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-disable",
+	 		        	 type:"html",
+	 		        	 html:'<input value="禁用" class="bootstrap-table-disable" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-enable",
+	 		        	 type:"html",
+	 		        	 html:'<input value="可用" class="bootstrap-table-enable" type="button" />'
+	 		         },{
+	 		        	 title:"bootstrap-table-verify",
+	 		        	 type:"html",
+	 		        	 html:'<input value="验证" class="bootstrap-table-verify" type="button" />'
+	 		         }
+	 		 ]
+	  }) 
+	   
+   })
+
+
+</script>
+</HTML>

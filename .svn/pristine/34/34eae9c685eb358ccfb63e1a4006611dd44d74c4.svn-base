@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <title>comboTree</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+  <script src="../js/bootstrap.datanew.js"></script>
+  <script src="../js/webuploader.datanew.js"></script>
+</head>
+<script>
+
+$(function() {
+  $("#uploader").weblupload({
+    pick: {
+      id: '.filePicker',
+      label: '点击选择文件'
+    },
+//      dnd: '#uploader .queueList',
+    paste: document.body,
+
+//      accept: {
+//        title: 'Images',
+//        extensions: 'gif,jpg,jpeg,bmp,png',
+//        mimeTypes: 'image/*'
+//      },
+    // swf文件路径
+//    swf: '../resources/webuploader/Uploader.swf',
+    disableGlobalDnd: true,
+    threads: 1,
+    chunked: true,
+    server: 'http://localhost:8080/fsglpt/db/webupload',
+    fileNumLimit: 300,
+    fileSizeLimit: 500 * 1024 * 1024,    // 200 M
+    fileSingleSizeLimit: 100 * 1024 * 1024    // 50 M)
+  })
+})
+</script>
+</head>
+<body>
+  <div id="uploader" class="uploader"></div>
+</body>
+
+
+</html>

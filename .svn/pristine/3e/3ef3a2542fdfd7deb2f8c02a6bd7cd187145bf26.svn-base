@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE></TITLE>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+        <h3>扩展自layer弹层组件，<a href="http://www.layui.com/doc/modules/layer.html" target="_blank">参考链接</a></h3>
+
+        <h4>使用方法:</h4>
+	    <pre>
+	        <ol style="display:table;">
+	        	<li><span>$.dalert({text:"保存成功",icon:6});</span></li>
+	        </ol>
+	    </pre>
+	    <h4>属性:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+	        <tbody>
+	        	<tr><td>text</td><td>string（字符串型）</td><td>提示框中内容</td><td>无</td></tr>
+	        	<tr><td>icon</td><td>number（数字）</td><td>提示框图表（1打勾，2打叉，3问号，4加锁，5不开心，6笑脸，7感叹号）</td><td>1</td></tr>
+	        </tbody>
+	    </table>
+	    <h4>案例:</h4>
+	    <button onclick="btnclick(1)">案例1</button>
+	    <button onclick="btnclick(2)">案例2</button>
+	    <button onclick="btnclick(3)">案例3</button>
+	    <button onclick="btnclick(4)">案例4</button>
+	    <button onclick="btnclick(5)">案例5</button>
+	    <button onclick="btnclick(6)">案例6</button>
+	    <button onclick="btnclick(7)">案例7</button>
+	</section>
+	<script>
+	    function btnclick(number){
+	    	$.dalert({text:"您点击了按钮"+number,icon:number})
+	    }
+
+
+
+
+	</script>
+</BODY>
+</HTML>

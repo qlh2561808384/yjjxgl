@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ztree </TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+
+<BODY>
+
+<section class="parser container-fluid">
+	<div class="page-header"><h1>语法解析</h1></div>
+	 <pre>
+        <ol style="display:table">
+			<li><span>初始化：</span></li>
+			<li><span>fn.tree(初始化参数对象)</span></li>
+			<li><span>方法调用：</span></li>
+			<li><span>fn.tree('方法名',参数)</span></li>
+		</ol>
+    </pre>
+
+
+    <h4>属性：</h4>
+	<table class=" table-border">
+		<thead>
+		<tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>localdata</td><td>Array</td><td>本地数据，zNodes =[{id:1, pId:0, name:"节点搜索演示 1"}]</td><td></td></tr>
+		<tr><td>url</td><td>String</td><td>远程数据请求地址</td><td></td></tr>
+		<tr><td>queryParam</td><td>obj</td><td>远程请求所携带的参数  格式：{param1:xxx,param2:xx}</td><td></td></tr>
+		<tr><td>openSearch</td><td>boolean</td><td>是否显示搜索框 开启搜索栏后 根据data.key.name 进行模糊查询 回车触发查询方法</td><td>false</td></tr>
+		<tr><td>checkType</td><td>String</td><td>定义选择框类型，checkbox为多选框，radio为单选框</td><td>"radio"</td></tr>
+		<tr><td>ISLEAF</td><td>Boolean</td><td>当checkType为checkbox或radio时，父节点是否有选择框，设置为false表示父不可选</td><td>false</td></tr>
+		<tr><td>rootElement</td><td>Boolean</td><td>是否添加“全部”节点</td><td>false</td></tr>
+		<tr><td>onLoaded</td><td>function</td><td>树加载完毕后 所执行方法 包含一个参数 返回ztree对象 可使用原生api实现 展开所有节点 等操作</td><td>false</td></tr>
+		<tr><td>data</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+					<li><span>data:{</span></li>
+					<li><span>    key : {</span></li>
+					<li><span>        name: "name", //保存节点<span style="color:#F00;">名称</span>的属性名</span></li>
+					<li><span>        url: "url", //保存节点<span style="color:#F00;">链接url</span>的属性名</span></li>
+					<li><span>        icon: "icon", //保存节点<span style="color:#F00;">小图标</span>的属性名</span></li>
+					<li><span>    },</span></li>
+					<li><span>    simpleData : {</span></li>
+					<li><span>        enable: true, //数据是否采用简单数据模式(Array)，true为是</span></li>
+					<li><span>        idKey: "id", //保存节点<span style="color:#F00;">唯一标识</span>的属性名</span></li>
+					<li><span>        pIdKey: "pId",  //保存节点<span style="color:#F00;">其父节点的唯一标识</span>的属性名</span></li>
+					<li><span>        rootPId: null //指定<span style="color:#F00;">根节点</span>数据</span></li>
+					<li><span>    }</span></li>
+					<li><span>}</span></li>
+				</ol>
+			</pre>
+		</td></tr>
+		<tr><td>callback</td><td colspan="3">
+			<pre style="padding: 0;">
+				<ol style="display:table">
+					<li><span>callback:{</span></li>
+					<li><span>    clickNode : function(e,treeId,treeNode,clickFlag){</span></li>
+					<li><span>     点击节点回调方法（由于封装时 使用了onclick事件 所以由该回调来代替onClick）  </span></li>
+					<li><span>    }</span></li>
+					<li><span>}</span></li>
+				</ol>
+			</pre>
+		</td></tr>
+		<tr><td colspan="4">其余为ztree组件属性，如要修改可查询ztree文档，地址<a href="http://www.treejs.cn/v3/api.php" target="_blank">http://www.treejs.cn/v3/api.php</a></td></tr>
+		</tbody>
+	</table>
+	<h4>方法:</h4>
+	<table class=" table-border">
+		<thead>
+		<tr><th>名称</th><th>参数</th><th>描述</th></tr>
+		</thead>
+		<tbody>
+		<tr><td>getTree</td><td>none</td><td>返回ztree对象 用于调用ztree api  语法为：ztree对象.方法名</td></tr>
+		<tr><td>getValue</td><td>none</td><td>返回选择节点的value值 多选模式下逗号分隔</td></tr>
+		<tr><td>getText</td><td>none</td><td>返回选择节点的文本内容 多选模式下逗号分隔</td></tr>
+		<tr><td>clearTree</td><td>none</td><td>清空选项</td></tr>
+		<tr><td>reload</td><td>obj</td><td>重新加载内容  dataOption url参数 或本地数据对象   {localdata:[]} OR {url:XXXX,queryParam:{}}</td></tr>
+		<tr><td>searchNodes</td><td>string</td><td>根据参数 模糊匹配节点name 隐藏非匹配节点  输入参数为''时 显示所有节点</td></tr>
+		<tr><td colspan="4">ztree一些常用方法:</td></tr>
+		<tr><td>expandAll</td><td>boolean</td><td>(true)展开/(false)折叠所有节点  本案例中onLoaded 回调使用该方法实现展开树所有节点</td></tr>
+		<tr><td>getCheckedNodes</td><td>boolean</td><td>(true)获取被选中的节点数组  (false)获取未被选中的节点数组  本案例中onLoaded 回调使用该方法实现展开树所有节点</td></tr>
+		<tr><td colspan="4">更多方法参见ztreeAPI</td></tr>
+		</tbody>
+	</table>
+	<h4>案例:</h4>
+</section>
+<input type="button" value="reload" onclick="reload()"/>
+<input type="button" value="getvalue" onclick="getValue()"/>
+<input type="button" value="setvalue" onclick="setValue()"/>
+<input type="button" value="clearTree" onclick="clearTree()"/>
+<input type="button" value="getTree" onclick="getTree()"/>
+<input type="button" value="addNode" onclick="addNode()"/>
+
+<div class="container-fluid clearfix">
+	<div id="tree" ></div>
+
+</div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</BODY>
+</HTML>
+
+<script type="text/javascript">
+	function reload(){
+		$("#tree").tree("reload",{localdata:zNodes1});
+	}
+	function getValue(){
+		alert($("#tree").tree("getValue"));
+	}
+	function setValue(){
+		$("#tree").tree("setValue",'1,2,3')
+	}
+	function clearTree(){
+		$("#tree").tree("clearTree");
+	}
+	function getTree(){
+		$("#tree").tree("getTree");
+	}
+
+	/**
+	 * 添加节点
+	 */
+	function addNode(){
+		var node=$("#tree").tree("getTree").getCheckedNodes()[0];
+		$("#tree").tree("getTree").addNodes(node,{id:999,parentTId:1,name:'朝阳区'},false)
+	}
+
+	$(document).ready(function(){
+		// 在这个案例中  由于本地数据 pid id 和默认配置一致 所以无需进行重写simpleData属性中  idKey 和 pIdKey
+		$("#tree").tree({
+			openSearch:true,//是否显示搜索栏
+			localdata: zNodes,
+			callback:{
+				onCheck: function(e, treeId, treeNode) {
+					console.log(treeNode.tId)
+				}
+			},
+			onLoaded:function(ztree){//加载完毕后 触发
+				ztree.expandAll(true);
+			}
+		})
+	});
+	
+	var zNodes = [
+		{id:1, pId:0, name:"北京", ISLEAF:1},
+   		{id:2, pId:0, name:"天津", ISLEAF:1},
+   		{id:3, pId:0, name:"上海", ISLEAF:1},
+   		{id:4, pId:0, name:"河北省", ISLEAF:0},
+   		{id:41, pId:4, name:"石家庄", ISLEAF:0},
+   		{id:411, pId:41, name:"dd", ISLEAF:1},
+   		{id:42, pId:4, name:"保定", ISLEAF:1},
+   		{id:43, pId:4, name:"邯郸", ISLEAF:1},
+   		{id:44, pId:4, name:"承德", ISLEAF:1},
+   		{id:5, pId:0, name:"广东省", ISLEAF:0},
+   		{id:51, pId:5, name:"广州", ISLEAF:1},
+   		{id:52, pId:5, name:"深圳", ISLEAF:1},
+   		{id:53, pId:5, name:"东莞", ISLEAF:1},
+   		{id:54, pId:5, name:"佛山", ISLEAF:1},
+   		{id:6, pId:0, name:"福建省", ISLEAF:0},
+   		{id:61, pId:6, name:"福州", ISLEAF:1},
+   		{id:62, pId:6, name:"厦门", ISLEAF:1},
+   		{id:63, pId:6, name:"泉州", ISLEAF:1},
+   		{id:64, pId:6, name:"三明", ISLEAF:1}
+	];
+	var zNodes1 =[
+		{ id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+		{ id:11, pId:1, name:"关键字可以是名字", test:123,ISLEAF:1},
+		{ id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+		{ id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+		{ id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+		{ id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+		{ id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+		{ id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+		{ id:23, pId:2, name:"搜我吧", ISLEAF:1},
+		{ id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+		{ id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+		{ id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+		{ id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+	];
+</script>

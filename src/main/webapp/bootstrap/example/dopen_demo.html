@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE></TITLE>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+    	<h4>使用方法:</h4>
+	    <pre>
+	        <ol style="display:table;">
+	        	<li><span>$.dopen({</span></li>
+	    		<li><span>   btns: 2, </span></li>
+	    		<li><span>   btn: ['确定1', '取消1'],</span></li>
+	    		<li><span>   area: ['310px','130px'],</span></li>
+	    		<li><span>   title :"页面层-自定义内容",</span></li>
+	    		<li><span>   content: '这是一个自定义html的例子',</span></li>
+	    		<li><span>   yes:function(index){</span></li>
+	    		<li><span>	   alert("点击了确定按钮");</span></li>
+	    		<li><span>	   layer.close(index);</span></li>
+	    		<li><span>   },</span></li>
+	    		<li><span>   no:function(index){</span></li>
+	    		<li><span>	   alert("点击了取消按钮");</span></li>
+	    		<li><span>	   layer.close(index);</span></li>
+	    		<li><span>   },</span></li>
+	    		<li><span>   close:function(index){//层右上角关闭按钮的点击事件触发回调函数。</span></li>
+	    		<li><span>   },</span></li>
+	    		<li><span>   end: function(){//层被彻底关闭后执行的回调函数。</span></li>
+	    		<li><span>   }</span></li>
+	    	    <li><span>});</span></li>
+	        </ol>
+	    </pre>
+	    <h4>属性:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+	        <tbody>
+	        	<tr><td>text</td><td>string（字符串型）</td><td>提示框中内容</td><td>无</td></tr>
+	        	<tr><td>icon</td><td>number（数字）</td><td>提示框图表（1打勾，2打叉，3问号，4加锁，5不开心，6笑脸，7感叹号）</td><td>1</td></tr>
+	            <tr><td>btn</td><td>array</td><td> 当您只想自定义一个按钮时，你可以btn: '我知道了'，当你要定义两个按钮时，你可以btn: ['yes', 'no']。当然，你也可以定义更多按钮，比如：btn: ['按钮1', '按钮2', '按钮3', …]，按钮1和按钮2的回调分别是yes和cancel，而从按钮3开始，则回调为btn3: function(){}，以此类推。</td><td>1</td></tr>
+	            </tbody>
+	    </table>
+	    <h4>案例:</h4>
+	    <button onclick="btnclick1()">页面层-自定义内容</button>
+	    <button onclick="btnclick2()">iframe层-父子操作</button>
+	    <button onclick="btnclick3()">tab层</button>
+	    <button onclick="btnclick(4)">案例4</button>
+	    <button onclick="btnclick(5)">案例5</button>
+	    <button onclick="btnclick(6)">案例6</button>
+	    <button onclick="btnclick(7)">案例7</button>
+	</section>
+	<script>
+	    function btnclick1(){
+	    	$.dopen({
+	    		  btns: 2, 
+	    		  btn: ['确定1', '取消1'],
+	    		  area: ['310px','130px'],
+	    		  title :"页面层-自定义内容",
+	    		  content: '<div>这是一个自定义html的例子</div>',
+	    		  yes:function(index){
+	    			  alert("点击了确定按钮");
+	    			  layer.close(index);
+	    		  },
+	    		  no:function(index){
+	    			  alert("点击了取消按钮");
+	    			  layer.close(index);
+	    		  },
+	    		  close:function(index){//层右上角关闭按钮的点击事件触发回调函数。
+	    			  
+	    		  },
+	    		  end: function(){//层被彻底关闭后执行的回调函数。
+	    			  
+	    		  }
+	    	});
+	    }
+	
+	    function btnclick2(){
+	    	//iframe层-父子操作
+	    	$.dopen({
+	    	  parent:true,
+	    	  type: 2,
+	    	  title :"iframe层-父子操作",
+	    	  area: ['700px', 'auto'],
+	    	  fix: false, //不固定
+	    	  maxmin: true,
+	    	  content: 'http://www.baidu.com'
+	    	});
+	    }
+	    function btnclick3(){
+	    	//tab
+	    	$.dopen({
+	    		type: 5,
+	    		area: ['600px', '300px'],
+	    		  tab: [{
+	    		    title: 'TAB1', 
+	    		    content: '这是自定义的html内容'
+	    		  }, {
+	    		    title: 'TAB2', 
+	    		    content:$(".parser").html()
+	    		  }, {
+	    		    title: 'TAB3', 
+	    		    content: 'http://www.baidu.com'
+	    		  }]
+	    	});
+	    }
+	
+	    
+	
+	</script>
+</BODY>
+</HTML>

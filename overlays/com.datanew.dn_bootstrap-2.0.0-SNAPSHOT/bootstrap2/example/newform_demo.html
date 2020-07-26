@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <title>comboTree</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.datanew.js"></script>
+  <!--<script src="../plugins/input/core1.0.js"></script>-->
+</head>
+<script>
+  var zNodes =[
+    { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+    { id:11, pId:1, name:"关键字可以是名字", test:123,ISLEAF:1},
+    { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+    { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+    { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+    { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+    { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+    { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+    { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+    { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+    { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+    { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+    { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+  ];
+  var zNodes1 = [
+    {id:1, pId:0, name:"北京", ISLEAF:1},
+    {id:2, pId:0, name:"天津", ISLEAF:1},
+    {id:3, pId:0, name:"上海", ISLEAF:1},
+    {id:4, pId:0, name:"河北省", ISLEAF:0},
+    {id:41, pId:4, name:"石家庄", ISLEAF:0},
+    {id:411, pId:41, name:"dd", ISLEAF:1},
+    {id:42, pId:4, name:"保定", ISLEAF:1},
+    {id:43, pId:4, name:"邯郸", ISLEAF:1},
+    {id:44, pId:4, name:"承德", ISLEAF:1},
+    {id:5, pId:0, name:"广东省", ISLEAF:0},
+    {id:51, pId:5, name:"广州", ISLEAF:1},
+    {id:52, pId:5, name:"深圳", ISLEAF:1},
+    {id:53, pId:5, name:"东莞", ISLEAF:1},
+    {id:54, pId:5, name:"佛山", ISLEAF:1},
+    {id:6, pId:0, name:"福建省", ISLEAF:0},
+    {id:61, pId:6, name:"福州", ISLEAF:1},
+    {id:62, pId:6, name:"厦门", ISLEAF:1},
+    {id:63, pId:6, name:"泉州", ISLEAF:1},
+    {id:64, pId:6, name:"三明", ISLEAF:1}
+  ];
+  var  combobox={
+    title:'comboBox',
+    type:'comboBox',
+    name:'combobox',
+    selected:0,
+    searchOption:false,
+    textField:'text',
+    valueField:'id',
+    required:true,
+    multiple:false,
+    localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+    onChange:function(newValue,oldValue){
+      $("#combotree01").comboTree("setValue",newValue)
+    },
+    onShowPanel:function($p){//当显示下拉面板的时候触发。
+      //console.log($p)
+    }
+  };
+  var combotree={
+    id:'combotree01',
+    title:'combotree',
+    type:'comboTree',
+    name:'comboTree',
+    panelHeight:150,
+    multiple:false,
+    required:true,
+    validText:'测试',
+    localdata: zNodes,
+    rootElement:false,
+    onlyLeaf:false,
+    onChange:function(newValue,oldValue){
+        //console.log(newValue+",,,,"+oldValue);
+    }
+  };
+  var searchTree={
+    title:'searchTree',
+    type:'searchTree',
+    name:'searchTree',
+    checkType:'radio',
+    required:true,
+    validText:'测试',
+    localdata: zNodes,
+    rootElement:false,
+    onlyLeaf:true,
+    onChange:function(newValue,oldValue){
+      //console.log(newValue+",,,,"+oldValue);
+    },
+    onAckCallback:function(nodes){
+      alert(nodes.length)
+    },
+    onLoaded:function(tree){
+      //console.log(tree.getNodes())
+    }
+  }
+var textbox={
+  title:'textbox',
+  type:'textBox',
+  name:'textbox',
+  required:true,
+  validText:'测试',
+  validate:'email|phone',
+  validFail:function($el){
+//    alert($el.attr("id"))
+  }
+};
+  var datebox={
+    title:'datebox',
+    type:'dateBox',
+    name:'datebox',
+    step:4,
+    inline:true,
+    format : 'yyyy-mm-dd',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    minView: 2,
+    todayHighlight: 1,
+    startView: 4,
+    forceParse: 0,
+    showMeridian: 1,
+    did:"updatedateid",
+    dname:"updatedate",
+    defaultValue:"2016-09-02 02:05"
+  }
+
+  $(function(){
+    $.include(['bootstrap/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css',
+      'bootstrap/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js',
+      'bootstrap/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js']);
+//    ,
+//    'bootstrap/plugins/datetimepicker/css/bootstrap-datetimepicker-custom.css'
+
+    $("#fm").newform({
+      formtitle:"项目信息", //表单标题
+      labelwidth:"100px",
+      inputs:[
+        combobox,
+        combotree,
+        textbox,
+        searchTree,
+        datebox,
+        {
+          type:'hidden',
+          name:'hidden'
+        }
+      ]
+    });
+
+  });
+
+
+  function disable(){
+    $("#fm").newform("disable");
+  }
+  function enable(){
+    $("#fm").newform("enable");
+  }
+  function getValue(){
+    alert(123)
+    $("#fm").newform("getData")
+  }
+  function load(){
+    $("#fm").newform("load",{tt:'tt',comboTree:'11',searchTree:'11,12',select1:'1',hidden:'123'})
+  }
+  function testVile(){
+    $("#fm").newform("validate");
+  }
+  function destroy(){
+    $("#fm").newform("destroy")
+  }
+  function clear1(){
+    $("#fm").newform("clear");
+  }
+  function reload(){
+    $("#combotree").comboTree("reload",zNodes1);
+  }
+  function submit(){
+    $("#fm").newform("submit",{url:'xxx'});
+  }
+
+  function disable1(){
+    $("#combotree").comboTree("disable");
+  }
+  function enable1(){
+    $("#combotree").comboTree("enable");
+  }
+
+</script>
+</head>
+<body>
+
+<section class="parser container-fluid">
+  <div id="bt">
+    <button class="btn btn-primary bootstrap-table-add" type="button" onclick="disable()">禁用</button>
+    <button class="btn btn-primary bootstrap-table-edit" type="button" onclick="enable()">启用</button>
+    <button class="btn btn-primary bootstrap-table-delete" type="button" onclick="getValue()">取值</button>
+    <button class="btn btn-primary" type="button" onclick="load()">设值</button>
+    <button class="btn btn-primary" type="button" onclick="testVile()">表单验证</button>
+    <button class="btn btn-primary" type="button" onclick="destroy()">销毁</button>
+    <button class="btn btn-primary" type="button" onclick="clear1()">clear</button>
+    <button class="btn btn-primary" type="button" onclick="reload()">reload</button>
+    <button class="btn btn-primary" type="button" onclick="submit()">submit</button>
+    <button class="btn btn-primary" type="button" onclick="disable1()">disable1</button>
+    <button class="btn btn-primary" type="button" onclick="enable1()">enable1</button>
+    <button class="btn btn-primary" type="button" onclick="submit1()">submit1</button>
+  </div>
+  <form id="fm">
+    <!--<input id="tt" name="tt" style="width:200px;"/>-->
+
+    <!--<label for="combotree">1</label><input id="combotree" name="combotree"  />-->
+
+    <!--<input id="select1" name="select1" />-->
+    <!--<input id="searchTree" name="searchTree"/>-->
+  </form>
+</section>
+<!--工具栏-->
+
+</body>
+
+
+</html>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.datanew:dn_bootstrap:war:2.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://E:/maven/apache-maven-3.6.0/repository/com/datanew/dn_bootstrap/2.0.0-SNAPSHOT/dn_bootstrap-2.0.0-20180620.012823-4.war!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/maven/apache-maven-3.6.0/repository/com/datanew/dn_bootstrap/2.0.0-SNAPSHOT/dn_bootstrap-2.0.0-20180620.012823-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/maven/apache-maven-3.6.0/repository/com/datanew/dn_bootstrap/2.0.0-SNAPSHOT/dn_bootstrap-2.0.0-20180620.012823-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

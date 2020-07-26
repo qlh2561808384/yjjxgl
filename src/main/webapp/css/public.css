@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+/* reset */
+body,p,dl,dt,dd,ol,ul,li,form,input,button,textarea,table,tr,th,td,img,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+html, body{height:100%; /*overflow:hidden;*/ color:#666; font-size: 18px; line-height:1.5; font-family: 'Microsoft Yahei';}
+input{font-family: 'Microsoft Yahei';}
+img{border:none;}
+ul,ol,li{list-style:none;}
+a{text-decoration:none; outline:none; color:#666;}
+a:hover, a:focus{outline:none;}
+a{/* 点击去除图片阴影 */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select:none;
+    user-select:none;
+}
+.clearfix:after{content:'.'; display:block; height:0; visibility:hidden; clear:both;}
+.clearfix{zoom:1;}
+.lt{float:left;}
+.rt{float:right;}
+.mt10{margin-top:10px;}
+.p_fix{position:fixed;}
+.p_rel{position:relative;}
+.p_abs{position:absolute;}
+.ell{text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.hide{display:none;}
+
+input[disabled='disabled']{background:#dadada;}
+input::-webkit-input-placeholder{color: #999;}
+input:-ms-input-placeholder{color: #999;}
+
+/* 隐藏IE下 输入框自带的文本删除按钮和密码查看按钮 */
+input::-ms-clear, input::-ms-reveal {
+    display:none;
+}
+
+body{width:100%;  background-position: top center; background-repeat:repeat-x; background-size:auto 100%;}
+
+/* 左上角终端信息 */
+.terminalInfo{position: absolute; left:5px; top:3px; font-size:16px; line-height:1.2; color:#FFF;}
+
+/* 进度条 */
+.progressBar{margin-bottom:20px;}
+.progressBar li{position: relative; float:left; color:#0e467b; text-align: center;}
+.progressBar li span{position: relative; z-index:10; display:inline-block; width:76px; height:76px; line-height:76px; text-align:center; font-size:30px; color:#092b4c; background:url('../images/progressbar-numbg.png') no-repeat;}
+.progressBar li p{height:35px; margin-top:6px; font-size:22px;}
+.progressBar li.active span{color:#FFF; background-position: -100px 0;}
+.progressBar li.active p{color:#FFF; text-shadow:0 0 5px #000;}
+.progressBar .col-2 li{width:50%;}
+.progressBar .col-3 li{width:33.3%;}
+.progressBar .col-4 li{width:25%;}
+.progressBar .col-5 li{width:20%;}
+.progressBar .col-6 li{width:16.5%;}
+
+.progressBar li .item:before{content:""; position: absolute; left:0; top:25%; z-index: 1; width:100%; height:17px; background:url('../images/progressbar-line.png') repeat-x;}
+.progressBar li:first-child .item:before{width:51%; left:50%;}
+.progressBar li:last-child .item:before{width:50%; left:0;}
+.progressBar li.active .item:after{content:""; position: absolute; right:50%; top:25%; z-index:5; width:100%; height:7px; margin-top:5px; background:#3697E4;}
+.progressBar li.active:first-child .item:after{content:none;}
+/* 大标题 */
+.headBox{width:100%; padding:13px 0; background:url('../images/hdbg.png') repeat-x; background-size:1px 100%; color:#FFF; text-align:center; font-size:24px; text-shadow:0 0 3px #666;}
+
+/* 正文部分 */
+.main{width:90%; height:88%; padding-top:10%; margin:0 auto;}
+.showCardMain{position:absolute; left:0; top:0; bottom:0; right:0; margin:auto; height:73%; padding:0;}
+.conBox{min-height:68%; padding:4% 4% 2%; border-radius:10px; background:url('../images/conbg.png') repeat-x; background-size:1px 100%;
+    background:-webkit-linear-gradient(rgba(22,106,164,1), rgba(22,106,164,0)); -moz-background:linear-gradient(rgba(22,106,164,1), rgba(22,106,164,0)); -o-background:linear-gradient(rgba(22,106,164,1), rgba(22,106,164,0)); background:linear-gradient(rgba(22,106,164,1), rgba(22,106,164,0));}
+.conBox .subhead{margin-bottom:10px; color:#FFF; font-size:30px; text-shadow:0 0 3px #666;}
+.conBox .subhead .ico_backto{display:inline-block; height:29px; margin-right:10px; vertical-align:middle;}
+
+/* 输入框 带下拉 键盘标志 */
+.inputBox{display:inline-block; border:1px solid #D3D3D3; border-radius:5px;}
+.inp_keyboard{position:relative; z-index:2; width:76%; padding:5px; font-size:26px; color:#666; border:none; border-radius:5px; background:none;}
+.icon_keyboard{display:inline-block; right:6px; top:0; z-index:1; width:13%; height:100%; background:url('../images/icon_keyboard.png') no-repeat center center; background-size:80%;}
+
+.text_select{position:relative; z-index:100; padding:12px 50px 12px 12px; font-size:26px; color:#999;}
+.text_select_color{color:#666;}
+.icon_select{display:inline-block; right:0; top:0; z-index:10; width:13%; height:100%; background:url('../images/icon_select.png') no-repeat center center; background-size:50%}
+
+/* 下拉菜单 */
+.inputBox_select .selectlist{position:absolute; left:1px; z-index:1000; width:99%; max-height:500%; border:1px solid #666; background-color:#FBFBFB; -webkit-box-shadow:2px 3px 10px #476072; box-shadow:2px 3px 10px #476072; border-radius:0 0 5px 5px; overflow-y:scroll;}
+.inputBox_select .selectlist li{position:relative; padding:8px 10px; font-size:26px; border-bottom:1px solid #DEDEDE;}
+
+/* 业务归属地 */
+.areaList{position:absolute; left:1px; z-index:1000; width:99%; border:1px solid #666; background-color:#FBFBFB; -webkit-box-shadow:2px 3px 10px #476072; box-shadow:2px 3px 10px #476072; border-radius:0 0 5px 5px;}
+.areaList .area_hd{padding:0 15px; border-bottom: 1px solid #DDDDDD;}
+.areaList .area_hd li{float:left; font-size:24px; padding:8px 0 5px; margin-right:15px; cursor:pointer;}
+.areaList .area_hd li.area_active{border-bottom:3px solid #145B89;}
+.areaList .area_bd{padding:15px 8px 10px;}
+.areaList .area_bd li{float:left; font-size:24px; width:23%; margin:0 1% 10px; cursor:pointer;}
+.areaList .area_bd li.twoRow{width: 48%; margin: 0 1% 10px;}
+.areaList .area_bd li span{display:block; padding:3px 0; border:1px solid #145B89; border-radius:4px; text-align: center;}
+.areaList .area_bd li.area_active span{background-color:#145B89; color:#fff;}
+
+/* 左下角首页 返回按钮 */
+.leftbottomBtn{width:35%; left:0; bottom:0; z-index: 10;}
+.leftbottomBtn a:active, .leftbottomBtn i:active, .leftbottomBtn img:active{opacity:.8; filter:alpha(opacity=80);}
+.leftbottomBtn .toback i, .leftbottomBtn .toindex i{position:absolute; z-index:100; display:block; height:100%;}
+.leftbottomBtn .toback img, .leftbottomBtn .toindex img{position: relative; z-index: 1;}
+.leftbottomBtn .toback i, .leftbottomBtn .toback img{width:48%; left:0; bottom:15px;}
+.leftbottomBtn .toindex i, .leftbottomBtn .toindex img{width:33%; left:41.5%; bottom:0;}
+.leftbottomBtn .toindex i{height:65%;}
+.leftbottomBtn .toindex img{position:absolute;}
+
+/* 下一步按钮 */
+.nextBtn a{display:block; width:50%; padding:10px 0; margin-top:16px; font-size:25px; cursor:pointer; background:url('../images/nextbtnbg.png') repeat-x; background-size:1px 100%; background:-webkit-linear-gradient(#0099DD, #00BFEC); -moz-background:linear-gradient(#0099DD, #00BFEC); -o-background:linear-gradient(#0099DD, #00BFEC); background:linear-gradient(#0099DD, #00BFEC); border-radius:5px; color:#FFF; text-align:center;}
+.nextBtn a.printbtn{background-image:url('../images/printbtnbg.png');}
+.nextBtn a:active{opacity: .8; filter: alpha(opacity=80);}
+
+/* 多选框 */
+.checkBoxLine{border-bottom: 1px solid #EEE \9;}
+.checkBox{display:inline-block; width:30px; height:30px; margin-right:5px; background:url('../images/icon_checkbox.png') no-repeat; background-position:0 1px; background-position:0 0 \9; background-size:100% 200%; vertical-align:middle; background-image:url('../images/icon_checkbox_small.png') \9;}
+.checkBox input[type='checkbox']{visibility:hidden;}
+.checkBox.chkchecked{background-position:0 -34px; background-position:0 -38px \9;}
+
+/* 弹窗 prompt&alert */
+.popupDiv{position:fixed;left:0;top:0;z-index:9999;width:100%;height:100%;}
+.popupMark{width:100%;height:100%;background:#FFF; opacity: .3; filter:alpha(opacity=30);}
+.popupBox{
+    position: absolute;
+    top:50%; left:50%; z-index:1;
+    width:80%; margin-left:-42%;
+    padding:15px 15px;
+    background-color: #FFF;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    font-size:30px;
+}
+.promptDiv .popupBox{height:200px; margin-top:-120px;}
+.alertDiv .popupBox{margin-top:-80px;}
+.confirmDiv .popupBox{margin-top:-80px;}
+
+.popupBox .inp_keyboard{width:89%; height: 40px; padding-right:10%; font-size:26px;}
+.popupBox .icon_keyboard{width:7%; height:90%; top:5%;}
+.popup_title{padding:5px 0 15px;}
+.popup_input{margin-bottom:25px;border: 1px solid #D3D3D3; border-radius: 5px;}
+.popup_btn{padding-right:15px;font-size: 24px;text-align: right;}
+.popup_btn .popbtn{
+    display:inline-block;
+    padding:7px 40px;
+    margin-left:10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+}
+.popup_btn .btn-cancel{
+    text-shadow: 0 1px 0 #fff;
+    background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+    background-color: #fff;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border-color: #ccc;
+    color: #333;
+}
+.popup_btn .btn-save{
+    background-image: -webkit-linear-gradient(top,#469ce5 0,#3679b4 100%);
+    background-image: -o-linear-gradient(top,#469ce5 0,#3679b4 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#469ce5),to(#3679b4));
+    background-image: linear-gradient(to bottom,#469ce5 0,#3679b4 100%);
+    background-color: #337ab7;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7', endColorstr='#ff265a88', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border-color: #245580;
+    color: #fff;
+}
+/* 正在打印 提示信息 */
+.printInfoDiv .popupBox{height:150px; padding:50px 30px 0; margin-top:-75px; text-align: center;}
+
+/* 虚拟键盘 */
+#softkey{position:absolute; left:0; z-index:100000;}
+
+/* 虚拟数字键盘 */
+#softkeyNum{position:absolute; left:50%; z-index:100000; min-width:230px; border:1px solid #ddd; background:#F2F3F7; border-radius: 4px; -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5); box-shadow: 0 3px 9px rgba(0,0,0,.5);}
+#softkeyNum li{text-align: center; margin:-1px -1px 0 0; cursor:pointer;}
+#softkeyNum li span{display: block; height:40px; line-height:40px; padding:10px 0; border:1px solid #ddd;}
+#softkeyNum .numPanel{width:75%; padding:6px 0 6px 1.5%;}
+#softkeyNum .numPanel li{float:left; width:33.33%;}
+#softkeyNum .numPanel li span{font-size:26px;}
+#softkeyNum .numPanel li span:active{background:#c7cbc9;}
+#softkeyNum .numPanel li.last-child span{font-size:18px;}
+#softkeyNum .funcPanel{width:22%; padding:6px 1.5% 6px 0;}
+#softkeyNum .funcPanel li span{height:39px; line-height:39px; padding:20px 0 21px; font-size:18px;}
+
+/* 右上角倒计时 */
+#countDown{position: fixed; right: 20px; top: 10px; z-index: 9999; width:60px; height:60px; line-height:60px; font-size:26px; background:#d13144; letter-spacing: 1px; text-align:center; border-radius:50%; border:2px solid #FFF; color:#FFF;}
+
+/* 手动输入按钮 */
+#manualInput{display: inline-block; padding: 5px 20px; margin-top: 20px; font-size:28px; cursor: pointer;  background:url("../images/printbtnbg.png") repeat-x; background-size: 1px 100%; border-radius: 5px; border: solid #07A752; border-width: 0 1px 0 1px;}
+#manualInput:active{opacity: .8; filter: alpha(opacity=80);}
+
+/* 隐藏输入框 */
+.hiddenInput{width:1px; height:1px; padding:0; margin:0; border:none; background:transparent; outline: none; color: transparent;}

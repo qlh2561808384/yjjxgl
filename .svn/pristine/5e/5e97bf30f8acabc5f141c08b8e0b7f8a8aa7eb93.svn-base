@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE>首页</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.datanew.js"></script>
+	<script src="plugins/tree/js/jquery.ztree.sidebar.js"></script>
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/sideTree.css" />
+	<link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index-custom.css" />
+	<script type="text/javascript" src="js/index.js"></script>
+</HEAD>
+
+<BODY>
+<div class="main-content">
+	<!-- Sidebar -->
+	<div class="sidebar" id="sidebar">
+		<div class="userInfo">
+			<div class="user_img"><img src="images/a.jpg" alt="" /></div>
+			<div class="user_name">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+					<span class="uname"><b>用户名</b></span>
+					<span class="utitle">管理员，部门管理员 <b class="caret"></b></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">修改头像</a></li>
+					<li><a href="#">个人资料</a></li>
+					<li class="divider"></li>
+					<li><a href="#">退出</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tree_side ztreeBox">
+			<ul class="ztree" id="treeSide" contenteditable="true">
+			</ul>
+		</div>
+		<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+			<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+		</div>
+	</div>
+
+	<!-- main -->
+	<div class="main-content-inner">
+		<!-- 导航 --> 
+		<div class="navbar">
+			<div class="navbar-inner container-fluid">
+				<!-- <button data-target=".sidebar" data-toggle="collapse" class="btn btn-navbar collapsed pull-left" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> -->
+				<a href="#" class="brand">网站名</a>
+				<ul class="nav pull-right">
+					<li class="dropdown nav_news_green pull-right">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-bell"></i><span class="badge badge-info">5</span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">55</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">2</span>
+								</a>
+							</li>
+							<li class="seeAllNews"><a href="#">查看所有消息</a></li>
+						</ul>
+					</li>
+					<li class="dropdown nav_news_purple pull-right">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-envelope"></i><span class="badge badge-info">5</span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">55</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">2</span>
+								</a>
+							</li>
+							<li class="seeAllNews"><a href="#">查看所有消息</a></li>
+						</ul>
+					</li>
+					<li class="dropdown nav_news_grey pull-right">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-envelope"></i><span class="badge badge-info">5</span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">55</span>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="" class="textover-ell">
+									<i class="fa fa-comment"></i>
+									<span class="msg_con">消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容</span>
+									<span class="badge badge_info">2</span>
+								</a>
+							</li>
+							<li class="seeAllNews"><a href="#">查看所有消息</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- tab标签 -->
+		<div class="tabBox">
+			<div class="tab_wrap clearfix">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active" id="tabli-11"><a href="#tab-11" id="tabclose-11" data-toggle="tab">首页 <i class="fa fa-times-circle"></i></a></li>
+				</ul>
+			</div>
+
+			<div class="tab_btn">
+				<a href="javascript:;" class="closeAll pull-right hide">关闭所有</a>
+                <a href="javascript:;" class="showtab showRightTabs pull-right hide"><i class="fa-angle-double-right"></i></a>
+                <a href="javascript:;" class="showtab showLeftTabs pull-right hide"><i class="fa-angle-double-left"></i></a>
+			</div>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="tab-11">
+					<iframe src="readme.html" frameborder="0" class="iframeCon" id="iframe-11" width="100%"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</BODY>
+</HTML>
+<script>
+    var zNodes = [
+        {id:11, pId:1, name:"首页", icon:'./css/zTreeStyle/img/diy/sibarimg1.png', url:'./readme.html'},
+
+        {id:14, pId:1, name:"组件demo", icon:'./css/zTreeStyle/img/diy/sibarimg7.png', isOpen:true},
+        {id:141, pId:14, name:"表格组件dtable", url:'example/table_demo.html'},
+        {id:142, pId:14, name:"树组件tree", url:'example/new_tree_demo.html'},
+        {id:1434, pId:14, name:"下拉树comboTree", url:'example/comboTree.html'},
+        {id:1435, pId:14, name:"弹出树searchTree", url:'example/searchTree_demo.html'},
+        {id:144, pId:14,name:"按钮button", url:'example/dbuttoncss_demo.html'},
+        //{id:143, pId:14, name:"表单组件"},
+        {id:1436, pId:14, name:"表单功能form", url:'example/form_demo.html'},
+        {id:1431, pId:14, name:"文本框textBox", url:'example/textBox.html'},
+        {id:1432, pId:14, name:"日期框dateBox", url:'example/dateBox.html'},
+        {id:1433, pId:14, name:"下拉框comboBox", url:'example/comboBox.html'},
+//      {id:144, pId:14, name:"弹出框组件", url:'example/modal_demo.html'},
+//      {id:146, pId:14, name:"输入框-树组件", url:'example/searchtree_demo.html'},
+        //{id:147, pId:14, name:"拖拽树组件", url:'example/dragtree_demo.html'},
+//      {id:148, pId:14, name:"输入框-日期组件", url:'example/ddate_demo.html'},
+//      {id:149, pId:14, name:"输入框-小数输入框组件", url:'example/decimal_demo.html'},
+        {id:1140, pId:14, name:"图片上传组件webuploader", url:'example/webuploader.html'},
+
+        {id:17, pId:1, name:"图形报表", icon:'./css/zTreeStyle/img/diy/sibarimg5.png'},
+        {id:171, pId:17, name:"柱状报表", url:'example/reportForms/bar.html'},
+        {id:172, pId:17, name:"地图报表", url:'example/reportForms/map.html'},
+
+        {id:16, pId:1, name:"js工具类", icon:'./css/zTreeStyle/img/diy/sibarimg4.png'},
+        {id:161, pId:16, name:"include", url:'example/include_demo.html'},
+//        		{id:162, pId:16, name:"getObj", url:'example/getObj_demo.html'},
+        {id:163, pId:16, name:"dajax", url:'example/dajax_demo.html'},
+        {id:165, pId:16, name:"dloadformdata", url:'example/dloadformdata_demo.html'},
+        {id:166, pId:16, name:"ddisable", url:'example/ddisable_demo.html'},
+        {id:167, pId:16, name:"dalert", url:'example/dalert_demo.html'},
+        {id:168, pId:16, name:"dconfirm", url:'example/dconfirm_demo.html'},
+        {id:169, pId:16, name:"dopen", url:'example/dopen_demo.html'},
+        {id:170, pId:16, name:"dcookie", url:'example/dcookie_demo.html'},
+
+        {id:15, pId:1, name:"定制组件", icon:'./css/zTreeStyle/img/diy/sibarimg3.png', isOpen:false},
+        {id:151, pId:15, name:"可编辑treetable", url:'example/treetable_demo.html'},
+        {id:152, pId:15, name:"可编辑整表数据table", url:'example/table_inlinebox_demo.html'},
+        {id:153, pId:15, name:"table单行行内编辑", url:'example/table_line_demo.html'},
+//        {id:154, pId:153, name:"table单行行内编辑", url:'example/table_line_demo.html'},
+
+//  		  		{id:17, pId:1, name:"其他", icon:'./css/zTreeStyle/img/diy/sibarimg5.png'},
+//  		  	    {id:171, pId:17,name:"bootstrap字体图标", url:'example/dbutton_demo.html'},
+
+
+        {id:19, pId:1, name:"个性化页面", icon:'./css/zTreeStyle/img/diy/sibarimg6.png'},
+        {id:191, pId:19, name:"桌面式页面", url:'example/modal/desktop/desktop.html'},
+        {id:192, pId:19, name:"常用模板", url:'example/layout/layout.html'},
+
+        {id:18, pId:1, name:"版本记录", icon:'./css/zTreeStyle/img/diy/sibarimg2.png', url:'version/version.html'}
+    ];
+
+    //侧边栏
+    var treeSide = $("#treeSide").atree({
+    	localdata: zNodes,
+    	//url : "jczl/budgetUnit/enterPrise.do", // Ajax 获取数据的 URL 地址  
+    	view: {
+    		dblClickExpand: false,
+    		showLine: false,
+    		showBadge: true //显示消息数字
+    	},
+    	data : { // 必须使用data
+    		simpleData : {
+    			enable : true,
+    			idKey : "id", // id编号命名 默认
+    			pIdKey : "pId", // 父id编号命名 默认
+    			rootPId : 0
+    		// 用于修正根节点父节点数据，即 pIdKey 指定的属性值
+    		}
+    	},
+    	callback: {
+    		beforeExpand: beforeExpand,
+    		onExpand: onExpand,
+    		onClick: onClick
+    	}
+    });
+
+
+</script>
+

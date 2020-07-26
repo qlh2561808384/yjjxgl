@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>小数输入框type=ddecimal</title>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+		$(function(){
+            $("a[id^='copybtn']").click(function(){
+                var copyObj = $(this).siblings("textarea")[0];
+                copyObj.select();
+                document.execCommand("Copy");
+                alert("复制成功");
+            })
+
+
+			$("#decimalInput").ddecimal({
+				title:"小数",
+				name: "ddecimal",
+				type: "ddecimal",
+				did: "decimalid",
+				dname: "decimalname",
+				decimalPlaces: 3 //小数位数
+			})
+		})
+	</script>
+</head>
+<body>
+
+<section class="parser">
+    <div class="page-header"><h1>语法解析</h1></div>
+
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$(function(){</span></li>
+            <li><span>  $("#decimalInput").ddecimal({</span></li>
+			<li><span>	 title:"小数",</span></li>
+			<li><span>	 name: "ddecimal",</span></li>
+			<li><span>	 type: "ddecimal",</span></li>
+			<li><span>	 did: "decimalid",</span></li>
+			<li><span>	 dname: "decimalname",</span></li>
+			<li><span>	 decimalPlaces: 3 //小数位数</span></li>
+			<li><span>  })</span></li>
+			<li><span>})</span></li>
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+			<tr><td colspan="4">form组件的其他参数请参考<a href="form_demo.html" target="_blank">form_demo.html</a>页面</td></tr>
+        	<tr><td>title</td><td>String</td><td>组件标签文字</td><td></td></tr>
+        	<tr><td>name</td><td>String</td><td>组件name值</td><td></td></tr>
+        	<tr><td>type</td><td>String</td><td>标签类型，默认为空的单元格，小数为ddecimal</td><td></td></tr>
+        	<tr><td>did</td><td>String</td><td></td><td></td></tr>
+        	<tr><td>dname</td><td>String</td><td>input对应的隐藏域的name值</td><td></td></tr>
+        	<tr><td>decimalPlaces</td><td>Number</td><td>小数位数</td><td>2</td></tr>
+        </tbody>
+    </table>
+    
+    <h4>案例:</h4>
+</section>
+
+<input id="decimalInput" type="number" name="decimalInput" value="0" />
+<section class="parser container-fluid row">
+    <br/><a href="javascript:;" id="copybtn1">复制代码</a>
+    <textarea id="copytext1" style="width:1px; height:1px; padding:0; border:none;">
+        <input id="decimalInput_1" type="number" name="decimalInput" value="0" />
+        <script type="text/javascript">
+            $("#decimalInput_1").ddecimal({
+                title:"小数",
+                name: "ddecimal",
+                type: "ddecimal",
+                did: "decimalid",
+                dname: "decimalname",
+                decimalPlaces: 3 //小数位数
+            })
+        </script>
+    </textarea>
+    <pre>
+        <ol style="display:table">
+            <li><span>&lt;input id="decimalInput_1" type="number" name="decimalInput" value="0" /&gt;</span></li>
+            <li><span>&lt;script type="text/javascript"&gt;</span></li>
+            <li><span>    $("#decimalInput_1").ddecimal({</span></li>
+            <li><span>        title:"小数",</span></li>
+            <li><span>        name: "ddecimal",</span></li>
+            <li><span>        type: "ddecimal",</span></li>
+            <li><span>        did: "decimalid",</span></li>
+            <li><span>        dname: "decimalname",</span></li>
+            <li><span>        decimalPlaces: 3 //小数位数</span></li>
+            <li><span>    });</span></li>
+            <li><span>&lt;/script&gt;</span></li>
+        </ol>
+    </pre>
+</section>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</body>
+</html>

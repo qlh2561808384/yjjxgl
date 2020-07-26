@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.datanew.js"></script>
+    <script>
+        $(function(){
+            var json = [{
+                "plug": [{
+                    "plug": [{
+                        "plug": [{
+                            "dtype": "tree",
+                            "localdata": [
+                                {
+                                "id": 1,
+                                "pId": 0,
+                                "name": "节点搜索演示 1",
+                                "open": true,
+                                "ISLEAF": 0
+                                }, {
+                                    "id": 11,
+                                    "pId": 1,
+                                    "name": "关键字可以是名字",
+                                    "ISLEAF": 1
+                                }, {
+                                    "id": 14,
+                                    "pId": 1,
+                                    "name": "关键字可以是各种属性",
+                                    "ISLEAF": 1
+                                }, {
+                                    "id": 2,
+                                    "pId": 0,
+                                    "name": "节点搜索演示 2",
+                                    "open": true,
+                                    "ISLEAF": 0
+                                }, {
+                                    "id": 21,
+                                    "pId": 2,
+                                    "name": "可以只搜索一个节点",
+                                    "ISLEAF": 1
+                                }, {
+                                    "id": 22,
+                                    "pId": 2,
+                                    "name": "可以搜索节点集合",
+                                    "ISLEAF": 1
+                                }, {
+                                    "id": 23,
+                                    "pId": 2,
+                                    "name": "搜我吧",
+                                    "ISLEAF": 1
+                                }
+                            ]
+                        }],
+                        "colspan": "6",
+                        "dtype": "column"
+                    }, {
+                        "plug": [{
+                            "dtype": "html",
+                            "dragHtml": "<div class=\"panel-group layoutClass\" id=\"html-305813\" role=\"tablist\" aria-multiselectable=\"true\">                                <div class=\"panel panel-default\">                                    <div class=\"panel-heading\" role=\"tab\" id=\"headingOne\">                                        <h4 class=\"panel-title\">                                            <a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\">                                                Collapsible Group Item #1                                            </a>                                        </h4>                                    </div>                                    <div id=\"collapseOne\" class=\"panel-collapse collapse in\" role=\"tabpanel\" aria-labelledby=\"headingOne\">                                        <div class=\"panel-body\">                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry                                            richardson ad squid.                                        </div>                                    </div>                                </div>                                <div class=\"panel panel-default\">                                    <div class=\"panel-heading\" role=\"tab\" id=\"headingTwo\">                                        <h4 class=\"panel-title\">                                            <a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseTwo\" aria-expanded=\"false\" aria-controls=\"collapseTwo\">                                                Collapsible Group Item #2                                            </a>                                        </h4>                                    </div>                                    <div id=\"collapseTwo\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"headingTwo\">                                        <div class=\"panel-body\">                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry                                            richardson ad squid.                                        </div>                                    </div>                                </div>                                <div class=\"panel panel-default\">                                    <div class=\"panel-heading\" role=\"tab\" id=\"headingThree\">                                        <h4 class=\"panel-title\">                                            <a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseThree\" aria-expanded=\"false\" aria-controls=\"collapseThree\">                                                Collapsible Group Item #3                                            </a>                                        </h4>                                    </div>                                    <div id=\"collapseThree\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"headingThree\">                                        <div class=\"panel-body\">                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry                                            richardson ad squid.                                        </div>                                    </div>                                </div></div>"
+                        }],
+                        "colspan": "6",
+                        "dtype": "column"
+                    }],
+                    "dtype": "row"
+                }],
+                "dtype": "body"
+            }];
+            $.initPage(json);
+        })
+    </script>
+</head>
+<body style="padding-bottom: 300px;">
+    <section class="parser container-fluid">
+        <h2>语法解析</h2>
+        <pre>
+            <ol style="display: table">
+                <li><span>$(function(){</span></li>
+                <li><span>    var json = [{ <strong style="color:#900">//json数据可通过点击 拖拽页面顶部栏的下载按钮 获取</strong></span></li>
+                <li><span>        "plug": [{</span></li>
+                <li><span>            "plug": [{</span></li>
+                <li><span>                "plug": [{</span></li>
+                <li><span>                    "dtype": "tree",</span></li>
+                <li><span>                    "rootElement": 1,</span></li>
+                <li><span>                    "checkType": "checkbox",</span></li>
+                <li><span>                    "localdata": [</span></li>
+                <li><span>                        {"id": 1,"pId": 0,"name": "节点搜索演示 1","open": true,"ISLEAF": 0},</span></li>
+                <li><span>                        {"id": 11,"pId": 1,"name": "关键字可以是名字","ISLEAF": 1},</span></li>
+                <li><span>                        {"id": 14,"pId": 1,"name": "关键字可以是各种属性","ISLEAF": 1},</span></li>
+                <li><span>                        {"id": 2,"pId": 0,"name": "节点搜索演示 2","open": true,"ISLEAF": 0},</span></li>
+                <li><span>                        {"id": 21,"pId": 2,"name": "可以只搜索一个节点","ISLEAF": 1},</span></li>
+                <li><span>                        {"id": 22,"pId": 2,"name": "可以搜索节点集合","ISLEAF": 1},</span></li>
+                <li><span>                        {"id": 23,"pId": 2,"name": "搜我吧","ISLEAF": 1}</span></li>
+                <li><span>                    ]</span></li>
+                <li><span>                }],</span></li>
+                <li><span>                "colspan": "6",</span></li>
+                <li><span>                "dtype": "column"</span></li>
+                <li><span>            }, {</span></li>
+                <li><span>                "plug": [{</span></li>
+                <li><span>                    "dtype": "html",</span></li>
+                <li><span>                    "dragHtml": '&lt;div class="panel-group layoutClass" id="accordion" role="tablist" aria-multiselectable="true"&gt;......&lt;/div&gt;'</span></li>
+                <li><span>                }],</span></li>
+                <li><span>                "colspan": "6",</span></li>
+                <li><span>                "dtype": "column"</span></li>
+                <li><span>            }],</span></li>
+                <li><span>            "dtype": "row"</span></li>
+                <li><span>        }],</span></li>
+                <li><span>        "dtype": "body"</span></li>
+                <li><span>    }];</span></li>
+                <li><span>    $.initPage(json);</span></li>
+                <li><span>})</span></li>
+            </ol>
+        </pre>
+        <h4>展示:</h4>
+    </section>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>form_demo</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css"/>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#formdemo").dform({
+    			//formtitle:"项目信息", //表单标题
+         		rownum:3,
+                labelwidth: "140px",
+                inputs: [
+                    {
+                        title: "隐藏域",
+                        name: "hide",
+                        type: "hidden",
+                        defaultvalue:'hidden'
+                    }, {
+                        title: "文本框-单行",
+                        name: "textBox1",
+                        type: "textBox",
+                        defaultValue: "张三",
+                        colspan: "2"
+                    }, {
+                        title: "备注-多行",
+                        name: "textBox2",
+                        type: "textBox",
+                        defaultValue: "多行",
+                        multiline:true,
+                        colspan: "3"
+                    }, {
+                        title: "小数",
+                        name: "decimal",
+                        type: "decimal",
+                        decimalPlaces: 2 //小数位数
+                    }, {
+                        title: 'searchTree',
+                        type: 'searchTree',
+                        name: 'searchTree',
+                        required:true,
+                        url:'./json/treeData.json',
+                        ISLEAF: false,
+                        onlyLeaf:true,
+                        modalTitle: '查找名称',
+                        checkType: 'checkbox',
+                        defaultValue:"12"
+                    }, {
+                        title: 'comboTree',
+                        type: 'comboTree',
+                        name: 'comboTree',
+                        multiple: true,
+                        url:'./json/treeData.json',
+                        defaultValue:'12'
+                    }, {
+                        title: 'comboBox-单选',
+                        type: 'comboBox',
+                        name: 'comboBox1',
+                        selected: 1,
+                        textField: 'comboTxt',
+                        valueField: 'comboId',
+                        required: true,
+                        localdata: [{comboId: 1, comboTxt: "comboBox1"}, {comboId: 2, comboTxt: "comboBox2"}, {comboId: 3, comboTxt: "comboBox3"}]
+                    }, {
+                       title: 'comboBox-多选',
+                        type: 'comboBox',
+                        name: 'comboBox2',
+                        multiple: true,
+                        localdata: [{id: 1, text: "comboBox1"}, {id: 2, text: "comboBox2"}, {id: 3, text: "comboBox3"}],
+                        defaultValue:"2"
+                    }, {
+                        title: "日期-年月日",
+                        type: "dateBox",
+                        name: "dateBox2",
+                        minView: 2,
+                        format: "yyyy-mm-dd",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2018-03-23"
+                    }, {
+                        title: "日期-年月",
+                        type: "dateBox",
+                        name: "dateBox3",
+                        minView: 3,
+                        format: "yyyy-mm",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2018-02"
+                    }, {
+                        title: "日期-年",
+                        type: "dateBox",
+                        name: "dateBox4",
+                        minView: 4,
+                        format: "yyyy",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2017"
+                    }, {
+                        title: "日期-月日",
+                        type: "dateBox",
+                        name: "dateBox5",
+                        startView: 3,
+                        minView: 2,
+                        format: "mm-dd",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"03-14"
+                    }, {
+                        title: "webupload",
+                        name: "webupload33",
+                        type: "webupload",
+                        server: '../plugins/webuploader/webuploader.json',//用于提交文件
+                        url: '../plugins/webuploader/filesList.json',//已上传的文件数据
+                        delUrl: '../plugins/webuploader/webuploader.json',
+                        downloadUrl: '../plugins/webuploader/webuploader.json',
+                        colspan:3
+                    }
+                ]
+            });
+            $.dinit();
+
+        });
+
+        function formsubmit() {
+            $("#formdemo").dform("submit", {
+                url: 'test/t'
+            });
+        }
+
+        function upload() {
+            $("#formdemo").dform('upload', function (data) {
+                alert(data)
+            })
+        }
+
+        function formclear() {
+            $("#formdemo").dform("clear");
+        }
+
+        function formdisabled() {
+            $("#formdemo").dform("disabled");
+        }
+
+        function formenable() {
+            $("#formdemo").dform("enable");
+        }
+
+        function formvalidate() {
+            var flag = $("#formdemo").dform("validate");
+            if (!flag) {
+                $.dalert({text:"验证不通过，有部分数据格式错误", icon:2})
+            }
+        }
+
+        function loadform() {
+            $("#formdemo").dform("load", {
+                textBox1: "hh",
+                textBox2: "备注",
+                searchTree: 11,
+                comboTree: 1,
+                comboBox1: 2,
+                comboBox2: "1,2",
+                dateBox2: "2017-09-20",
+                webupload33: '1122,1212'
+            });
+        }
+
+        function getData() {
+            var formdata = $("#formdemo").dform("getData");
+            $.dalert({text:JSON.stringify(formdata)});
+        }
+
+        var zNodes = [
+            {id: 1, pId: 0, name: "节点搜索演示 1", open: true, ISLEAF: 0},
+            {id: 11, pId: 1, name: "关键字可以是名字", ISLEAF: 1},
+            {id: 12, pId: 1, name: "关键字可以是level", ISLEAF: 1},
+            {id: 13, pId: 1, name: "关键字可以是id", ISLEAF: 1},
+            {id: 14, pId: 1, name: "关键字可以是各种属性", ISLEAF: 1},
+            {id: 2, pId: 0, name: "节点搜索演示 2", open: true, ISLEAF: 0},
+            {id: 21, pId: 2, name: "可以只搜索一个节点", ISLEAF: 1},
+            {id: 22, pId: 2, name: "可以搜索节点集合", ISLEAF: 1},
+            {id: 23, pId: 2, name: "搜我吧", ISLEAF: 1},
+            {id: 3, pId: 0, name: "节点搜索演示 3", open: true, ISLEAF: 0},
+            {id: 31, pId: 3, name: "我的 id 是: 31", ISLEAF: 0},
+            {id: 32, pId: 31, name: "我的 id 是: 32", ISLEAF: 0},
+            {id: 33, pId: 32, name: "我的 id 是: 33", ISLEAF: 1}
+        ];
+    </script>
+</head>
+<body>
+
+<section class="parser">
+    <div class="page-header"><h1 id="a1">语法解析</h1></div>
+
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$(function(){</span></li>
+			<li><span> 	  $("#formdemo").dform({</span></li>
+			<li><span> 		 formtitle:"项目信息", //表单标题</span></li>
+			<li><span> 		 rownum:3,   //每行控件数目</span></li>
+			<li><span> 		 labelwidth:"100px",</span></li>
+			<li><span> 		 inputs:[</span></li>
+			<li><span> 		         {</span></li>
+			<li><span> 		        	 title:"姓名",</span></li>
+			<li><span> 		        	 name:"name",</span></li>
+			<li><span> 		        	 type:"textBox",</span></li>
+			<li><span> 		        	 defaultvalue:"张三",</span></li>
+			<li><span> 		        	 required:true,</span></li>
+			<li><span> 		        	 colspan:"2"</span></li>
+			<li><span> 		         }</span></li>
+			<li><span> 		 ]</span></li>
+			<li><span> 	  })</span></li>
+			<li><span>   })</span></li>
+        </ol>
+    </pre>
+    <h4 id="a2">初始化参数</h4>
+    <table class=" table-border">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>类型</th>
+            <th>描述</th>
+            <th>默认值</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="a2_tr_1">
+            <td>formtitle</td>
+            <td>String</td>
+            <td>定义表单标题</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>rownum</td>
+            <td>Number</td>
+            <td>定义表格的高度</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>labelwidth</td>
+            <td>String</td>
+            <td>标签的宽度</td>
+            <td>50px</td>
+        </tr>
+        <tr>
+            <td>showtitle</td>
+            <td>String</td>
+            <td>标签显示的位置(left/top/none)</td>
+            <td>left</td>
+        </tr>
+
+        <tr>
+            <td colspan="4">inputs(组件数组)，以下没有列出的属性请查看具体组件</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>String</td>
+            <td>组件标签</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>String</td>
+            <td>组件name值</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>String</td>
+            <td>
+                标签类型,默认为空的单元格,目前支持的有以下类型(text,password,datetime,datetime-local,date,month,time,week,number,email,url,search,tel,color,ddate,select,dsearchtree,ddecimal,html,hidden)
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>colspan</td>
+            <td>Number</td>
+            <td>组件占用的格子数</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>defaultvalue</td>
+            <td>String</td>
+            <td>默认值</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>onLoadedCallBack</td>
+            <td>function</td>
+            <td>可能表单元素通过url属性进行异步远程数据加载，该回调方法可确保在所有数据加载完毕之后调用
+                反例：表单中使用 combo tree 等组件 并利用url获取数据 在初始化后立刻使用执行 dform('load',{}) 将会原地爆炸
+            </td>
+            <td>undefined</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <h4 id="a3">事件:</h4>
+    <table class=" table-border">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <h4 id="a4">方法:</h4><h5>调用语法：fn.dform('method',param)</h5>
+    <table class=" table-border">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>参数</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="a4_tr_1">
+            <td>submit</td>
+            <td>{}</td>
+            <td>ajax提交表单 参数为ajax 参数 url 为必填 默认 type : "POST",dataType : "json" 除data参数 其余ajax参数可进行重写</td>
+        </tr>
+        <tr>
+            <td>upload</td>
+            <td>function</td>
+            <td>上传文件方法 如使用该方法 需在form标签内 写上action 和method 参数为回调方法 请求效果点击上传按钮后查看请求数据</td>
+        </tr>
+        <tr>
+            <td>clear</td>
+            <td>none</td>
+            <td>清空表单内所有表单值</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>none</td>
+            <td>禁用表单内所有表单元素</td>
+        </tr>
+        <tr>
+            <td>enable</td>
+            <td>none</td>
+            <td>启用表单内所有表单元素</td>
+        </tr>
+        <tr>
+            <td>load</td>
+            <td>object</td>
+            <td>根据表单name 加载各表单数据 主意：如果需要实现 初始化form后 立即调用load 方法 请将该代码移入</td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<h4 id="a5">上传文件后端代码</h4>
+    <pre>
+        <ol style="display: table">
+			<li><span>//MultipartFile file为file表单的name，a b c为其余input的name</span></li>
+			<li><span>public void upload(MultipartFile file,HttpServletResponse res,String a,String b,String c){</span></li>
+			<li><span> 	  String fileName = file.getOriginalFilename();</span></li>
+			<li><span> 	  file.getBytes();//文件处理</span></li>
+			<li><span> 	  Map<String, Object> model = new TreeMap<String, Object>();</span></li>
+			<li><span> 	  model.put("success", true);</span></li>
+			<li><span> 	  model.put("msg", msg);</span></li>
+			<li><span> 	  StringWriter writer = new StringWriter();</span></li>
+			<li><span> 	  ObjectMapper mapper = new ObjectMapper();</span></li>
+			<li><span> 	  mapper.writeValue(writer, model);</span></li>
+			<li><span> 	  res.setContentType("text/html;charset=UTF-8");</span></li>
+			<li><span> 	  res.getWriter().write(writer.toString());</span></li>
+			<li><span>}</span></li>
+		</ol>
+    </pre>-->
+    <h4 id="a6">案例:</h4>
+</section>
+<div class="outbackframe">
+    <button style="margin-left: 5px;margin-bottom: 10px" type="button" class="btn btn-info btn-sm copyBtn" id="copyBtn9">查看代码</button>
+    <div class="innerback">
+        <form id="formdemo" action="test.do" method="post">
+        </form>
+        <div style="margin-left:15px;">
+            <input value="提交" class="bootstrap-table-submit" type="button" onclick="formsubmit()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn1">查看代码</button> |
+            <input value="取值" class="bootstrap-table-submit" type="button" onclick="getData()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn2">查看代码</button> |
+            <input value="上传" class="bootstrap-table-upload" type="button" onclick="upload()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn3">查看代码</button> |
+            <input value="清空" class="bootstrap-table-submit" type="button" onclick="formclear()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn4">查看代码</button> |
+            <input value="禁用" class="bootstrap-table-delete" type="button" onclick="formdisabled()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn5">查看代码</button><br><br>
+            <input value="启用" class="bootstrap-table-submit" type="button" onclick="formenable()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn6">查看代码</button> |
+            <input value="验证数据是否正确" class="bootstrap-table-query" type="button" onclick="formvalidate()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn7">查看代码</button> |
+            <input value="表单加载" class="bootstrap-table-query" type="button" onclick="loadform()"/>&nbsp;<button type="button" class="btn btn-default btn-xs copyBtn" id="copyBtn8">查看代码</button>
+        </div>
+    </div>
+</div>
+
+<div class="siteDir">
+    <div class="dir-title">目录 <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+    <div class="dir-list">
+        <ul id="dir_tree"></ul>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $(".siteDir .close").on("click", function(){
+            $(this).parents(".siteDir").hide();
+        });
+        function addEleId(ele) {
+            var i = 0;
+            $('#'+ele+'_tr_1').parent().find('tr').map(function (index,value) { //a3_tr_1
+                $(this).attr('id',ele+"_tr_"+(++i));
+            })
+        }
+        addEleId('a2');//传入参数a3
+        addEleId('a4');
+        function createObject(ele) { //创建一个对象，{id:3, pId:0, name:"方法", url:"#a4", target:"_self"}
+            var gdatastring = [];
+            var gdata = {
+                arg:{},
+                i:1,
+                sumarg:[],
+                glength:$('#a'+ele+'_tr_1').parent().find('tr').length,
+                gseriesinfo:function () {
+                    let sumarg = [];
+                    for(;gdata.i<=gdata.glength;gdata.i++){
+                        gdata.arg.id=ele.toString()+gdata.i;
+                        gdata.arg.pId = ele;
+                        gdata.arg.name = $('#a'+ele+'_tr_'+gdata.i).find('td:first').html();
+                        gdata.arg.url = '#a'+ele+'_tr_'+gdata.i;
+                        gdata.arg.target = '_self';
+                        sumarg.push(JSON.stringify(gdata.arg));
+                    }
+                    return sumarg;
+                }
+            }
+
+            gdata.gseriesinfo().map(function (i,v) {
+                gdatastring.push(JSON.parse(i));
+            });
+            return gdatastring;
+        }
+
+
+        $("#dir_tree").tree({
+            localdata: [
+                {id:1, pId:0, name:"用法 & 数据格式", url:"#a1", target:"_self"},
+                {id:2, pId:0, name:"初始化参数", url:"#a2", target:"_self"},
+
+                {id:3, pId:0, name:"事件", url:"#a3", target:"_self"},
+                {id:4, pId:0, name:"方法", url:"#a4", target:"_self"},
+
+                {id:5, pId:0, name:"上传文件后端代码", url:"#a5", target:"_self"},
+                {id:6, pId:0, name:"案例", url:"#a6", target:"_self"}
+            ].concat(createObject(2),createObject(4)),
+            checkType:'nocheck',
+            view: {
+                showIcon: false
+            },
+            data : { // 必须使用data
+                simpleData : {
+                    enable : true,
+                    idKey : "id", // id编号命名 默认
+                    pIdKey : "pId", // 父id编号命名 默认
+                    rootPId : 0
+                },
+                key: {
+                    url: "url"
+                }
+            },
+            callback:{
+                clickNode : function(e,treeId,treeNode,clickFlag){
+                    var ztree = $("#"+treeId).tree("getTree");
+                    ztree.expandNode(treeNode);
+                    $('#dir_tree').find('.checkbox_false_full').remove();
+                }
+            }
+        });
+        $('#dir_tree').find('.checkbox_false_full').remove();
+
+    })
+</script>
+
+<br><br><br><br>
+
+<div style="width:1px;height:1px;overflow:hidden;">
+    <textarea id="copyTarget1">
+        function formsubmit() {
+            $("#formdemo").dform("submit", {
+                url: 'test/t'
+            });
+        }
+        </textarea>
+    <textarea id="copyTarget2">
+        function getData() {
+            //console.log($("#formdemo").dform("getData"));
+        }
+
+    </textarea>
+    <textarea id="copyTarget3">
+        function upload() {
+            $("#formdemo").dform('upload', function (data) {
+                alert(data)
+            })
+        }
+
+    </textarea>
+    <textarea id="copyTarget4">
+        function formclear() {
+            $("#formdemo").dform("clear");
+        }
+
+    </textarea>
+    <textarea id="copyTarget5">
+        function formdisabled() {
+            $("#formdemo").dform("disabled");
+        }
+
+    </textarea>
+    <textarea id="copyTarget6">
+        function formenable() {
+            $("#formdemo").dform("enable");
+        }
+
+    </textarea>
+    <textarea id="copyTarget7">
+        function formvalidate() {
+            var flag = $("#formdemo").dform("validate");
+            if (!flag) {
+                $.dalert("验证不通过，有部分数据格式错误")
+            }
+        }
+     </textarea>
+    <textarea id="copyTarget8">
+        function loadform() {
+            $("#formdemo").dform("load", {
+                textBox1: "hh",
+                textBox2: "备注",
+                searchTree: 11,
+                comboTree: 1,
+                comboBox1: 2,
+                comboBox2: "1,2",
+                dateBox2: "2017-09-20"
+            });
+        }
+    </textarea>
+    <textarea id="copyTarget9">
+       $(function () {
+            $("#formdemo").dform({
+                //formtitle:"项目信息", //表单标题
+                rownum:3,
+                labelwidth: "140px",
+                inputs: [
+                    {
+                        title: "隐藏域",
+                        name: "hide",
+                        type: "hidden",
+                        defaultvalue:'hidden',
+                    }, {
+                        title: "文本框-单行",
+                        name: "textBox1",
+                        type: "textBox",
+                        defaultValue: "张三",
+                        colspan: "2"
+                    }, {
+                        title: "选择文件",
+                        type: "html",
+                        name: 'file',
+                        html:'<input type="file" name="file"/>',
+                        colspan:'3'
+                    }, {
+                        title: "备注-多行",
+                        name: "textBox2",
+                        type: "textBox",
+                        defaultValue: "多行",
+                        multiline:true,
+                        colspan: "3"
+                    }, {
+                        title: "小数",
+                        name: "decimal",
+                        type: "decimal",
+                        decimalPlaces: 2 //小数位数
+                    }, {
+                        title: 'searchTree',
+                        type: 'searchTree',
+                        name: 'searchTree',
+                        required:true,
+                        url:'./json/treeData.json',
+                        ISLEAF: false,
+                        onlyLeaf:true,
+                        modalTitle: '查找名称',
+                        checkType: 'checkbox',
+                        defaultValue:"12"
+                    }, {
+                        title: 'comboTree',
+                        type: 'comboTree',
+                        name: 'comboTree',
+                        multiple: true,
+                        url:'./json/treeData.json',
+                        defaultValue:'12'
+                    }, {
+                        title: 'comboBox-单选',
+                        type: 'comboBox',
+                        name: 'comboBox1',
+                        selected: 1,
+                        textField: 'comboTxt',
+                        valueField: 'comboId',
+                        required: true,
+                        localdata: [{comboId: 1, comboTxt: "comboBox1"}, {comboId: 2, comboTxt: "comboBox2"}, {comboId: 3, comboTxt: "comboBox3"}]
+                    }, {
+                       title: 'comboBox-多选',
+                        type: 'comboBox',
+                        name: 'comboBox2',
+                        multiple: true,
+                        localdata: [{id: 1, text: "comboBox1"}, {id: 2, text: "comboBox2"}, {id: 3, text: "comboBox3"}],
+                        defaultValue:"2"
+                    }, {
+                        title: "日期-年月日",
+                        type: "dateBox",
+                        name: "dateBox2",
+                        minView: 2,
+                        format: "yyyy-mm-dd",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2018-03-23"
+                    }, {
+                        title: "日期-年月",
+                        type: "dateBox",
+                        name: "dateBox3",
+                        minView: 3,
+                        format: "yyyy-mm",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2018-02"
+                    }, {
+                        title: "日期-年",
+                        type: "dateBox",
+                        name: "dateBox4",
+                        minView: 4,
+                        format: "yyyy",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"2017"
+                    }, {
+                        title: "日期-月日",
+                        type: "dateBox",
+                        name: "dateBox5",
+                        startView: 3,
+                        minView: 2,
+                        format: "mm-dd",
+                        pickerPosition: "bottom-left",
+                        defaultValue:"03-14"
+                    }, {
+                        title: "webupload",
+                        name: "webupload33",
+                        type: "webupload",
+                        colspan:3
+                    }
+                ]
+            });
+            $.dinit();
+
+        });
+    </textarea>
+</div>
+<script>
+    $(function(){
+        $(".copyBtn").on("click", function(){
+            var num = $(this).attr("id").replace(/[^0-9]/ig, "");
+            var target = $("#copyTarget"+ num);
+            var dopenH = parseInt(num)===9 ? "600px" : "auto";
+            $.dopen({
+                title: "查看代码",
+                content: "<pre>"+ target.html() +"</pre>",
+                area: ["900px", dopenH],
+                btn: ["复制", "取消"],
+                btn1: function(index){
+                    var res = $.copyToClipboard(target.get(0));
+                    if(res){
+                        layer.msg('复制成功', {time: 2000});
+                        layer.close(index);
+                    }else{
+                        layer.msg('复制失败，请手动复制', {time: 2000});
+                    }
+                }
+            });
+        })
+    })
+</script>
+
+</body>
+<br/><br/><br/>
+</html>

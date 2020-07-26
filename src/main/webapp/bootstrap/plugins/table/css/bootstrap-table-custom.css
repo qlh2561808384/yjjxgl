@@ -1,0 +1,32 @@
+.bootstrap-table { border:1px solid #DDDDDD;  background:#F5F5F5; box-sizing:border-box;padding: 10px;}
+.bootstrap-table .fixed-table-toolbar{ background-color:#F5F5F5; }
+.bootstrap-table .fixed-table-searchbar .panel-group .panel-default{ border-color: #D1D1D1;}
+.bootstrap-table .fixed-table-searchbar .panel-group .panel.panel-default .panel-heading {font-family: "Microsoft YaHei";color:#333;background-color:#E1E3EB;border-color:#ddd;font-weight:500;background-image:url(../img/btn-img.png);background-position: 5px -216px; background-repeat: no-repeat;text-indent: 15px;}
+.bootstrap-table .fixed-table-container .fixed-table-header .table.table-hover.table-striped thead>tr>th{font-weight: 500;color:#fff;vertical-align:bottom; background-color:#7892C7;border-bottom: 1px solid #4A68A5;border-left: 1px solid #4A68A5; }
+.bootstrap-table .fixed-table-container .fixed-table-header .table.table-hover.table-striped thead>tr>th:first-child{border-left: 0;}
+.bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr>td{background-color:#fff; text-align: center;  }
+.bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:nth-child(odd)>td{background-color: #F5F5F5;  }
+.bootstrap-table .fixed-table-container .table.table-hover.table-striped tbody>tr:hover>td{background-color:#E5EAF2;}
+.bootstrap-table .fixed-table-container .fixed-table-pagination{background:#F5F5F5; box-sizing:border-box;border-top:1px solid #DDDDDD; }
+.pagination{margin: 0;}
+.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail{margin-bottom:0;}
+.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner {font-size: 14px;  font-family: "Microsoft YaHei";}
+.fixed-table-body {    font-size: 13px;  font-family: "Microsoft YaHei";}
+
+
+.icon-refresh {  background-position: 14px 14px;  }
+.columns.columns-right.btn-group.pull-right .btn.btn-default {background-image: none;}
+.icon-list-alt {  background-position: 14px 14px;  }
+.text-center.span12 .btn-primary{ background-color:#7892C7;border-color: #4A68A5;background-image:none; border-radius: 4px;text-shadow: none;}
+.text-center.span12 .btn-primary:nth-child(2){background-color:#F45762;border-color: #D5202C;}
+
+
+.bootstrap-table .fixed-table-searchbar .panel-heading{position: relative; cursor:pointer;}
+.bootstrap-table .fixed-table-searchbar .panel-heading i.angle-double-down{position: absolute; left: 50%; top:45%; display: inline-block; width:10px; height:9px; background:url(../img/angle-double-down.png) no-repeat;}
+.bootstrap-table .fixed-table-searchbar .panel-heading.collapsed i.angle-double-down{-webkit-transform:rotate(180deg); -moz-transform:rotate(180deg);-o-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg);}
+.bootstrap-table .fixed-table-searchbar .panel-heading:before,
+.bootstrap-table .fixed-table-searchbar .panel-heading:after{content:url(../img/double-dot.png); position: absolute; top:22%; left:50%; width:7px; height:5px;}
+.bootstrap-table .fixed-table-searchbar .panel-heading:before{margin-left:-30px;}
+.bootstrap-table .fixed-table-searchbar .panel-heading:after{margin-left: 3px;}
+.form-inline .dis_flex .flex_val_1, .form-horizontal .dis_flex .flex_val_1 {  font-family: "Microsoft YaHei";  }
+label { font-family: "Microsoft YaHei";  }

@@ -1,0 +1,58 @@
+#application configs
+#数据源配置
+jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+#hibernate 配置
+hibernate.dialect = org.hibernate.dialect.Oracle10gDialect
+hibernate.show_sql = true
+hibernate.format_sql = false
+hibernate.hbm2ddl.auto = true
+hibernate.cache.use_second_level_cache = true
+hibernate.cache.use_query_cache = true
+hibernate.cache.region.factory_class = org.hibernate.cache.ehcache.EhCacheRegionFactory
+hibernate.cache.provider_configuration_file_resource_path = ehcache.xml
+METHOD_DESCRIPTION_TARGET=com.datanew.service.ServicesService
+
+#正式库
+#jdbc.url = jdbc:oracle:thin:@10.41.126.17:1521/yjcz
+
+#jdbc.url = jdbc:oracle:thin:@172.16.12.217:1521:sjfxpt
+#测试库
+#jdbc.url = jdbc:oracle:thin:@10.41.126.54:1521:orcl
+#永嘉正式库导到本地的数据库
+jdbc.url = jdbc:oracle:thin:@172.16.12.141:1521:ysbz
+jdbc.username = jxgl
+jdbc.password = jxgl
+
+#短信ws接口地址（不需要修改）
+WEBSERVICE_MESSAGE=http://172.28.93.3:12345/?wsdl
+#当前行政区划
+Region_leval=330600
+Curve_Region=330600
+pageAuthorityExclude=/index.htm
+
+#应用guid
+APPGUID=355
+
+#报表地址
+#JXGLBBURL=172.16.12.217:8082
+JXGLBBURL=10.41.126.52:9082
+
+#报表名称
+TARGETVOLUME=jxgl
+
+#报表id
+#绩效跟踪表
+#可编辑的报表
+JXGZID=hte_2018_05_25095542451
+#只读的报表
+READ_JXGZID=hte_180611143636637
+
+#绩效管理考核表(可编辑)
+JXKHID=hte_2018_08_14103331170
+#绩效管理考核表(只读)
+READ_JXKHID=hte_180831173854795
+#绩效自评表(可编辑)
+JXZPID=hte_2018_08_14115816029
+#绩效自评表(只读)
+READ_JXZPID=hte_180831173516810
+

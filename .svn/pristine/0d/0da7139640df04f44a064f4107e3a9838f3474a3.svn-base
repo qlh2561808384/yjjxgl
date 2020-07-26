@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>表式设计器</title>
+		<script language=javascript src="../js/bdd.js"></script>
+	</head>
+	<body onresize="onWindowResize()" onbeforeunload="checkLeave()" style="padding:0;margin:0;border:none;overflow:hidden;" >
+		<script language=javascript>  
+	var obj = window.dialogArguments;
+	window.onload  =   function ()
+	{
+		onWindowResize();
+		setTimeout("ReportDesigner();",50);
+	}
+	
+	function ReportDesigner() {
+		
+	  	//设置服务器登录信息
+	  	excelReport.ApplyMgr.ClearBuffer();
+		excelReport.ApplyMgr.Login.ServerAddr = _BDD_SERVERADDR;
+		excelReport.ApplyMgr.Login.ServerPort = _BDD_SERVERPORT;
+		excelReport.ApplyMgr.Login.ApplyName = "丽水报表";//_BDD_APPLYNAME+"_"+obj.year;
+		//excelReport.ApplyMgr.Login.UserID = _BDD_USERID+obj.userid+";"+_BDD_YEAR+obj.year+";"+_BDD_SYSID+obj.sysid+";"+_BDD_SETID+obj.setid;
+		
+		excelReport.ApplyMgr.ApplyConfig.PermissionType = 1;
+ 		excelReport.ApplyMgr.ApplyConfig.EnableReporting = true;
+ 		excelReport.ApplyMgr.ApplyConfig.TitleSetting(6, "数据模型");
+	 	if(obj.arrsCN!=null&&obj.arrsCN.length>0){
+	 		for(var i=0;i<obj.arrsCN.length;i++) {
+	 			excelReport.ApplyMgr.AddExternalParam(obj.arrsCN[i],3);//传入系统参数（中文）
+		 	}
+	 	}
+ 		excelReport.ApplyMgr.ExcelReportConfig.AddParamDispType(0,'输入框');
+ 		excelReport.ApplyMgr.ExcelReportConfig.AddParamDispType(4,'日期');
+ 		excelReport.ApplyMgr.ExcelReportConfig.AddParamDispType(3,'树');
+ 		excelReport.ApplyMgr.ExcelReportConfig.AddParamDispType(6,'金额');
+ 		
+ 		excelReport.ApplyMgr.ExcelReportConfig.EnableWebViewReport = true; 
+ 		excelReport.ApplyMgr.ExcelReportConfig.AllowAutoCreateLink = true; 
+ 		excelReport.ApplyMgr.ExcelReportConfig.ShowAttributeEditor = false; 
+ 		excelReport.ApplyMgr.ExcelReportConfig.EnableEditCtrlName = false;
+ 		excelReport.ApplyMgr.ExcelReportConfig.ShowSheetRowColHeader = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnableNavigationVCell = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnableNavigationHCell = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnableNavigationCol = false;
+	    excelReport.ApplyMgr.ExcelReportConfig.EnableNavigationRow = false;
+	    excelReport.ApplyMgr.ExcelReportConfig.EnableChartCell = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnableSectionAlign = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnableMultSheet = false; 
+	 	excelReport.ApplyMgr.ExcelReportConfig.EnablePublish = false;
+	 	excelReport.ApplyMgr.ExcelReportConfig.ShowZeroValue = true;
+	 	
+ 		
+ 		
+ 		//var win = self;
+		//var	topWin = win.parent;
+		//var strs= new Array(); 
+		//strs = topWin.location.search.substring(1).split("&");
+		//var strs2= new Array(); 
+		//strs2 = strs[1].split("=");
+		//var str_ = "http://"+_BDD_SERVERADDR+":"+_BDD_SERVERPORT+"/HappyPortal/file/report/reportTypeSelect.jsp?&userExtra=key|"+strs[0]+"||"+strs2[0]+"|"
+		//+strs2[1]+"&userId="+obj.userid;
+ 		
+		//excelReport.ApplyMgr.Login.ViewReportUrl = str_; 
+ 		
+ 		excelReport.ReportMode = 21;   //自定义预算新增
+ 		excelReport.CustomTableName = obj.tableName;   //自定义预算表名
+ 		excelReport.ShowSysUIStyle();
+ 		excelReport.LoadFrame();
+ 		
+	  //加载应用基础信息
+	  //excelReport.ApplyMgr.LoadApply();
+	  //test.SetCellValue(10,10);
+	  //test.SetCellStyleId(10,10,"StyleId");
+	  this.excelReport.attachEvent("Close", onClose);
+	  this.excelReport.attachEvent("CreatedReport", onCreatedReport);
+	  this.excelReport.attachEvent("SavedReport", onSavedReport);
+	  this.excelReport.attachEvent("Modified", onModified);
+	  this.excelReport.attachEvent("ImportFinished", onImportFinished);
+	  this.excelReport.attachEvent("ExportFinished", onExportFinished);
+	  
+	  
+		    
+	    //excelReport.ApplyMgr.ExternalParamFolderName = "预算编制";
+	    
+	    //excelReport.ApplyMgr.AddExternalParam("年", 4);//默认参数
+	    //excelReport.ApplyMgr.AddExternalParam("单位编码", 4);
+	    //excelReport.ApplyMgr.AddExternalParam("环节编码", 4);
+	    
+  	  window.document.title = obj.title; 
+	  if(obj.name != "" && obj.name!=null) {
+	     if (!excelReport.EditReport(obj.name)) {
+			alert(excelReport.LastError);
+	     }else{
+	     	excelReport.DelReportParam("项目编码");
+	     	excelReport.DelReportParam("支出类别编码");
+	     	excelReport.DelReportParam("功能科目编码");
+	     	excelReport.DelReportParam("经济分类编码");
+	     	excelReport.DelReportParam("资金来源编码");
+	     	if(obj.arrs!=null&&obj.arrs.length>0){
+		 		for(var i=0;i<obj.arrs.length;i++) {
+		 			//alert(obj.arrsCN[i]+"|"+obj.arrs[i]+"|"+converDataType(obj.arrsDataType[i])+"|"+obj.arrsDataLength[i]);
+			 		excelReport.AddReportParam2(obj.arrsCN[i],0,"",false,obj.arrs[i],converDataType(obj.arrsDataType[i]),obj.arrsDataLength[i]); //自定义预算额外新增参数
+			 	}
+		 	}
+	    	excelReport.UpdateParam();
+	     }
+	  }else{
+	    if (!excelReport.NewReport(false,obj.parentGuId,true)) {
+			alert(excelReport.LastError);
+	    } else {
+	      //设置页码
+		    //excelReport.MergeCell(1,18,6,1);
+		    //excelReport.SetCellValue(1,18,"=&中文标准_页码");
+		 	excelReport.Title = obj.title;
+		 	
+		 	if(obj.arrs!=null&&obj.arrs.length>0){
+		 		for(var i=0;i<obj.arrs.length;i++) {
+		 			//alert(obj.arrsCN[i]+"|"+obj.arrs[i]+"|"+converDataType(obj.arrsDataType[i])+"|"+obj.arrsDataLength[i]);
+			 		excelReport.AddReportParam2(obj.arrsCN[i],0,"",false,obj.arrs[i],converDataType(obj.arrsDataType[i]),obj.arrsDataLength[i]); //自定义预算额外新增参数
+			 	}
+		 	}
+	    	excelReport.UpdateParam();
+        }
+       }
+	}
+	
+	function converDataType(dataType){
+		var valueType = 0 ;
+		if(dataType!=null){
+			if(dataType=="NUMBER"){
+				valueType = 1;//数值型
+			}else if(dataType=="VARCHAR2"||dataType=="CHAR"||dataType=="NVARCHAR2"){
+				valueType = 0;//字符型
+			}else if(dataType=="DATE"){
+				valueType = 2;//日期型
+			}
+			// valueType = 3; 布尔型
+		}
+		return valueType;
+	}
+	
+    
+	function checkLeave() {
+			var modify = this.excelReport.Modified;
+			if(modify == true) {
+				event.returnValue="注意：内容已经修改,关闭将丢失未保存的内容";
+			}
+	}
+	
+	function onClose() {
+			//window.close();
+	}
+	
+	function onSavedReport(bool) {
+		var obj = new Object();
+		obj.name = this.excelReport.Name;
+		obj.title = this.excelReport.Title;
+		window.returnValue = obj;
+		//window.close();
+	}
+	
+	function onModified() {
+	}
+	
+	function onCreatedReport() {
+		var obj = new Object();
+		obj.name = this.excelReport.Name;
+		obj.title = this.excelReport.Title;
+		window.returnValue = obj;
+	}
+	
+	function onImportFinished() {
+	}
+	
+	function onExportFinished() {
+	}
+	
+	function onWindowResize() {
+		window.dialogHeight = window.screen.height +"px";
+		window.dialogWidth = window.screen.width +"px";
+		window.dialogLeft = (parseInt(window.screen.width) - parseInt(window.dialogWidth)) / 2 +"px";
+	    //excelReport.width  = parseInt(window.dialogWidth) + "px";
+		//excelReport.height = parseInt(window.dialogHeight) + "px";
+	    excelReport.width  = document.documentElement.clientWidth;
+		excelReport.height = document.documentElement.clientHeight;
+	}
+	
+</script>
+<object classid="clsid:2E8B4B9F-C698-40CC-9047-48104F448625" id="excelReport"
+			width="100%" height="100%" style="margin:0px;padding:0px;" >
+		</object>
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>removeByRowIndex</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <script>
+        $(function(){
+            $("#table1").dtable({
+                height: 400,
+                url: "./layout/json/tableData.json",
+                /*data: [
+                    {"guid":4083,"code":"2017001002001","name":"部门预算培训","money":28,"lmoney":10,"cmoney":8,"nmoney":10,"reportdivname":null,"programsource":"3","businesscontact":null,"programleader":"金国兴","remark":null},
+                ],*/
+                columns: [
+                    {field:"checkbox", checkbox:true},
+                    {"field":'guid',"title":'guid',"width":10,"align":'center',"visible":false},
+                    {"field":'name',"title":'工作内容名称',"width":200,"align":'left',"valign":'middle'},
+                    {"field":'reportdiv',"title":'上报单位',"width":80,"align":'center',"valign":'middle'},
+                    {"field":'programsource',"title":'项目来源',"width":80,"align":'center',"valign":'middle'},
+                    {"field":'money',"title":'项目预算(万元)',"width":115,"align":'right',"valign":'middle'},
+                    {"field":'programleader',"title":'课题组长',"width":80,"align":'center',"valign":'middle'},
+                    {"field":'operation',"title":'操作',"width":600,"align":'left',"valign":'middle'}
+                ],
+                uniqueId: "guid",
+                clickToSelect: true
+            });
+        });
+
+        function insertRow(){
+            $("#table1").bootstrapTable('insertRow', {index: 1, row: {guid:40844, name:"aaaa"}});
+        }
+        function removeRow(){
+            var $table = $("#table1");
+            var selectRows = $table.bootstrapTable("getSelections");
+            var tableData = $table.bootstrapTable("getData");
+
+            $.each(selectRows, function(i){
+                var dataIndex = tableData.indexOf(selectRows[i]);
+                $table.bootstrapTable("removeByRowIndex", dataIndex);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>删除选中的行</h2>
+    <button type="button" class="btn btn-default" onclick="insertRow()">新增</button>
+    <button type="button" class="btn btn-default" id="removeRow" onclick="removeRow()">删除</button>
+    <table id="table1"></table>
+
+    <section class="parser">
+        <h3>源码</h3>
+        <pre>
+            <ol style="display: table">
+                <li><span>&lt;button type="button" class="btn btn-default" onclick="insertRow()"&gt;新增&lt;/button&gt;</span></li>
+                <li><span>&lt;button type="button" class="btn btn-default" id="removeRow" onclick="removeRow()"&gt;删除&lt;/button&gt;</span></li>
+                <li><span>&lt;table id="table1"&gt;&lt;/table&gt;</span></li>
+                <li><span></span></li>
+                <li><span>$(function(){</span></li>
+                <li><span>    $("#table1").dtable({</span></li>
+                <li><span>        height:400,</span></li>
+                <li><span>        url: "./layout/json/tableData.json",</span></li>
+                <li><span>        columns:[</span></li>
+                <li><span>            {field:"checkbox", checkbox:true},</span></li>
+                <li><span>            {"field":'guid',"title":'guid',"width":10,"align":'center',"visible":false},</span></li>
+                <li><span>            {"field":'name',"title":'工作内容名称',"width":200,"align":'left',"valign":'middle'},</span></li>
+                <li><span>            {"field":'reportdiv',"title":'上报单位',"width":80,"align":'center',"valign":'middle'},</span></li>
+                <li><span>            {"field":'programsource',"title":'项目来源',"width":80,"align":'center',"valign":'middle'},</span></li>
+                <li><span>            {"field":'money',"title":'项目预算(万元)',"width":115,"align":'right',"valign":'middle'},</span></li>
+                <li><span>            {"field":'programleader',"title":'课题组长',"width":80,"align":'center',"valign":'middle'},</span></li>
+                <li><span>            {"field":'operation',"title":'操作',"width":600,"align":'left',"valign":'middle'}</span></li>
+                <li><span>        ],</span></li>
+                <li><span>        uniqueId: "guid",</span></li>
+                <li><span>        clickToSelect: true</span></li>
+                <li><span>    });</span></li>
+                <li><span>})</span></li>
+                <li><span></span></li>
+                <li><span>function insertRow(){</span></li>
+                <li><span>    $("#table1").bootstrapTable('insertRow', {index: 1, row: {guid:40844, name:"aaaa"}});</span></li>
+                <li><span>}</span></li>
+                <li><span></span></li>
+                <li><span>function removeRow(){</span></li>
+                <li><span>    var $table = $("#table1");</span></li>
+                <li><span>    var selectRows = $table.bootstrapTable("getSelections");</span></li>
+                <li><span>    var optionsData = $table.bootstrapTable("getOptions").data;</span></li>
+                <li><span>    $.each(selectRows, function(i){</span></li>
+                <li><span>        var dataIndex = optionsData.indexOf(selectRows[i]);</span></li>
+                <li><span>        $table.bootstrapTable("removeByRowIndex", dataIndex);</span></li>
+                <li><span>    });</span></li>
+                <li><span>}</span></li>
+            </ol>
+        </pre>
+    </section>
+</body>
+</html>

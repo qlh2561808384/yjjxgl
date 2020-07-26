@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>报表控件检测</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META HTTP-EQUIV="imagetoolbar" CONTENT="no">
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<script language="Javascript" src="../js/bdd.js"></script>
+
+<style type="text/css">
+<!--
+body {
+	overflow: hidden;
+}
+.block{
+	width:100%;
+}
+.block td{
+	padding:2px;
+}
+.blockTitle{
+	color:#5276A3;
+	font-size:14px;
+	font-weight:bold;
+	letter-spacing:2px;
+}
+.line{
+	height:1px;
+	border-bottom:1px solid #A4B9D7;
+	margin:-3px 0px -8px 0px;
+}
+a:link { text-decoration: none;}
+a:active { text-decoration:none;}
+a:hover { text-decoration:none;}
+a:visited { text-decoration: none;}
+-->
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+window.onload=checkplus;
+//
+//检测有没有安装或加载插件
+ function checkplus()
+ {
+ 	var flag=true;
+ 	var str="";
+ 	var obj1 = document.getElementById("reportdesignerctrl");
+ 	//var obj2 = new ActiveXObject('HappySwitch.HSwitch.1');
+	//if(viewreportctrl.version!=_BDD_VERSION) {
+ 	//alert(obj1.Version);
+ 	
+	if (!reportdesignerctrl.version){
+	   flag=false;
+	   if(str!=""){
+	   	str=str+"<br>";
+	   }
+	   str=str+"报表设计控件未安装";
+	 }else if(reportdesignerctrl.version !=_BDD_VERSION) {
+	   flag=false;
+	   if(str!=""){
+	   	str=str+"<br>";
+	   }
+	   str=str+"报表设计控件未正常加载  ,当前版本"+reportdesignerctrl.version;
+	 }
+	 
+	if (!viewreportctrl.version){
+	   flag=false;
+	   if(str!=""){
+	   	str=str+"<br>";
+	   }
+	   str=str+"报表查看控件未安装";
+	 }else if(viewreportctrl.version !=_BDD_VIEW_VERSION) {
+	   flag=false;
+	   if(str!=""){
+	   	str=str+"<br>";
+	   }
+	   str=str+"报表查看控件未正常加载 ,当前版本"+viewreportctrl.version;
+	}
+	/* if(dnp.version !=_BDD_VERSION) {
+	   flag=false;
+	   if(str!=""){
+	   	str=str+"<br>";
+	   }
+	   str=str+"报表打印控件未正常加载 ,当前版本"+dnp.version;
+	 }  */
+ 	if(flag){
+	 	document.getElementById("p_reportbatch").innerHTML="报表控件加载正常。当前版本"+obj1.Version;
+	    document.getElementById("p_reportbatch").style.color="#0000ff";
+	 }else{
+	 	document.getElementById("p_reportbatch").innerHTML=str;
+	    document.getElementById("p_reportbatch").style.color="#ff0000"; 
+	 }
+ }
+</SCRIPT>
+</head>
+
+<body>
+ <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+	<td style="border-top:3px solid #D5E1F0;padding:10px;" valign=top>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<TD>
+				<TABLE class="block" cellspacing="0">
+				<TR>
+					<TD class="blockTitle" >数新报表控件下载</TD>
+					<TD width="100"><a href="../plugin/plugin.rar">下载控件</a></TD>
+				</TR>
+				<TR>
+					<TD colspan=2><hr class="line"/></TD>
+				</TR>
+				<TR>
+					<TD colspan=2 height="50" valign=top id="p_reportbatch">可以下载数新报表编辑控件...</TD>
+				</TR>
+				</TABLE>
+			</TD>
+		  </TR></table>
+	</td>
+  </tr>
+</table>
+<!--查看控件对象-->
+<object classid="clsid:DCA07853-5BBB-4F88-B5AD-4CD941F3DC99" id="viewreportctrl" width="800" height="600" style="display:none;"></object>
+<!--打印控件对象-->
+<object classid="clsid:7D8C7FF0-EFA1-47b0-A039-4CC0E6FA206B" id="dnp" width="800" height="600" style="display:none;"></object>
+<!--报表设计控件对象-->
+<object classid="clsid:2E8B4B9F-C698-40CC-9047-48104F448625" id="reportdesignerctrl" width="800" height="600" style="display:none;"></object>
+</body>
+</html>
+

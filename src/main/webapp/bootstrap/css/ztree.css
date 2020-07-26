@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+/* 新增带多选单选框的树形 */
+.btn-group .dropdown-toggle:focus{outline:0;}
+.btn-group .dropdown-toggle input{margin-bottom:0;}
+.btn-group .dropdown-toggle, .btn-group.open .dropdown-toggle{box-shadow:none; background:none; border:none;}
+
+.ztree li a{padding:0;}

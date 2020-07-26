@@ -1,0 +1,17 @@
+.ztreeBox .ztree li{line-height:25px;text-indent:0;}
+.ztreeBox .ztree li span.button { height: 25px;background-image: url("./img/zTreeStandard3.png")}
+.ztreeBox .ztree li span.button.root_open {  background-position: -92px -62px;  }
+.ztreeBox .ztree li span.button.root_close {  background-position: -74px -62px;  }
+.ztreeBox .ztree li span.button.switch {  width: 18px;  height: 25px;  }
+.ztreeBox .ztree li span.button.chk{height:13px;}
+.ztreeBox .ztree li span.button.ico_open {  background-position: -110px -20px;  }
+.ztreeBox .ztree li span.button.ico_close {background-position: -110px 5px;}
+.ztreeBox .ztree li span.button.ico_docu {background-position: -110px -43px;}
+.ztreeBox .ztree li span.button.center_docu {  background-position: -56px -19px;  }
+.ztreeBox .ztree li span.button.bottom_docu {  background-position: -56px -40px;  }
+.ztreeBox .ztree li span.button.bottom_close {  background-position: -74px -39px; }
+.ztreeBox .ztree li span.button.bottom_open {  background-position: -92px -39px;  }
+.ztreeBox .ztree li span.button.center_close {  background-position: -74px -17px;  }
+.ztreeBox .ztree li span.button.center_open {  background-position: -92px -17px;  }
+.ztreeBox .ztree li a.curSelectedNode {height:25px;}
+

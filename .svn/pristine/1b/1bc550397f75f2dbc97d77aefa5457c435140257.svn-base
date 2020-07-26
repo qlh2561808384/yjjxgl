@@ -1,0 +1,2 @@
+.form_datetime.input-group.date input{width:100%;margin-bottom:0;border-top-right-radius:0; border-bottom-right-radius:0; border-right:0;}
+.form_datetime.input-group.date span.input-group-addon{height:30px; padding:0 12px;margin:0; box-sizing: border-box;}

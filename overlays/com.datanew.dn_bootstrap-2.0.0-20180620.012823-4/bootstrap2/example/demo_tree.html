@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE> ZTREE DEMO - checkbox select menu</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap-combined.min.css"/>
+	<link rel="stylesheet" href="../css/font-awesome.min.css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+	<style>
+		pre{box-shadow: inset 30px 0 0 #fbfbfc, inset 31px 0 0 #ececf0;}
+		ol{display: table;margin: 0 0 -20px 25px;padding: 0;}
+		.parser .table-border {border: 1px solid #dddddd;border-collapse: separate;border-left: 0;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;}
+		.parser>table {width: 100%;margin-bottom: 20px;}
+		tr {display: table-row;vertical-align: inherit;border-color: inherit;}
+		.parser>table tr th {border-top: 0;}
+		.parser>table th, .parser>table td {border-left: 1px solid #dddddd;border-top: 1px solid #dddddd;padding: 8px;line-height: 20px;text-align: left;vertical-align: top;}
+		.parser>table tbody tr:nth-child(odd) td {background-color: #F5F5F5;}
+		.datadiv{margin:0 0 10px;text-indent:20px;border: 1px solid #dddddd;border-collapse: separate;border-left: 0;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;}
+		.datadivdiv{height:20px;}
+		.ztree_abs{position:absolute; z-index:99999; max-height:350px; overflow-y:scroll; overflow-x:auto; border: 1px solid rgba(0, 0, 0, 0.2); background:#fff; box-shadow:0 5px 10px rgba(0, 0, 0, 0.2); border-radius:4px; display: none;}
+		.ztreeBox{position: relative;}
+	</style>
+</HEAD>
+
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>语法解析</h1></div>
+    	<h4>使用方法:</h4>
+	    <pre>
+	        <ol>
+            	<li><span>$(obj).dtree({</span></li>
+				<li><span>  localdata: zNodes,</span></li>
+				<li><span>  isOpen: true,</span></li>
+				<li><span>  rootElement: true,</span></li>
+				<li><span>  callback : {</span></li>
+				<li><span>    beforeClick: function(treeId, treeNode){</span></li>
+				<li><span>      var zTree = $.fn.zTree.getZTreeObj("treeDemo");</span></li>
+				<li><span>      zTree.checkNode(treeNode, !treeNode.checked, null, true);</span></li>
+				<li><span>    }</span></li>
+				<li><span>  },</span></li>
+				<li><span>  check: {enable: true},</span></li>
+				<li><span>  view: {dblClickExpand: false}</span></li>
+				<li><span>});</span></li>
+            </ol>
+	    </pre>
+	    <h4>属性:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr></thead>
+	        <tbody>
+	        	<tr><td>localdata</td><td>json类型</td><td>获取固定数据。如果与属性url都有值，取localdata。</td><td>无</td></tr>
+				<tr><td>url</td><td>string（字符串型）</td><td>获取数据库数据。如果与属性url都有值，取localdata。</td><td>无</td></tr>
+	        	<tr><td>isOpen</td><td>boolean（布尔型）</td><td>加载后是否展开全部节点</td><td>false</td></tr>
+	        	<tr><td>ISLEAF</td><td>boolean（布尔型）</td><td>父节点是否不可选择</td><td>false</td></tr>
+	        	<tr><td>rootElement</td><td>boolean（布尔型）</td><td>是否添加根节点“全部”</td><td>false</td></tr>
+	        	<tr><td>check:enable</td><td>boolean（布尔型）</td><td>设置 zTree 的节点上是否显示 checkbox / radio</td><td>false</td></tr>
+	        	<tr><td>check:chkStyle</td><td>string（字符串型）</td><td>勾选框类型(checkbox 或 radio）</td><td>checkbox</td></tr>
+	        	<tr><td>check:radioType</td><td>string（字符串型）</td><td>radio 的分组范围。</td><td>level</td></tr>
+	        	<tr><td>view:dblClickExpand</td><td>boolean（布尔型）</td><td>双击节点时，是否自动展开父节点的标识</td><td>true</td></tr>
+	        </tbody>
+	    </table>
+	    <h4>事件:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>参数</th><th>描述</th></tr></thead>
+	        <tbody>
+	        	<tr><td>callback:{beforeClick}</td><td>treeId, treeNode</td><td>根据返回值确定节点是否允许单击操作</td></tr>
+	        	<tr><td>callback:{onCheck}</td><td>e, treeId, treeNode</td><td>捕获 checkbox / radio 被勾选 或 取消勾选的事件回调函数</td></tr>
+	        </tbody>
+	    </table>
+	    <h4>方法:</h4>
+	    <table class=" table-border">
+	        <thead><tr><th>名称</th><th>参数</th><th>描述</th></tr></thead>
+	        <tbody>
+	        	<tr><td></td><td></td><td></td></tr>
+	        </tbody>
+	    </table>
+	    <h4>案例:</h4>
+	</section>
+	<div class="datadiv">
+		<div class="datadivdiv"></div>
+		<table id="datatable">
+			<div class="main-content clearfix">
+				<div class="main-content-inner pull-left">
+					<div class="container-fluid iframeCon">
+						<div class="ztreeBox" style="float:left;">
+							<p>复选框，叶节点可选</p>
+							<ul id="treeDemo" class="ztree"></ul>
+						</div>
+						<div class="ztreeBox" style="float:left;">
+							<p>单选框，叶节点可选</p>
+							<ul id="treeDemo1" class="ztree"></ul>
+						</div>
+						<div class="ztreeBox" style="float:left;">
+							<p>复选框，叶节点不可选</p>
+							<ul id="treeDemo2" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</table>
+	</div>
+</BODY>
+</HTML>
+<script type="text/javascript">
+	var zNodes = [
+   		{id:1, pId:0, NAME:"北京", ISLEAF:1},
+   		{id:2, pId:0, NAME:"天津", ISLEAF:1},
+   		{id:3, pId:0, NAME:"上海", ISLEAF:1},
+   		{id:4, pId:0, NAME:"河北省", ISLEAF:0},{id:41, pId:4, NAME:"石家庄", ISLEAF:0},{id:411, pId:41, NAME:"dd", ISLEAF:1},{id:42, pId:4, NAME:"保定", ISLEAF:1},{id:43, pId:4, NAME:"邯郸", ISLEAF:1},{id:44, pId:4, NAME:"承德", ISLEAF:1},
+   		{id:5, pId:0, NAME:"广东省", ISLEAF:0},{id:51, pId:5, NAME:"广州", ISLEAF:1},{id:52, pId:5, NAME:"深圳", ISLEAF:1},{id:53, pId:5, NAME:"东莞", ISLEAF:1},{id:54, pId:5, NAME:"佛山", ISLEAF:1},
+   		{id:6, pId:0, NAME:"福建省", ISLEAF:0},{id:61, pId:6, NAME:"福州", ISLEAF:1},{id:62, pId:6, NAME:"厦门", ISLEAF:1},{id:63, pId:6, NAME:"泉州", ISLEAF:1},{id:64, pId:6, NAME:"三明", ISLEAF:1}];	
+	var zNodes1 = [
+  		{id:1, pId:0, NAME:"北京", ISLEAF:1},
+  		{id:2, pId:0, NAME:"天津", ISLEAF:1},
+  		{id:3, pId:0, NAME:"上海", ISLEAF:1},
+  		{id:4, pId:0, NAME:"河北省", ISLEAF:0},{id:41, pId:4, NAME:"石家庄", ISLEAF:0},{id:411, pId:41, NAME:"dd", ISLEAF:1},{id:42, pId:4, NAME:"保定", ISLEAF:1},{id:43, pId:4, NAME:"邯郸", ISLEAF:1},{id:44, pId:4, NAME:"承德", ISLEAF:1},
+  		{id:5, pId:0, NAME:"广东省", ISLEAF:0},{id:51, pId:5, NAME:"广州", ISLEAF:1},{id:52, pId:5, NAME:"深圳", ISLEAF:1},{id:53, pId:5, NAME:"东莞", ISLEAF:1},{id:54, pId:5, NAME:"佛山", ISLEAF:1},
+  		{id:6, pId:0, NAME:"福建省", ISLEAF:0},{id:61, pId:6, NAME:"福州", ISLEAF:1},{id:62, pId:6, NAME:"厦门", ISLEAF:1},{id:63, pId:6, NAME:"泉州", ISLEAF:1},{id:64, pId:6, NAME:"三明", ISLEAF:1}];
+	var zNodes2 = [
+   		{id:1, pId:0, NAME:"北京", ISLEAF:1},
+   		{id:2, pId:0, NAME:"天津", ISLEAF:1},
+   		{id:3, pId:0, NAME:"上海", ISLEAF:1},
+   		{id:4, pId:0, NAME:"河北省", ISLEAF:0},{id:41, pId:4, NAME:"石家庄", ISLEAF:0},{id:411, pId:41, NAME:"dd", ISLEAF:1},{id:42, pId:4, NAME:"保定", ISLEAF:1},{id:43, pId:4, NAME:"邯郸", ISLEAF:1},{id:44, pId:4, NAME:"承德", ISLEAF:1},
+   		{id:5, pId:0, NAME:"广东省", ISLEAF:0},{id:51, pId:5, NAME:"广州", ISLEAF:1},{id:52, pId:5, NAME:"深圳", ISLEAF:1},{id:53, pId:5, NAME:"东莞", ISLEAF:1},{id:54, pId:5, NAME:"佛山", ISLEAF:1},
+   		{id:6, pId:0, NAME:"福建省", ISLEAF:0},{id:61, pId:6, NAME:"福州", ISLEAF:1},{id:62, pId:6, NAME:"厦门", ISLEAF:1},{id:63, pId:6, NAME:"泉州", ISLEAF:1},{id:64, pId:6, NAME:"三明", ISLEAF:1}];
+	$("#treeDemo").tree({
+		localdata: zNodes,
+		isOpen: true,
+		rootElement: true,
+		callback : {
+			beforeClick: function(treeId, treeNode){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				zTree.checkNode(treeNode, !treeNode.checked, null, true);
+			}
+		},
+		data:{ // 必须使用data 
+            simpleData : {enable : true,idKey : "id", pIdKey : "pId", rootPId : "0"  }, 
+            key:{name:"NAME"}
+        }, 
+		check: {enable: true},
+		view: {dblClickExpand: false}
+	});
+	$("#treeDemo1").tree({
+		localdata: zNodes1,
+		isOpen: true,
+		rootElement: true,
+		callback : {
+			beforeClick: function(treeId, treeNode){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo1");
+				zTree.checkNode(treeNode, !treeNode.checked, null, true);
+			}
+		},
+		data:{ // 必须使用data 
+            simpleData : {enable : true,idKey : "id", pIdKey : "pId", rootPId : "0"  }, 
+            key:{name:"NAME"}
+        }, 
+		check: {enable: true,chkStyle: "radio",radioType: "all"},
+		view: {dblClickExpand: false}
+	});
+	$("#treeDemo2").tree({
+		localdata: zNodes2,
+		isOpen: true,
+		ISLEAF:true,
+		callback : {
+			beforeClick: function(treeId, treeNode){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo2");
+				zTree.checkNode(treeNode, !treeNode.checked, null, true);
+			}
+		},
+		data:{ // 必须使用data 
+            simpleData : {enable : true,idKey : "id", pIdKey : "pId", rootPId : "0"  }, 
+            key:{name:"NAME"}
+        }, 
+		check: {enable: true},
+		view: {dblClickExpand: false}
+	});
+</script>

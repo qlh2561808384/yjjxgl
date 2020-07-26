@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jxgl:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>jxgl</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="jxgl.war">
+      <element id="artifact" artifact-name="jxgl:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE>dcookie</TITLE>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.datanew.js"></script>
+</HEAD>
+<BODY>
+	<section class="parser">
+    	<div class="page-header"><h1>dcookie---cookie管理工具类</h1></div>
+        <h3>扩展自cookie组件，<a href="http://plugins.jquery.com/cookie/" target="_blank">参考链接</a></h3>
+    	<h4>使用方法:</h4>
+        <pre id="content1">
+            <ol style="display:table;">
+                <li><span>1.添加一个"会话cookie"</span></li>
+                <li><span>    $.dcookie('the_cookie', 'the_value');</span></li>
+                <li><span>    //这里没有指明 cookie有效时间，所创建的cookie有效期默认到用户关闭浏览器为止，所以被称为 “会话cookie（session cookie）”。</span></li>
+                <li><span>2.创建一个cookie并设置有效时间为 7天</span></li>
+                <li><span>    $.dcookie('the_cookie', 'the_value', { expires: 7 });</span></li>
+                <li><span>    //这里指明了cookie有效时间，所创建的cookie被称为“持久 cookie （persistent cookie）”。注意单位是：天；</span></li>
+                <li><span>3.创建一个cookie并设置 cookie的有效路径</span></li>
+                <li><span>    $.dcookie('the_cookie', 'the_value', { expires: 7, path: '/' });</span></li>
+                <li><span>    //在默认情况下，只有设置 cookie的网页才能读取该 cookie。如果想让一个页面读取另一个页面设置的cookie，必须设置cookie的路径。cookie的路径用于设置能够读取 cookie的顶级目录。将这个路径设置为网站的根目录，可以让所有网页都能互相读取 cookie （一般不要这样设置，防止出现冲突）。</span></li>
+                <li><span>4.读取cookie</span></li>
+                <li><span>    $.dcookie('the_cookie');</span></li>
+                <li><span>5.删除cookie</span></li>
+                <li><span>    $.dcookie('the_cookie', null);   //通过传递null作为cookie的值即可</span></li>
+                <li><span>6.可选参数</span></li>
+                <li><span>    $.dcookie('the_cookie','the_value',{
+                               expires:7,
+                               path:'/',
+                               domain:'jquery.com',
+                               secure:true
+                          })
+                </span></li>
+                <li><span>      expires：（Number|Date）有效期；设置一个整数时，单位是天；也可以设置一个日期对象作为Cookie的过期日期；
+                            path：（String）创建该Cookie的页面路径；
+                            domain：（String）创建该Cookie的页面域名；
+                            secure：（Booblean）如果设为true，那么此Cookie的传输会要求一个安全协议，例如：HTTPS；
+                </span></li>
+
+            </ol>
+        </pre>
+
+
+	</section>
+	<script>
+            $(function(){
+
+               $.dcookie('token', '22222');
+                $.dcookie('token', null);
+                //$.cookie('token', '1111111212323');
+                //alert( $.cookie('token'));
+                //alert( $.dcookie('token'));
+
+            })
+	
+	</script>
+</BODY>
+</HTML>

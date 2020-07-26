@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>form_demo</title>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.datanew.js"></script>
+    <link href="../css/bootstrap-parser.css" rel="stylesheet" type="text/css" />
+	<style>
+		.combo-panel{
+			position: absolute;
+			z-index:99999;
+			max-height:350px;
+			overflow:auto;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			background:#fff;
+			box-shadow:0 5px 10px rgba(0, 0, 0, 0.2);
+			border-radius:4px;
+			display: none;
+			margin: 0 px;
+			padding: 0;
+		}
+
+		.comboBox_option:hover{
+			background-color: #2D86B9;
+			color: #fff;
+		}
+		.comboBox_option_check{
+			background-color: #2D86B9;
+			color: #fff;
+			padding: 2px 4px;
+		}
+
+		.comboBox_option {
+			font-size: 12px;
+			padding: 2px 4px;
+		}
+
+		.dform-input{
+			height:34px;
+			margin-bottom:10px !important;
+		}
+		.form-sm .dform-input{
+			height:30px;
+		}
+		.form-sm .form-control{
+			height: 30px;
+			padding:5px 10px;
+			font-size: 12px;
+		}
+		.form-sm .ztreeBox_down .fa-angle-down{
+			padding:6px 6px;
+		}
+	</style>
+    <script type="text/javascript">
+
+		var  combobox={
+			title:'comboBox',
+			type:'comboBox',
+			name:'combobox',
+			selected:0,
+			searchOption:false,
+			textField:'text',
+			valueField:'id',
+			required:true,
+			multiple:true,
+			localdata:[{id:1,text:'79962450@qq.com'},{id:2,text:456}],
+			onChange:function(newValue,oldValue){
+				console.log("newValue:"+newValue+" oldValue:"+oldValue)
+			},
+			onShowPanel:function($p){//当显示下拉面板的时候触发。
+				console.log($p)
+			}
+		};
+       $(function(){
+     	  $("#formdemo").dform({
+//			  formtitle:"项目信息", //表单标题
+//     		 rownum:3,   //每行控件数目。只有layout为form-inline才生效
+     		 labelwidth:"100px",
+     		 inputs:[{   
+			        	 proving:"notEmpty",
+	 		        	 title:"姓名1111",
+	 		        	 name:"name",
+	 		        	 type:"hidden",
+	 		        	 defaultvalue:"张三111"
+ 		             },
+     		         {   
+     		        	 proving:"notEmpty",
+     		        	 title:"姓名",
+     		        	 name:"name",
+     		        	 type:"text",
+     		        	 defaultvalue:"张三",
+     		        	 colspan:"2"
+     		         },{
+     		        	 title:"",
+     		        	 type:"html",
+     		        	 html:'<input type="file" name="file"/>'
+     		         },
+     		         {
+     		        	 title:"密码",
+     		        	 name:"password",
+     		        	 type:"password",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"日期",
+     		        	 name:"createdate",
+     		        	 type:"datetime",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"datetime",
+     		        	 name:"datetime-local",
+     		        	 type:"datetime-local",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"日期date",
+     		        	 name:"date",
+     		        	 type:"date",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"日期month",
+     		        	 name:"month",
+     		        	 type:"month",
+						 dname:'MONTH',
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"日期time",
+     		        	 name:"time",
+     		        	 type:"time",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"日期week",
+     		        	 name:"week",
+     		        	 type:"week",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"number",
+     		        	 name:"number",
+     		        	 type:"number",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"email",
+     		        	 name:"email",
+     		        	 type:"email",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"url",
+     		        	 name:"url",
+     		        	 type:"url",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"search",
+     		        	 name:"search",
+     		        	 type:"search",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"tel",
+     		        	 name:"tel",
+     		        	 type:"tel",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"color",
+     		        	 name:"color",
+     		        	 type:"color",
+     		        	 defaultvalue:"111" 
+     		         },
+     		         {
+     		        	 title:"ddate",
+     		        	 name:"ddate",
+     		        	 type:"dateBox",
+						 minView:3,
+     		        	 weekStart: 1,
+     		            todayBtn:  1,
+     		    		autoclose: 1,
+     		    		todayHighlight: 1,
+     		    		startView: 2,
+     		    		forceParse: 0,
+     		            showMeridian: 1,
+     		            format : 'yyyy - mm - dd',
+     		            did:"updatedateid",
+     		            dname:"updatedate",
+     		            defaultValue:"2016-09-02 02:05"
+     		         },{
+						type:'dsearchtree',
+						title:'ceshi',
+						name:'searchtree',
+						localdata: zNodes,
+						ISLEAF:false,
+						modalTitle: '查找名称', //模态框标题
+						checkType: 'checkbox' //选择框类型，值为checkbox或radio或nocheck，默认为nocheck
+				 	},{
+				 		title:"年份",
+						name:"dyear",
+						type:"ddate",
+						format: 'yyyy',
+						weekStart: 1,
+						todayBtn: 1,
+						autoclose: 1,
+						startView: 4, //日期时间选择器打开之后首先显示的视图，4显示为年
+						minView: 4,
+						did:"yearid",
+						dname:"yearname",
+						defaultValue:"2016",
+						removeIcon: false
+				 	},{
+				 		title:"小数",
+						name: "ddecimal",
+						type: "ddecimal",
+						did: "decimalid",
+						dname: "decimalname",
+						decimalPlaces: 2 //小数位数
+				 	},{
+				 		
+				 	}/*,{
+	 		        	 title:"bootstrap-table-add",
+	 		        	 type:"html",
+	 		        	 html:'<input value="新增" class="bootstrap-table-submit" type="button" />'
+	 		        }*/,{
+     		        	 proving:"notEmpty|email|idcard|phone|url",
+     		        	 title:"验证测试",
+     		        	 name:"name",
+     		        	 type:"text"
+     		         },
+				 combobox,
+				 {
+//					 proving:"notEmpty",
+					 title:"checkBox",
+					 name:"checkbox",
+					 type:"checkbox",
+					 options:[{lable:'check001',value:1},{lable:'check002',value:2},{lable:'check003',value:3}]
+//					 defaultvalue:"张三111"
+				 },
+				 {
+					 title:'combotree',
+					 type:'comboTree',
+					 name:'comboTree',
+					 panelHeight:150,
+					 multiple:false,
+					 required:true,
+					 validText:'测试',
+					 localdata: zNodes,
+					 rootElement:false,
+					 onlyLeaf:false,
+					 onChange:function(newValue,oldValue){
+						 console.log(newValue+",,,,"+oldValue);
+					 }
+				 }
+     		 	]
+     	  	});
+     	   $.dinit();
+     	  
+       });
+	   function  formsubmit(){
+		   $("#formdemo").dform("submit",{
+			   url:'test/t'
+		   });
+	   }
+
+	   function upload(){
+		   $("#formdemo").dform('upload',function(data){
+			   alert(data)
+		   })
+	   }
+
+	   function formclear() {
+		   $("#formdemo").dform("clear");
+	   }
+
+	   function formdisabled(){
+		   $("#formdemo").dform("disabled");
+	   }
+
+	   function formenable(){
+		   $("#formdemo").dform("enable");
+	   }
+	   function formvalidate(){
+		   var flag =$("#formdemo").dform("validate");
+		   if(!flag){
+			   $.dalert("验证不通过，有部分数据格式错误")
+		   }
+	   }
+
+	   function loadform(){
+		   $.dloadformdata($("#formdemo"),{MONTH:'1',comboTree:1,searchtree:11,combobox:2,checkbox:[1,2]},'name')
+	   }
+
+		function getData(){
+			console.log($("#formdemo").dform("getData"));
+		}
+	   
+	   var zNodes =[
+		   { id:1, pId:0, name:"节点搜索演示 1", open:true, ISLEAF:0},
+		   { id:11, pId:1, name:"关键字可以是名字", ISLEAF:1},
+		   { id:12, pId:1, name:"关键字可以是level", ISLEAF:1},
+		   { id:13, pId:1, name:"关键字可以是id", ISLEAF:1},
+		   { id:14, pId:1, name:"关键字可以是各种属性", ISLEAF:1},
+		   { id:2, pId:0, name:"节点搜索演示 2", open:true, ISLEAF:0},
+		   { id:21, pId:2, name:"可以只搜索一个节点", ISLEAF:1},
+		   { id:22, pId:2, name:"可以搜索节点集合", ISLEAF:1},
+		   { id:23, pId:2, name:"搜我吧", ISLEAF:1},
+		   { id:3, pId:0, name:"节点搜索演示 3", open:true, ISLEAF:0},
+		   { id:31, pId:3, name:"我的 id 是: 31", ISLEAF:0},
+		   { id:32, pId:31, name:"我的 id 是: 32", ISLEAF:0},
+		   { id:33, pId:32, name:"我的 id 是: 33", ISLEAF:1}
+	   ];
+	</script>
+</head>
+<body>
+
+<section class="parser">
+    <div class="page-header"><h1>语法解析</h1></div>
+
+    <h4>表格参数:</h4>
+    <pre>
+        <ol style="display: table">
+            <li><span>$(function(){</span></li>
+			<li><span> 	  $("#formdemo").dform({</span></li>
+			<li><span> 		 formtitle:"项目信息", //表单标题</span></li>
+			<li><span> 		 rownum:3,   //每行控件数目</span></li>
+			<li><span> 		 labelwidth:"100px",</span></li>
+			<li><span> 		 inputs:[</span></li>
+			<li><span> 		         {</span></li>
+			<li><span> 		             proving:"notEmpty",</span></li>
+			<li><span> 		        	 title:"姓名",</span></li>
+			<li><span> 		        	 name:"name",</span></li>
+			<li><span> 		        	 type:"text",</span></li>
+			<li><span> 		        	 defaultvalue:"张三",</span></li>
+			<li><span> 		        	 colspan:"2"</span></li>
+			<li><span> 		         }</span></li>
+			<li><span> 		 ]</span></li>
+			<li><span> 	  })</span></li>
+			<li><span>   })</span></li>
+            
+        </ol>
+    </pre>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>类型</th><th>描述</th><th>默认值</th></tr>
+        </thead>
+        <tbody>
+		<tr><td>formtitle</td><td>String</td><td>定义表单标题</td><td></td></tr>
+        <tr><td>rownum</td><td>Number</td><td>定义表格的高度</td><td>3</td></tr>
+        <tr><td>labelwidth</td><td>String</td><td>标签的宽度</td><td>50px</td></tr>
+        <tr><td>showtitle</td><td>String</td><td>标签显示的位置(left/top/none)</td><td>left</td></tr>
+        
+        <tr><td colspan="4">inputs(组件数组)，以下没有列出的属性请查看具体组件</td></tr>
+        <tr><td>title</td><td>String</td><td>组件标签</td><td></td></tr>
+        <tr><td>name</td><td>String</td><td>组件name值</td><td></td></tr>
+        <tr><td>type</td><td>String</td><td>标签类型,默认为空的单元格,目前支持的有以下类型(text,password,datetime,datetime-local,date,month,time,week,number,email,url,search,tel,color,ddate,select,dsearchtree,ddecimal,html,hidden)</td><td></td></tr>
+        <tr><td>colspan</td><td>Number</td><td>组件占用的格子数</td><td>1</td></tr>
+        <tr><td>defaultvalue</td><td>String</td><td>默认值</td><td></td></tr>
+        
+        
+        
+        </tbody>
+    </table>
+    
+    <h4>事件:</h4>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+    </table>
+    <h4>方法:</h4><h5>调用语法：fn.dform('method',param)</h5>
+    <table class=" table-border">
+        <thead>
+        <tr><th>名称</th><th>参数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>submit</td><td>{}</td><td>ajax提交表单 参数为ajax 参数 url 为必填  默认 type : "POST",dataType : "json" 除data参数 其余ajax参数可进行重写</td></tr>
+        <tr><td>upload</td><td>function</td><td>上传文件方法 如使用该方法 需在form标签内 写上action 和method  参数为回调方法   请求效果点击上传按钮后查看请求数据</td></tr>
+		<tr><td>clear</td><td>none</td><td>清空表单内所有表单值</td></tr>
+		<tr><td>disabled</td><td>none</td><td>禁用表单内所有表单元素</td></tr>
+		<tr><td>enable</td><td>none</td><td>启用表单内所有表单元素</td></tr>
+        </tbody>
+    </table>
+	<h4>上传文件后端代码</h4>
+	 <pre>
+        <ol style="display: table">
+			<li><span>//MultipartFile file为file表单的name，a b c为其余input的name</span></li>
+			<li><span>public void upload(MultipartFile file,HttpServletResponse res,String a,String b,String c){</span></li>
+			<li><span> 	  String fileName = file.getOriginalFilename();</span></li>
+			<li><span> 	  file.getBytes();//文件处理</span></li>
+			<li><span> 	  Map<String, Object> model = new TreeMap<String, Object>();</span></li>
+			<li><span> 	  model.put("success", true);</span></li>
+			<li><span> 	  model.put("msg", msg);</span></li>
+			<li><span> 	  StringWriter writer = new StringWriter();</span></li>
+			<li><span> 	  ObjectMapper mapper = new ObjectMapper();</span></li>
+			<li><span> 	  mapper.writeValue(writer, model);</span></li>
+			<li><span> 	  res.setContentType("text/html;charset=UTF-8");</span></li>
+			<li><span> 	  res.getWriter().write(writer.toString());</span></li>
+			<li><span>}</span></li>
+
+
+		</ol>
+    </pre>
+    <h4>案例:</h4>
+</section>
+<form id="formdemo" action="test.do" method="post">
+	
+</form>
+<form id="formdemo1" action="test.do" method="post">
+
+</form>
+<input value="提交" class="bootstrap-table-submit" type="button" onclick="formsubmit()"/>
+<input value="取值" class="bootstrap-table-submit" type="button" onclick="getData()"/>
+<input value="上传" class="bootstrap-table-upload" type="button" onclick="upload()"/>
+<input value="清空" class="bootstrap-table-submit" type="button" onclick="formclear()"/>
+<input value="禁用" class="bootstrap-table-delete" type="button" onclick="formdisabled()"/>
+<input value="启用" class="bootstrap-table-submit" type="button" onclick="formenable()"/>
+<input value="验证数据是否正确" class="bootstrap-table-query" type="button" onclick="formvalidate()"/>
+<input value="表单加载" class="bootstrap-table-query" type="button" onclick="loadform()"/>
+<br/><br/>
+
+
+
+<section class="parser container-fluid">
+    <a href="javascript:;" id="copybtn1">复制代码</a>
+    <textarea id="copytext1" style="width:1px; height:1px; padding:0; border:none;">
+        <form id="formdemo2" action="test.do" method="post"></form>
+        <input value="提交" class="bootstrap-table-submit" type="button" onclick="formsubmit()"/>
+        <input value="取值" class="bootstrap-table-submit" type="button" onclick="getData()"/>
+        <input value="上传" class="bootstrap-table-upload" type="button" onclick="upload()"/>
+        <input value="清空" class="bootstrap-table-submit" type="button" onclick="formclear()"/>
+        <input value="禁用" class="bootstrap-table-delete" type="button" onclick="formdisabled()"/>
+        <input value="启用" class="bootstrap-table-submit" type="button" onclick="formenable()"/>
+        <input value="验证数据是否正确" class="bootstrap-table-query" type="button" onclick="formvalidate()"/>
+        <input value="表单加载" class="bootstrap-table-query" type="button" onclick="loadform()"/>
+        <script>
+            $(function(){
+                $("#formdemo").dform({
+                    formtitle:"项目信息",
+                    labelwidth:"100px",
+                    inputs:[
+                        {proving:"notEmpty",title:"姓名1111",name:"name",type:"hidden",defaultvalue:"张三111"},
+                        {proving:"notEmpty",title:"姓名",name:"name",type:"text",defaultvalue:"张三",colspan:"2"},
+                        {title:"",type:"html",html:'<input type="file" name="file"/>'},
+                        {title:"密码",name:"password",type:"password",defaultvalue:"111"},
+                        {title:"日期",name:"createdate",type:"datetime",defaultvalue:"111"},
+                        {title:"datetime",name:"datetime-local",type:"datetime-local",defaultvalue:"111"},
+                        {title:"日期date",name:"date",type:"date",defaultvalue:"111"},
+                        {title:"日期month",name:"month",type:"month",dname:'MONTH',defaultvalue:"111"},
+                        {title:"日期time",name:"time",type:"time",defaultvalue:"111"},
+                        {title:"日期week",name:"week",type:"week",defaultvalue:"111"},
+                        {title:"number",name:"number",type:"number",defaultvalue:"111"},
+                        {title:"email",name:"email",type:"email",defaultvalue:"111"},
+                        {title:"url",name:"url",type:"url",defaultvalue:"111"},
+                        {title:"search",name:"search",type:"search",defaultvalue:"111"},
+                        {title:"tel",name:"tel",type:"tel",defaultvalue:"111"},
+                        {title:"color",name:"color",type:"color",defaultvalue:"111"},
+                        {title:"ddate",name:"ddate",type:"ddate",weekStart:1,todayBtn:1,autoclose:1,todayHighlight:1,startView:2,forceParse:0,showMeridian:1,format:'yyyy - mm - dd',did:"updatedateid",dname:"updatedate",defaultValue:"2016-09-02 02:05"},
+                        {type:'dsearchtree',title:'ceshi',name:'searchtree',localdata:zNodes,ISLEAF:false,modalTitle:'查找名称',checkType:'checkbox'},
+                        {title:"年份",name:"dyear",type:"ddate",format:'yyyy',weekStart:1,todayBtn:1,autoclose:1,startView:4,minView:4,did:"yearid",dname:"yearname",defaultValue:"2016",removeIcon:false},
+                        {title:"小数",name:"ddecimal",type:"ddecimal",did:"decimalid",dname:"decimalname",decimalPlaces:2},
+                        {title:"bootstrap-table-add",type:"html",html:'<input value="新增" class="bootstrap-table-submit" type="button" />'},
+                        {proving:"notEmpty|email|idcard|phone|url",title:"验证测试",name:"name",type:"text"}
+                    ]
+                });
+                $.dinit()
+            });
+            function formsubmit(){$("#formdemo").dform("submit",{url:'test/t'})}
+            function upload(){$("#formdemo").dform('upload',function(data){alert(data)})}
+            function formclear(){$("#formdemo").dform("clear")}
+            function formdisabled(){$("#formdemo").dform("disabled")}
+            function formenable(){$("#formdemo").dform("enable")}
+            function formvalidate(){var flag=$("#formdemo").dform("validate");if(!flag){$.dalert("验证不通过，有部分数据格式错误")}}
+            function loadform(){$.dloadformdata($("#formdemo"),{MONTH:'1'},'dname')}
+        </script>
+    </textarea>
+    <pre>
+        <ol style="display:table">
+            <li><span>&lt;form id="formdemo2" action="test.do" method="post"&gt;&lt;/form&gt;</span></li>
+            <li><span>&lt;input value="提交" class="bootstrap-table-submit" type="button" onclick="formsubmit()"/&gt;</span></li>
+            <li><span>&lt;input value="取值" class="bootstrap-table-submit" type="button" onclick="getData()"/&gt;</span></li>
+            <li><span>&lt;input value="上传" class="bootstrap-table-upload" type="button" onclick="upload()"/&gt;</span></li>
+            <li><span>&lt;input value="清空" class="bootstrap-table-submit" type="button" onclick="formclear()"/&gt;</span></li>
+            <li><span>&lt;input value="禁用" class="bootstrap-table-delete" type="button" onclick="formdisabled()"/&gt;</span></li>
+            <li><span>&lt;input value="启用" class="bootstrap-table-submit" type="button" onclick="formenable()"/&gt;</span></li>
+            <li><span>&lt;input value="验证数据是否正确" class="bootstrap-table-query" type="button" onclick="formvalidate()"/&gt;</span></li>
+            <li><span>&lt;input value="表单加载" class="bootstrap-table-query" type="button" onclick="loadform()"/&gt;</span></li>
+            <li><span>&lt;script&gt;</span></li>
+            <li><span>$(function(){</span></li>
+            <li><span>    $("#formdemo").dform({</span></li>
+            <li><span>        formtitle:"项目信息",</span></li>
+            <li><span>        labelwidth:"100px",</span></li>
+            <li><span>        inputs:[</span></li>
+            <li><span>            {proving:"notEmpty",title:"姓名1111",name:"name",type:"hidden",defaultvalue:"张三111"},</span></li>
+            <li><span>            {proving:"notEmpty",title:"姓名",name:"name",type:"text",defaultvalue:"张三",colspan:"2"},</span></li>
+            <li><span>            {title:"",type:"html",html:'&lt;input type="file" name="file"/&gt;'},</span></li>
+            <li><span>            {title:"密码",name:"password",type:"password",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"日期",name:"createdate",type:"datetime",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"datetime",name:"datetime-local",type:"datetime-local",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"日期date",name:"date",type:"date",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"日期month",name:"month",type:"month",dname:'MONTH',defaultvalue:"111"},</span></li>
+            <li><span>            {title:"日期time",name:"time",type:"time",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"日期week",name:"week",type:"week",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"number",name:"number",type:"number",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"email",name:"email",type:"email",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"url",name:"url",type:"url",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"search",name:"search",type:"search",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"tel",name:"tel",type:"tel",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"color",name:"color",type:"color",defaultvalue:"111"},</span></li>
+            <li><span>            {title:"ddate",name:"ddate",type:"ddate",weekStart:1,todayBtn:1,autoclose:1,todayHighlight:1,startView:2,forceParse:0,showMeridian:1,format:'yyyy - mm - dd',did:"updatedateid",dname:"updatedate",defaultValue:"2016-09-02 02:05"},</span></li>
+            <li><span>            {type:'dsearchtree',title:'ceshi',name:'searchtree',localdata:zNodes,ISLEAF:false,modalTitle:'查找名称',checkType:'checkbox'},</span></li>
+            <li><span>            {title:"年份",name:"dyear",type:"ddate",format:'yyyy',weekStart:1,todayBtn:1,autoclose:1,startView:4,minView:4,did:"yearid",dname:"yearname",defaultValue:"2016",removeIcon:false},</span></li>
+            <li><span>            {title:"小数",name:"ddecimal",type:"ddecimal",did:"decimalid",dname:"decimalname",decimalPlaces:2},</span></li>
+            <li><span>            {title:"bootstrap-table-add",type:"html",html:'&lt;input value="新增" class="bootstrap-table-submit" type="button" /&gt;'},</span></li>
+            <li><span>            {proving:"notEmpty|email|idcard|phone|url",title:"验证测试",name:"name",type:"text"}</span></li>
+            <li><span>        ]</span></li>
+            <li><span>    });</span></li>
+            <li><span>    $.dinit()</span></li>
+            <li><span>});</span></li>
+            <li><span>function formsubmit(){$("#formdemo").dform("submit",{url:'test/t'})}</span></li>
+            <li><span>function upload(){$("#formdemo").dform('upload',function(data){alert(data)})}</span></li>
+            <li><span>function formclear(){$("#formdemo").dform("clear")}</span></li>
+            <li><span>function formdisabled(){$("#formdemo").dform("disabled")}</span></li>
+            <li><span>function formenable(){$("#formdemo").dform("enable")}</span></li>
+            <li><span>function formvalidate(){var flag=$("#formdemo").dform("validate");if(!flag){$.dalert("验证不通过，有部分数据格式错误")}}</span></li>
+            <li><span>function loadform(){$.dloadformdata($("#formdemo"),{MONTH:'1'},'dname')}</span></li>
+            <li><span>&lt;/script&gt;</span></li>
+        </ol>
+    </pre>
+</section>
+<script>
+    $(document).ready(function(){
+        $("a[id^='copybtn']").click(function(){
+            var copyObj = $(this).siblings("textarea")[0];
+            copyObj.select();
+            document.execCommand("Copy");
+            alert("复制成功");
+        })
+    })
+</script>
+
+<br/><br/><br/><br/>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>desktop</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.datanew.js"></script>
+    <script type="text/javascript" src="js/desktop.js"></script>
+    <link rel="stylesheet" href="css/desktop.css"/>
+</head>
+<body oncontextmenu="self.event.returnValue=false" onselectstart="return false">
+    <div class="deskWrap">
+        <div class="deskTop clearfix">
+            <div class="pull-left">desktop</div>
+            <div class="pull-right">desktop</div>
+        </div>
+        <div class="deskMain" id="deskMain">
+            <div class="deskItem desk_icon" data-id="id1" data-url="./example/table_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">1</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id2" data-url="./example/comboBox.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">2</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id3" data-url="./example/comboTree.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">3</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id4" data-url="./example/dalert_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">4</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id5" data-url="./example/dopen_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">5</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id6" data-url="./example/newform_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">6</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id7" data-url="./example/new_tree_demo.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">7</p>
+            </div>
+            <div class="deskItem desk_icon" data-id="id8" data-url="./example/searchTree.html">
+                <img src="images/a.jpg" class="item-img" alt=""/>
+                <p class="textover-ell item-txt">8</p>
+            </div>
+        </div>
+        <div class="deskBottom">
+            <div class="pull-left showDesk" id="showDesk"><a href="javascript:void(0);" title="显示桌面"><img src="images/favicon.png" alt="显示桌面"/></a></div>
+            <div class="pull-left">
+                <ul class="deskBtmTab clearfix" id="deskBtmTab"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

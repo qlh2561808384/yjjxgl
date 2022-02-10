@@ -18,7 +18,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.1.4.RELEASE</spring.version>
-		<hibernate.version>4.2.4.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 		<jackson.version>2.5.0</jackson.version>
 		<slog4j.version>1.7.2</slog4j.version>
 		<xfire.version>1.2.6</xfire.version>
